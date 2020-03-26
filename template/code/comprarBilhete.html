@@ -60,8 +60,10 @@
             <ul class="submenu show-submenu">
                 <li class="active-menu"><a href="comprarBilhete.html"><i class="fa fa-angle-right"></i>Comprar<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não Utilizados<i class="fa fa-circle"></i></a></li>
-                <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a></li>
+                <li><a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+                <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i
+                            class="fa fa-circle"></i></a></li>
             </ul>
         </li>
         <li><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -69,11 +71,12 @@
     </ul>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; color: #fff; width: 600px; font-size: 18px;" id="nomeUtilizador">Pedro Oliveira</h4>
+        <h4 class="header-logo" style="color: #fff; color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
+            Pedro Oliveira</h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
     <div class="header-clear-big"></div>
-
+    
     <div class="content">
         <div class="container no-bottom">
             <h3>Comprar Bilhete</h3>
@@ -86,12 +89,16 @@
             </div>
             <div class="one-third" style="width: 20px; margin-right: 10px;">
                 <ul class="icon-list">
-                    <li class="tick-list"><p>&nbsp;</p></li>   
+                    <li class="tick-list">
+                        <p>&nbsp;</p>
+                    </li>
                 </ul>
             </div>
             <div class="one-third last-column" style="width: 20px; margin-right: 2px;">
                 <ul class="icon-list">
-                    <li class="delete-list"><p>&nbsp;</p></li>   
+                    <li class="delete-list">
+                        <p>&nbsp;</p>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -113,35 +120,96 @@
                         escolha, o preço será automaticamente preenchido.
                     </p>
                     <select class="select-input" id="tipoBilhete" name="tipoBilhete" required>
+                        <!--Nao estatico-->
                         <option value="" selected disabled hidden>Tipo de bilhete</option>
-                        <option value="bilheteUnico">Bilhete Único</option>
-                        <option value="bilheteIdaVolta">Bilhete de Ida e Volta</option>
-                        <option value="pack5">Pack de 5 bilhetes</option>
-                        <option value="pack10">Pack de 10 bilhetes</option>
-                    </select>
-                    <select class="select-input" id="companhia" name="companhia" required>
-                        <option value="" selected disabled hidden>Companhia</option>
-                        <option value="transdev">Transdev</option>
-                        <option value="barquense">Barquense</option>
+                        <option value="Bilhete unico-Barquense-1.40">Bilhete Único Barquense - 1,40€</option>
+                        <option value="Bilhete unico-Transdev-1.30">Bilhete Único Transdev - 1,30€</option>
+                        <!-- <option value="bilheteIdaVolta">Bilhete de Ida e Volta</option> -->
+                        <option value="pack5-Barquense-5.50">Pack de 5 bilhetes - Barquense - 5,50€</option>
+                        <option value="pack10-Transdev-11.70">Pack de 10 bilhetes - Transdev - 11,70€</option>
                     </select>
                     <input type="number" class="text-input-one" id="quantidade" name="quantidade"
                         placeholder="Quantidade" required></input>
-                    <input type="text" class="text-input-one" id="preco" name="preco" placeholder="Preço Total"
+                    <input type="text" class="text-price" id="preco" name="preco" placeholder="Preço Total"
                         disabled></input>
                 </div>
 
             </div>
             <div class="decoration"></div>
             <div class="container no-bottom">
-                <div class="one-half-responsive">
-                    <button type="submit" id="submit"
-                        class="button center-button button-blue full-bottom detected-button" style="width: 50%;">Efetuar
-                        Pagamento</button>
-                </div>
+                <button type="submit" id="submit" class="button center-button button-blue full-bottom detected-button"
+                    style="width: 50%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Efetuar
+                    Pagamento</button>
             </div>
         </form>
     </div>
-
     <div class="menu-wrapper-background"></div>
+    <script>
+        document.getElementById("tipoBilhete").addEventListener("change", (e) => {
+            verificarQuantidade();
+        })
 
+        document.getElementById("quantidade").addEventListener("change", (e) => {
+            verificarQuantidade();
+        })
+
+        function verificarQuantidade() {
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete")
+                .selectedIndex].value;
+            let quantidade = document.getElementById("quantidade").value;
+            if (tipoBilhete != "" && quantidade != "") {
+                let res = tipoBilhete.split("-");
+                if (quantidade <= 50 && res[0].includes("unico")) {
+                    if (quantidade % 5 == 0 && res[1].includes("Barquense")) {
+                        for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            let tipo = document.getElementById("tipoBilhete").options[i].value;
+                            if (tipo.includes("Barquense") && tipo.includes("pack")) {
+                                document.getElementById("tipoBilhete").selectedIndex = i;
+                                tipoBilhete = document.getElementById("tipoBilhete").options[i].value;
+                            }
+                        }
+                        document.getElementById("quantidade").value = quantidade / 5;
+                    } else if (quantidade % 10 == 0 && res[1].includes("Transdev")) {
+                        for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            let tipo = document.getElementById("tipoBilhete").options[i].value;
+                            if (tipo.includes("Transdev") && tipo.includes("pack")) {
+                                document.getElementById("tipoBilhete").selectedIndex = i;
+                                tipoBilhete = document.getElementById("tipoBilhete").options[i].value;
+                            }
+                        }
+                        document.getElementById("quantidade").value = quantidade / 10;
+                    }
+
+                    quantidade = document.getElementById("quantidade").value;
+                    res = tipoBilhete.split("-")
+                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
+                    if (Number.isInteger(total)) {
+                        total += ",00";
+                    } else {
+                        let x = total.toString().split(".");
+                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
+                    }
+                    document.getElementById("preco").value = total;
+                } else if (quantidade <= 10 && res[0].includes("pack") && res[1].includes("Barquense")) {
+                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
+                    if (Number.isInteger(total)) {
+                        total += ",00";
+                    } else {
+                        let x = total.toString().split(".");
+                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
+                    }
+                    document.getElementById("preco").value = total;
+                } else if (quantidade <= 5 && res[0].includes("pack") && res[1].includes("Transdev")) {
+                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
+                    if (Number.isInteger(total)) {
+                        total += ",00";
+                    } else {
+                        let x = total.toString().split(".");
+                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
+                    }
+                    document.getElementById("preco").value = total;
+                }
+            }
+        }
+    </script>
 </body>
