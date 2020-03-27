@@ -145,6 +145,18 @@
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
+        document.getElementById("tipoBilhete").addEventListener("click", async() => {
+            const response = await fetch('/products');
+            const products = await response.json();
+            let opcao = `<option value="" selected disabled hidden>Tipo de bilhete</option>`;
+            
+            for (let i = 0; i < products.length; i++) {
+                opcao += `
+                        <option value="${products[i].name}-${products[i].company}-${products[i].price}">${products[i].name} - ${products[i].company} - ${products[i].price}</option>`;
+            }
+            opcao.innerHTML;
+        })
+        
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
             verificarQuantidade();
         })
