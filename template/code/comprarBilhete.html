@@ -121,12 +121,12 @@
                     </p>
                     <select class="select-input" id="tipoBilhete" name="tipoBilhete" required>
                         <!--Nao estatico-->
-                        <option value="" selected disabled hidden>Tipo de bilhete</option>
+                       <!-- <option value="" selected disabled hidden>Tipo de bilhete</option>
                         <option value="Bilhete unico-Barquense-1.40">Bilhete Único Barquense - 1,40€</option>
                         <option value="Bilhete unico-Transdev-1.30">Bilhete Único Transdev - 1,30€</option>
-                        <!-- <option value="bilheteIdaVolta">Bilhete de Ida e Volta</option> -->
-                        <option value="pack5-Barquense-5.50">Pack de 5 bilhetes - Barquense - 5,50€</option>
-                        <option value="pack10-Transdev-11.70">Pack de 10 bilhetes - Transdev - 11,70€</option>
+                       <option value="bilheteIdaVolta">Bilhete de Ida e Volta</option> -->
+                       <!--   <option value="pack5-Barquense-5.50">Pack de 5 bilhetes - Barquense - 5,50€</option>
+                        <option value="pack10-Transdev-11.70">Pack de 10 bilhetes - Transdev - 11,70€</option> -->
                     </select>
                     <input type="number" class="text-input-one" id="quantidade" name="quantidade"
                         placeholder="Quantidade" required></input>
@@ -171,11 +171,11 @@
             let quantidade = document.getElementById("quantidade").value;
             if (tipoBilhete != "" && quantidade != "") {
                 let res = tipoBilhete.split("-");
-                if (quantidade <= 50 && res[0].includes("unico")) {
+                if (quantidade <= 50 && res[0].includes("único")) {
                     if (quantidade % 5 == 0 && res[1].includes("Barquense")) {
                         for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
                             let tipo = document.getElementById("tipoBilhete").options[i].value;
-                            if (tipo.includes("Barquense") && tipo.includes("pack")) {
+                            if (tipo.includes("Barquense") && tipo.includes("Pack")) {
                                 document.getElementById("tipoBilhete").selectedIndex = i;
                                 tipoBilhete = document.getElementById("tipoBilhete").options[i].value;
                             }
@@ -184,7 +184,7 @@
                     } else if (quantidade % 10 == 0 && res[1].includes("Transdev")) {
                         for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
                             let tipo = document.getElementById("tipoBilhete").options[i].value;
-                            if (tipo.includes("Transdev") && tipo.includes("pack")) {
+                            if (tipo.includes("Transdev") && tipo.includes("Pack")) {
                                 document.getElementById("tipoBilhete").selectedIndex = i;
                                 tipoBilhete = document.getElementById("tipoBilhete").options[i].value;
                             }
@@ -202,7 +202,7 @@
                         total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
                     }
                     document.getElementById("preco").value = total;
-                } else if (quantidade <= 10 && res[0].includes("pack") && res[1].includes("Barquense")) {
+                } else if (quantidade <= 10 && res[0].includes("Pack") && res[1].includes("Barquense")) {
                     let total = (quantidade * parseFloat(res[2])).toFixed(2);
                     if (Number.isInteger(total)) {
                         total += ",00";
@@ -211,7 +211,7 @@
                         total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
                     }
                     document.getElementById("preco").value = total;
-                } else if (quantidade <= 5 && res[0].includes("pack") && res[1].includes("Transdev")) {
+                } else if (quantidade <= 5 && res[0].includes("Pack") && res[1].includes("Transdev")) {
                     let total = (quantidade * parseFloat(res[2])).toFixed(2);
                     if (Number.isInteger(total)) {
                         total += ",00";
