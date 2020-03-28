@@ -3247,61 +3247,7 @@ table tr:hover td{
     margin-bottom:5px;
 }
 
-.signup-primeiroNome{
-    display:block;
-    width:100%;
-    height:45px;
-    padding-left:20px;
-    padding-right:20px;
-    line-height:45px;
-    line-height:100%;
-    border:solid 1px #cacaca; 
-    color:#666666;
-    border-radius:0px;
-}
-
-.signup-ultimoNome{
-    display:block;
-    width:100%;
-    height:45px;
-    padding-left:20px;
-    padding-right:20px;
-    line-height:45px;
-    line-height:100%;
-    border:solid 1px #cacaca; 
-    color:#666666;
-    border-radius:0px;
-}
-
-.signup-email{
-    display:block;
-    width:100%;
-    height:45px;
-    padding-left:20px;
-    padding-right:20px;
-    line-height:45px;
-    line-height:100%;
-    border:solid 1px #cacaca; 
-	color:#666666;
-    border-radius:0px;
-}
-
-.signup-password{
-    display:block;
-    width:100%;
-    height:45px;
-    padding-left:20px;
-    padding-right:20px;
-    line-height:45px;
-    line-height:100%;
-    border:solid 1px #cacaca; 
-    color:#666666;
-    margin-top:0px;
-    margin-bottom:0px;
-     border-radius:0px;
-}
-
-.signup-confirmPassword{
+.signup{
     display:block;
     width:100%;
     height:45px;

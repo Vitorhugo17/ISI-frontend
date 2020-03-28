@@ -241,6 +241,13 @@ body{
     margin-left:30px;
 }
 
+.header-logo1{
+    float:left;
+    height:20px;
+    background-size:70px 15px;
+    margin-top:22px;
+}
+
 .header-navigation{
     float:right;
     color:#FFFFFF;
@@ -426,7 +433,7 @@ body{
 .slider-image-1{background-image:url(../images/pictures/3.jpg);}
 .slider-image-2{background-image:url(../images/pictures/1.jpg);}
 .slider-image-3{background-image:url(../images/pictures/5.jpg);}
-.bg1{background-image:url(../images/pictures/3.jpg);}
+.bg1{background-image:url(../images/pictures/bus.jpg);}
 .bg2{background-image:url(../images/pictures/1.jpg);}
 .bg3{background-image:url(../images/pictures/5.jpg);}
 
