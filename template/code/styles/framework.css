@@ -59,7 +59,8 @@ License:        You may not reuse or redistribute this framework
     46. Soon Page
     47. Blog Page
     48. Fullscreen Image Slider
-    49. Calendar
+	49. Calendar
+	50. Recover password
 */ 
 
 
@@ -3128,43 +3129,21 @@ table tr:hover td{
     z-index:1;
 }
 
-
 .login-page-wrapper{
     position:absolute;
     width:280px;
-    height:330px;
+    height:460px;
     top:50%;
-    margin-top:-195px;
+    margin-top:-260px;
     left:50%;
     margin-left:-140px;
     z-index:2;
 }
 
-.login-username{
-    display:block;
-    width:100%;
-    height:45px;
-    padding-left:20px;
-    padding-right:20px;
-    line-height:45px;
-    line-height:100%;
-    border:solid 1px #cacaca; 
-    color:#666666;
-    border-radius:0px;
-}
-
-.login-password{
-    display:block;
-    width:100%;
-    height:45px;
-    padding-left:20px;
-    padding-right:20px;
-    line-height:45px;
-    line-height:100%;
-    border:solid 1px #cacaca; 
-    color:#666666;
-    margin-top:-1px;
-    border-radius:0px;
+.login-page-wrapper p{
+    color:rgba(255,255,255,0.7);
+    text-align:center;
+    margin-bottom:20px;
 }
 
 .login-logo{
@@ -3173,31 +3152,79 @@ table tr:hover td{
     height:22px;
     background-size:100px 22px;
     margin-left:auto;
-    margin-right:Auto;
-    margin-bottom:10px;
+    margin-right:auto;
+    margin-bottom:5px;
 }
 
-.login-page-wrapper p{
-    color:rgba(255,255,255,0.7);
-    text-align:center;
-}
-    
-.login-page-wrapper .button{
+.login{
+    display:block;
     width:100%;
-    text-align:center;
-    margin-top:20px;
+    height:45px;
+    padding-left:20px;
+    padding-right:20px;
+    line-height:45px;
+    line-height:100%;
+    border:solid 1px #cacaca; 
+    color:#666666;
+    border-radius:0px;
 }
 
-.login-page-wrapper .forgot{
+
+.or-button{
+    margin-top:10px;
+    margin-bottom:17px;
+}
+
+.or-button em{
+    width:40%;
+    float:left;
+    height:1px;
+    background-color:rgba(255,255,255,0.2);
+    margin-top:11px;
+}
+
+.or-button strong{
+    float:left;
+    width:20%;
     text-align:center;
-    margin-top:20px;
     color:rgba(255,255,255,0.5);
-    transition:all 200ms ease;
+    font-weight:400;
+    font-size:12px;
 }
 
-.login-page-wrapper .forgot:hover{
+.login-socials i{
+    padding-left:30px;
+    padding-right:40px;
+    width:15px;
+    font-size:14px;
+    line-height:45px;
+}
+
+.login-socials .facebook{
+    background-color:#3b5998;
+    color:#FFFFFF; 
+    line-height:45px;
+}
+
+.login-socials .twitter{
+    background-color:#4099ff;
     color:#FFFFFF;
-    transition:all 200ms ease;
+    line-height:45px;
+    margin-top:10px;
+}
+
+.login-socials .google{
+    background-color:#d34836;
+    color:#FFFFFF;
+    line-height:45px;
+    margin-top:10px;
+}
+
+.login-socials .mail{
+    background-color:#7f8c8d;
+    color:#FFFFFF;
+    line-height:45px;
+    margin-top:10px;
 }
 
 /*40.Signup Page*/
@@ -4570,7 +4597,7 @@ table tr:hover td{
 }
 
 
-/*Calendar*/
+/*49. Calendar*/
 
 .calendar{
     margin-bottom:30px;
@@ -4720,3 +4747,119 @@ table tr:hover td{
 }
 
 
+/* 50. Recover password*/
+/*///////////////*/
+
+.recover-page{
+    background-size:cover;
+    position:absolute;
+    width:100%;
+    height:100%;
+    margin-bottom:-60px;
+}
+
+.recover-page-overlay{
+    background-color:rgba(0,0,0,0.8);
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+.recover-page-wrapper{
+    position:absolute;
+    width:280px;
+    height:460px;
+    top:50%;
+    margin-top:-260px;
+    left:50%;
+    margin-left:-140px;
+    z-index:2;
+}
+
+.recover-page-wrapper p{
+    color:rgba(255,255,255,0.7);
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.recover-logo{
+    background-image:url(../images/misc/logo.png);
+    width:100px;
+    height:22px;
+    background-size:100px 22px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:5px;
+}
+
+.recover{
+    display:block;
+    width:100%;
+    height:45px;
+    padding-left:20px;
+    padding-right:20px;
+    line-height:45px;
+    line-height:100%;
+    border:solid 1px #cacaca; 
+    color:#666666;
+    border-radius:0px;
+}
+
+
+.or-button{
+    margin-top:10px;
+    margin-bottom:17px;
+}
+
+.or-button em{
+    width:40%;
+    float:left;
+    height:1px;
+    background-color:rgba(255,255,255,0.2);
+    margin-top:11px;
+}
+
+.or-button strong{
+    float:left;
+    width:20%;
+    text-align:center;
+    color:rgba(255,255,255,0.5);
+    font-weight:400;
+    font-size:12px;
+}
+
+.recover-socials i{
+    padding-left:30px;
+    padding-right:40px;
+    width:15px;
+    font-size:14px;
+    line-height:45px;
+}
+
+.recover-socials .facebook{
+    background-color:#3b5998;
+    color:#FFFFFF; 
+    line-height:45px;
+}
+
+.recover-socials .twitter{
+    background-color:#4099ff;
+    color:#FFFFFF;
+    line-height:45px;
+    margin-top:10px;
+}
+
+.recover-socials .google{
+    background-color:#d34836;
+    color:#FFFFFF;
+    line-height:45px;
+    margin-top:10px;
+}
+
+.recover-socials .mail{
+    background-color:#7f8c8d;
+    color:#FFFFFF;
+    line-height:45px;
+    margin-top:10px;
+}
