@@ -157,10 +157,7 @@
                     </button>
                 </form>
                 <div class="sr-result hidden">
-                    <p>Payment completed<br /></p>
-                    <pre>
-              <code></code>
-            </pre>
+                    <p>Compra realizada com sucesso!<br /></p>
                 </div>
             </div>
         </div>
@@ -169,8 +166,7 @@
     <script>
         const urlBase = `http://localhost:8080`;
 
-        window.onload = async () => {
-            console.log("1");
+        const loadOption = async () => {
             const response = await fetch(`${urlBase}/products`);
             const result = await response.json();
             const products = result.products;
@@ -178,82 +174,82 @@
 
             for (let i = 0; i < products.length; i++) {
                 opcao +=
-                    `<option value="${products[i].id}-${products[i].company}-${products[i].price}">${products[i].name} - ${products[i].company} - ${products[i].price}</option>`;
+                    `<option value="${products[i].id}-${products[i].company}-${products[i].price}">${products[i].name} - ${products[i].company} - ${products[i].price}€</option>`;
             }
-            opcao.innerHTML;
+            document.getElementById("tipoBilhete").innerHTML = opcao;
+        }
+        loadOption();
+
+        document.getElementById('efetuarPagamento').addEventListener('click', (e) => {
+            document.getElementById('compra').style.display = "none";
+            document.getElementById('pagamento').style.display = "block";
+        })
 
 
-            document.getElementById('efetuarPagamento').addEventListener('click', (e) => {
-                document.getElementById('compra').style.display = "none";
-                document.getElementById('pagamento').style.display = "block";
-            })
+        document.getElementById("tipoBilhete").addEventListener("change", (e) => {
+            verificarQuantidade();
+        })
 
+        document.getElementById("quantidade").addEventListener("change", (e) => {
+            verificarQuantidade();
+        })
 
-            document.getElementById("tipoBilhete").addEventListener("change", (e) => {
-                verificarQuantidade();
-            })
-
-            document.getElementById("quantidade").addEventListener("change", (e) => {
-                verificarQuantidade();
-            })
-
-            function verificarQuantidade() {
-                let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
-                        "tipoBilhete")
-                    .selectedIndex].value;
-                let quantidade = document.getElementById("quantidade").value;
-                if (tipoBilhete != "" && quantidade != "") {
-                    let res = tipoBilhete.split("-");
-                    if (quantidade <= 50 && res[0].includes("único")) {
-                        if (quantidade % 5 == 0 && res[1].includes("Barquense")) {
-                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
-                                let tipo = document.getElementById("tipoBilhete").options[i].value;
-                                if (tipo.includes("Barquense") && tipo.includes("Pack")) {
-                                    document.getElementById("tipoBilhete").selectedIndex = i;
-                                    tipoBilhete = document.getElementById("tipoBilhete").options[i].value;
-                                }
+        function verificarQuantidade() {
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete")
+                .selectedIndex].text;
+            let quantidade = document.getElementById("quantidade").value;
+            if (tipoBilhete != "" && quantidade != "") {
+                let res = tipoBilhete.split("-");
+                if (quantidade <= 50 && res[0].includes("único")) {
+                    console.log(1);
+                    if (quantidade % 5 == 0 && res[1].includes("Barquense")) {
+                        for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            let tipo = document.getElementById("tipoBilhete").options[i].text;
+                            if (tipo.includes("Barquense") && tipo.includes("Pack")) {
+                                document.getElementById("tipoBilhete").selectedIndex = i;
+                                tipoBilhete = document.getElementById("tipoBilhete").options[i].text;
+                                document.getElementById("quantidade").value = quantidade / 5;
                             }
-                            document.getElementById("quantidade").value = quantidade / 5;
-                        } else if (quantidade % 10 == 0 && res[1].includes("Transdev")) {
-                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
-                                let tipo = document.getElementById("tipoBilhete").options[i].value;
-                                if (tipo.includes("Transdev") && tipo.includes("Pack")) {
-                                    document.getElementById("tipoBilhete").selectedIndex = i;
-                                    tipoBilhete = document.getElementById("tipoBilhete").options[i].value;
-                                }
+                        }
+                    } else if (quantidade % 10 == 0 && res[1].includes("Transdev")) {
+                        for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            let tipo = document.getElementById("tipoBilhete").options[i].text;
+                            if (tipo.includes("Transdev") && tipo.includes("Pack")) {
+                                document.getElementById("tipoBilhete").selectedIndex = i;
+                                tipoBilhete = document.getElementById("tipoBilhete").options[i].text;
+                                document.getElementById("quantidade").value = quantidade / 10;
                             }
-                            document.getElementById("quantidade").value = quantidade / 10;
                         }
-
-                        quantidade = document.getElementById("quantidade").value;
-                        res = tipoBilhete.split("-")
-                        let total = (quantidade * parseFloat(res[2])).toFixed(2);
-                        if (Number.isInteger(total)) {
-                            total += ",00";
-                        } else {
-                            let x = total.toString().split(".");
-                            total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
-                        }
-                        document.getElementById("preco").value = total;
-                    } else if (quantidade <= 10 && res[0].includes("Pack") && res[1].includes("Barquense")) {
-                        let total = (quantidade * parseFloat(res[2])).toFixed(2);
-                        if (Number.isInteger(total)) {
-                            total += ",00";
-                        } else {
-                            let x = total.toString().split(".");
-                            total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
-                        }
-                        document.getElementById("preco").value = total;
-                    } else if (quantidade <= 5 && res[0].includes("Pack") && res[1].includes("Transdev")) {
-                        let total = (quantidade * parseFloat(res[2])).toFixed(2);
-                        if (Number.isInteger(total)) {
-                            total += ",00";
-                        } else {
-                            let x = total.toString().split(".");
-                            total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
-                        }
-                        document.getElementById("preco").value = total;
                     }
+
+                    quantidade = document.getElementById("quantidade").value;
+                    res = tipoBilhete.split("-")
+                    let total = (quantidade * parseFloat(res[2].replace("€", "").trim())).toFixed(2);
+                    if (Number.isInteger(total)) {
+                        total += ",00";
+                    } else {
+                        let x = total.toString().split(".");
+                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
+                    }
+                    document.getElementById("preco").value = total;
+                } else if (quantidade <= 10 && res[0].includes("Pack") && res[1].includes("Barquense")) {
+                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
+                    if (Number.isInteger(total)) {
+                        total += ",00";
+                    } else {
+                        let x = total.toString().split(".");
+                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
+                    }
+                    document.getElementById("preco").value = total;
+                } else if (quantidade <= 5 && res[0].includes("Pack") && res[1].includes("Transdev")) {
+                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
+                    if (Number.isInteger(total)) {
+                        total += ",00";
+                    } else {
+                        let x = total.toString().split(".");
+                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
+                    }
+                    document.getElementById("preco").value = total;
                 }
             }
         }

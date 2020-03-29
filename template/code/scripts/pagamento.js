@@ -1,11 +1,6 @@
 // A reference to Stripe.js
-var stripe;
+let stripe;
 
-var orderData = {
-  product_id: "49245902",
-  quantity: "2",
-  company: "Barquense"
-};
 
 // Disable the button until we have Stripe set up on the page
 document.querySelector("button").disabled = true;
@@ -97,7 +92,15 @@ var pay = function (stripe, card) {
     if (result.error) {
       showMessage(result.error.message);
     } else {
-      orderData.paymentMethodId = result.paymentMethod.id;
+      let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete").selectedIndex].value;
+      let res = tipoBilhete.split("-");
+
+      let orderData = {
+        product_id: res[0],
+        company: res[1],
+        quantity: document.getElementById('quantidade').value,
+        paymentMethodId: result.paymentMethod.id
+      };
 
       return fetch(`${urlBase}/pay`, {
         method: "POST",
@@ -142,10 +145,12 @@ var orderComplete = function (clientSecret) {
     method: 'POST',
     body: JSON.stringify(data)
   }).then(response => {
+    console.log(response);
     return response.json();
   }).then(result => {
-    if (result.statusCode == 200) {
-      showMessage("Compra efetuada com sucesso!");
+    console.log(result);
+    if (result.message == "Purchase inserted with success") {
+      changeLoadingState(false);
     } else {
       throw new Error(result.message);
     }
