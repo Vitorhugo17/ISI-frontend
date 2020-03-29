@@ -150,7 +150,16 @@ var orderComplete = function (clientSecret) {
   }).then(result => {
     console.log(result);
     if (result.message == "Purchase inserted with success") {
-      changeLoadingState(false);
+      swal({
+        title: 'Compra efetuada com sucesso!',
+        type: 'success',
+        showCloseButton: false,
+        showConfirmButton: false,
+        focusConfirm: false,
+        timer: 2000
+    }).then(() => {
+      window.location.reload();
+    })
     } else {
       throw new Error(result.message);
     }
