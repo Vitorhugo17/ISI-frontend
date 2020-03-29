@@ -76,7 +76,7 @@
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
     <div class="header-clear-big"></div>
-    
+
     <div class="content">
         <div class="container no-bottom">
             <h3>Comprar Bilhete</h3>
@@ -121,11 +121,11 @@
                     </p>
                     <select class="select-input" id="tipoBilhete" name="tipoBilhete" required>
                         <!--Nao estatico-->
-                       <!-- <option value="" selected disabled hidden>Tipo de bilhete</option>
+                        <!-- <option value="" selected disabled hidden>Tipo de bilhete</option>
                         <option value="Bilhete unico-Barquense-1.40">Bilhete Único Barquense - 1,40€</option>
                         <option value="Bilhete unico-Transdev-1.30">Bilhete Único Transdev - 1,30€</option>
                        <option value="bilheteIdaVolta">Bilhete de Ida e Volta</option> -->
-                       <!--   <option value="pack5-Barquense-5.50">Pack de 5 bilhetes - Barquense - 5,50€</option>
+                        <!--   <option value="pack5-Barquense-5.50">Pack de 5 bilhetes - Barquense - 5,50€</option>
                         <option value="pack10-Transdev-11.70">Pack de 10 bilhetes - Transdev - 11,70€</option> -->
                     </select>
                     <input type="number" class="text-input-one" id="quantidade" name="quantidade"
@@ -145,18 +145,19 @@
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
-        document.getElementById("tipoBilhete").addEventListener("click", async() => {
+        document.getElementById("tipoBilhete").addEventListener("click", async () => {
             const response = await fetch('/products');
             const products = await response.json();
             let opcao = `<option value="" selected disabled hidden>Tipo de bilhete</option>`;
-            
+
             for (let i = 0; i < products.length; i++) {
-                opcao += `
+                opcao +=
+                    `
                         <option value="${products[i].name}-${products[i].company}-${products[i].price}">${products[i].name} - ${products[i].company} - ${products[i].price}</option>`;
             }
             opcao.innerHTML;
         })
-        
+
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
             verificarQuantidade();
         })
