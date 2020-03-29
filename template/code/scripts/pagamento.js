@@ -155,7 +155,7 @@ var orderComplete = function (clientSecret) {
         type: 'success',
         showCloseButton: false,
         showConfirmButton: false,
-        focusConfirm: false,
+        focusConfirm: false, 
         timer: 2000
     }).then(() => {
       window.location.reload();
