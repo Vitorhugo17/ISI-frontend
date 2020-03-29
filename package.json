@@ -1,0 +1,24 @@
+{
+  "name": "isi-frontend",
+  "version": "1.0.0",
+  "description": "ISITravel  FRONTEND",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vitorhugo17/ISI-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vitorhugo17/ISI-frontend/issues"
+  },
+  "homepage": "https://github.com/Vitorhugo17/ISI-frontend#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}

@@ -3122,7 +3122,7 @@ table tr:hover td{
 }
 
 .login-page-overlay{
-    background-color:rgba(0,0,0,0.8);
+    background-color:rgba(0,0,0,0.4);
     position:absolute;
     width:100%;
     height:100%;
@@ -3144,6 +3144,19 @@ table tr:hover td{
     color:rgba(255,255,255,0.7);
     text-align:center;
     margin-bottom:20px;
+}
+
+.login-page-wrapper .forgot{
+    text-align:center;
+    margin-top:20px;
+    color:rgba(255,255,255,0.8);
+	transition:all 200ms ease;
+	font-size: 13px;
+}
+
+.login-page-wrapper .forgot:hover{
+    color:#FFFFFF;
+    transition:all 200ms ease;
 }
 
 .login-logo{
@@ -3240,7 +3253,7 @@ table tr:hover td{
 }
 
 .signup-page-overlay{
-    background-color:rgba(0,0,0,0.8);
+    background-color:rgba(0,0,0,0.4);
     position:absolute;
     width:100%;
     height:100%;
@@ -4759,7 +4772,7 @@ table tr:hover td{
 }
 
 .recover-page-overlay{
-    background-color:rgba(0,0,0,0.8);
+    background-color:rgba(0,0,0,0.4);
     position:absolute;
     width:100%;
     height:100%;
