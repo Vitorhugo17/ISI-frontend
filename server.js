@@ -12,9 +12,9 @@ app.get("/profile", (request, response) => {
     response.render(`${dirName}perfil`);
 })
 
-app.get("/", (request, response) => {
+app.get("/payment", (request, response) => {
     response.set('Content-Type', 'text/html');
-    response.render(`${dirName}index`);    
+    response.render(`${dirName}pagamento`);    
 })
 
 app.listen(4242, () => console.log(`Node server listening on port ${4242}!`));
