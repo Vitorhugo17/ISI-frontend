@@ -19,8 +19,6 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "html": "^1.0.0",
-    "nodemon": "^2.0.2",
-    "path": "^0.12.7"
+    "nodemon": "^2.0.2"
   }
 }
