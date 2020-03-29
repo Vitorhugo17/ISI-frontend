@@ -27,11 +27,6 @@ app.get("/purchase", (request, response) => {
     response.render(`${dirName}comprarBilhete`);
 })
 
-app.get("/payment", (request, response) => {
-    response.set('Content-Type', 'text/html');
-    response.render(`${dirName}pagamento`);    
-})
-
 app.get("/profile", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}perfil`);

@@ -13,7 +13,7 @@ document.querySelector("button").disabled = true;
 
 fetch(`${urlBase}/stripe-key`).then(function (result) {
   return result.json();
-}).then(function (data) {  
+}).then(function (data) {
   return setupElements(data);
 }).then(function ({
   stripe,
@@ -64,7 +64,7 @@ var setupElements = function (data) {
 var handleAction = function (clientSecret) {
   stripe.handleCardAction(clientSecret).then(function (data) {
     if (data.error) {
-      showError("Your card was not authenticated, please try again");
+      showMessage("Your card was not authenticated, please try again");
     } else if (data.paymentIntent.status === "requires_confirmation") {
       fetch(`${urlBase}/pay`, {
         method: "POST",
@@ -78,7 +78,7 @@ var handleAction = function (clientSecret) {
         return result.json();
       }).then(function (json) {
         if (json.error) {
-          showError(json.error);
+          showMessage(json.error);
         } else {
           orderComplete(clientSecret);
         }
@@ -96,7 +96,7 @@ var pay = function (stripe, card) {
   // Collects card details and creates a PaymentMethod
   stripe.createPaymentMethod("card", card).then(function (result) {
     if (result.error) {
-      showError(result.error.message);
+      showMessage(result.error.message);
     } else {
       orderData.paymentMethodId = result.paymentMethod.id;
 
@@ -112,7 +112,7 @@ var pay = function (stripe, card) {
     return result.json();
   }).then(function (response) {
     if (response.error) {
-      showError(response.error);
+      showMessage(response.error);
     } else if (response.requiresAction) {
       // Request authentication
       handleAction(response.clientSecret);
@@ -126,23 +126,36 @@ var pay = function (stripe, card) {
 
 /* Shows a success / error message when the payment is complete */
 var orderComplete = function (clientSecret) {
-  stripe.retrievePaymentIntent(clientSecret).then(function (result) {
-    var paymentIntent = result.paymentIntent;
-    var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+  let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete").selectedIndex].value;
+  let res = tipoBilhete.split("-");
+  let id = res[0];
+  let company = res[1];
+  let data = {};
+  data.user_id = '201';
+  data.product_id = id;
+  data.company = company;
+  data.quantity = document.getElementById('quantidade').value;
 
-    document.querySelector(".sr-payment-form").classList.add("hidden");
-    document.querySelector("pre").textContent = paymentIntentJson;
-
-    document.querySelector(".sr-result").classList.remove("hidden");
-    setTimeout(function () {
-      document.querySelector(".sr-result").classList.add("expand");
-    }, 200);
-
-    changeLoadingState(false);
-  });
+  return fetch(`${urlBase}/purchases`, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(data)
+  }).then(response => {
+    return response.json();
+  }).then(result => {
+    if (result.statusCode == 200) {
+      showMessage("Compra efetuada com sucesso!");
+    } else {
+      throw new Error(result.message);
+    }
+  }).catch(error => {
+    showMessage(error.message);
+  })
 };
 
-var showError = function (errorMsgText) {
+var showMessage = function (errorMsgText) {
   changeLoadingState(false);
   var errorMsg = document.querySelector(".sr-field-error");
   errorMsg.textContent = errorMsgText;

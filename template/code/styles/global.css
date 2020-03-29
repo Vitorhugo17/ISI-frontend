@@ -57,8 +57,7 @@ body {
 }
 
 /* Inputs */
-.sr-input,
-input[type="text"] {
+.sr-input {
   border: 1px solid var(--gray-border);
   border-radius: var(--radius);
   padding: 5px 12px;
@@ -71,7 +70,6 @@ input[type="text"] {
   appearance: none;
 }
 .sr-input:focus,
-input[type="text"]:focus,
 button:focus,
 .focused {
   box-shadow: 0 0 0 1px rgba(50, 151, 211, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.07),
@@ -79,8 +77,7 @@ button:focus,
   outline: none;
   z-index: 9;
 }
-.sr-input::placeholder,
-input[type="text"]::placeholder {
+.sr-input::placeholder {
   color: var(--gray-light);
 }
 .sr-result {
@@ -107,8 +104,7 @@ input[type="text"]::placeholder {
 
 /* Buttons and links */
 button {
-  background: var(--accent-color);
-  border-radius: var(--radius);
+  background-color: #2980b9;
   color: white;
   border: 0;
   padding: 12px 16px;

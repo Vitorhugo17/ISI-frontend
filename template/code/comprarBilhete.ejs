@@ -38,6 +38,11 @@
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
 
+   <link rel="stylesheet" href="/styles/normalize.css" />
+   <link rel="stylesheet" href="/styles/global.css" /> 
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/scripts/pagamento.js" defer></script> 
+
 </head>
 
 <body>
@@ -78,84 +83,110 @@
     <div class="header-clear-big"></div>
 
     <div class="content">
-        <div class="container no-bottom">
-            <h3>Comprar Bilhete</h3>
-        </div>
-
-        <div class="decoration"></div>
-        <div class="container" style="margin-bottom: 0px;">
-            <div class="one-third" style="width: 175px; margin-right: 2px;">
-                <h5 style="line-height: 30px;">Temos uma solução para si!</h5>
-            </div>
-            <div class="one-third" style="width: 20px; margin-right: 10px;">
-                <ul class="icon-list">
-                    <li class="tick-list">
-                        <p>&nbsp;</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="one-third last-column" style="width: 20px; margin-right: 2px;">
-                <ul class="icon-list">
-                    <li class="delete-list">
-                        <p>&nbsp;</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="decoration"></div>
-
-        <form id="formCompraBilhetes">
+        <div id="compra">
             <div class="container no-bottom">
-                <div class="one-half-responsive">
-                    <h5>NIF</h5>
-                    <p class="half-bottom">
-                        Insira o seu NIF no campo abaixo, caso pretenda a sua fatura com o mesmo.
-                    </p>
-                    <input type="text" class="text-input-one" id="nif" name="nif" placeholder="NIF"></input>
-                </div>
-                <div class="one-half-responsive">
-                    <h5>Escolha do bilhete</h5>
-                    <p class="half-bottom">
-                        Escolha o tipo de bilhete que pretende comprar, a companhia, a quantidade e, consoante a sua
-                        escolha, o preço será automaticamente preenchido.
-                    </p>
-                    <select class="select-input" id="tipoBilhete" name="tipoBilhete" required>
-                        <!--Nao estatico-->
-                        <!-- <option value="" selected disabled hidden>Tipo de bilhete</option>
-                        <option value="Bilhete unico-Barquense-1.40">Bilhete Único Barquense - 1,40€</option>
-                        <option value="Bilhete unico-Transdev-1.30">Bilhete Único Transdev - 1,30€</option>
-                       <option value="bilheteIdaVolta">Bilhete de Ida e Volta</option> -->
-                        <!--   <option value="pack5-Barquense-5.50">Pack de 5 bilhetes - Barquense - 5,50€</option>
-                        <option value="pack10-Transdev-11.70">Pack de 10 bilhetes - Transdev - 11,70€</option> -->
-                    </select>
-                    <input type="number" class="text-input-one" id="quantidade" name="quantidade"
-                        placeholder="Quantidade" required></input>
-                    <input type="text" class="text-price" id="preco" name="preco" placeholder="Preço Total"
-                        disabled></input>
-                </div>
+                <h3>Comprar Bilhete</h3>
+            </div>
 
+            <div class="decoration"></div>
+            <div class="container" style="margin-bottom: 0px;">
+                <div class="one-third" style="width: 175px; margin-right: 2px;">
+                    <h5 style="line-height: 30px;">Temos uma solução para si!</h5>
+                </div>
+                <div class="one-third" style="width: 20px; margin-right: 10px;">
+                    <ul class="icon-list">
+                        <li class="tick-list">
+                            <p>&nbsp;</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="one-third last-column" style="width: 20px; margin-right: 2px;">
+                    <ul class="icon-list">
+                        <li class="delete-list">
+                            <p>&nbsp;</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="decoration"></div>
-            <div class="container no-bottom">
-                <button type="submit" id="submit" class="button center-button button-blue full-bottom detected-button"
-                    style="width: 50%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Efetuar
-                    Pagamento</button>
+
+            <form id="formCompraBilhetes">
+                <div class="container no-bottom">
+                    <div class="one-half-responsive">
+                        <h5>NIF</h5>
+                        <p class="half-bottom">
+                            Insira o seu NIF no campo abaixo, caso pretenda a sua fatura com o mesmo.
+                        </p>
+                        <input type="text" class="text-input-one" id="nif" name="nif" placeholder="NIF"></input>
+                    </div>
+                    <div class="one-half-responsive">
+                        <h5>Escolha do bilhete</h5>
+                        <p class="half-bottom">
+                            Escolha o tipo de bilhete que pretende comprar, a companhia, a quantidade e, consoante a sua
+                            escolha, o preço será automaticamente preenchido.
+                        </p>
+                        <select class="select-input" id="tipoBilhete" name="tipoBilhete" required>                            
+                        </select>
+                        <input type="number" class="text-input-one" id="quantidade" name="quantidade"
+                            placeholder="Quantidade" required></input>
+                        <input type="text" class="text-price" id="preco" name="preco" placeholder="Preço Total"
+                            disabled></input>
+                    </div>
+
+                </div>
+                <div class="decoration"></div>
+                <div class="container no-bottom">
+                    <button type="button" id="efetuarPagamento"
+                        class="button center-button button-blue full-bottom detected-button"
+                        style="width: 100%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Efetuar
+                        Pagamento</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="sr-root" id="pagamento" style="display: none;">
+            <div class="sr-main">
+                <form id="payment-form" class="sr-payment-form">
+                    <div class="sr-combo-inputs-row">
+                        <div class="sr-input sr-card-element" id="card-element"></div>
+                    </div>
+                    <div class="sr-field-error" id="card-errors" role="alert"></div>
+                    <button id="submit">
+                        <div class="spinner hidden" id="spinner"></div>
+                        <span id="button-text">Pay</span><span id="order-amount"></span>
+                    </button>
+                </form>
+                <div class="sr-result hidden">
+                    <p>Payment completed<br /></p>
+                    <pre>
+              <code></code>
+            </pre>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
-        document.getElementById("tipoBilhete").addEventListener("click", async() => {
-            const response = await fetch('/products');
+        const urlBase = `http://localhost:8080`;
+
+        document.getElementById("tipoBilhete").addEventListener("click", async () => {
+            const response = await fetch(`${urlBase}/products`);
             const products = await response.json();
             let opcao = `<option value="" selected disabled hidden>Tipo de bilhete</option>`;
 
             for (let i = 0; i < products.length; i++) {
-                opcao += `<option value="${products[i].name}-${products[i].company}-${products[i].price}">${products[i].name} - ${products[i].company} - ${products[i].price}</option>`;
+                opcao +=
+                    `<option value="${products[i].id}-${products[i].company}-${products[i].price}">${products[i].name} - ${products[i].company} - ${products[i].price}</option>`;
             }
             opcao.innerHTML;
         })
 
+        document.getElementById('efetuarPagamento').addEventListener('click', (e) => {
+            document.getElementById('compra').style.display = "none";
+            document.getElementById('pagamento').style.display = "block";
+        })
+
+        
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
             verificarQuantidade();
         })
