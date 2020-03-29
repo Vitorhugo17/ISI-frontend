@@ -136,7 +136,6 @@ var orderComplete = function (clientSecret) {
   data.user_id = '201';
   data.product_id = id;
   data.company = company;
-  data.customer_tax_id = document.getElementById('nif').value;
   data.quantity = document.getElementById('quantidade').value;
 
   return fetch(`${urlBase}/purchases`, {
