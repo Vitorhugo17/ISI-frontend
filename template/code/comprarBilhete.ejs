@@ -112,7 +112,7 @@
             </div>
             <div class="decoration"></div>
 
-            <form id="formCompraBilhetes">
+            <form id="formCompraBilhetes" class=>
                 <div class="container no-bottom">
                     <div class="one-half-responsive">
                         <h5>Escolha do bilhete</h5>
@@ -121,7 +121,7 @@
                             sua
                             escolha, o preço será automaticamente preenchido.
                         </p>
-                        <select class="select-input requiredField" id="tipoBilhete" name="tipoBilhete">
+                        <select class="select-input" id="tipoBilhete" name="tipoBilhete" required>
                         </select>
                         <input type="number" class="text-input-one" id="quantidade" name="quantidade"
                             placeholder="Quantidade" required></input>
@@ -135,7 +135,7 @@
                     <div class="one-half-responsive">
                         <button type="button" id="efetuarPagamento"
                             class="button center-button button-blue full-bottom detected-button"
-                            style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Efetuar
+                            style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px; ;">Efetuar
                             Pagamento</button>
                     </div>
                 </div>
@@ -188,7 +188,6 @@
             document.getElementById('compra').style.display = "none";
             document.getElementById('pagamento').style.display = "block";
         })
-
 
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
             verificarQuantidade();
