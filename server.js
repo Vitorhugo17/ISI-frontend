@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const app = express();
 
@@ -48,4 +50,4 @@ app.get("/busSchedules", (request, response) => {
     response.render(`${dirName}horarios`);    
 })
 
-app.listen(4242, () => console.log(`Node server listening on port ${4242}!`));
+app.listen(process.env.PORT, () => console.log(`Node server listening on port ${process.env.PORT}!`));
