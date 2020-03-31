@@ -112,7 +112,7 @@
             </div>
             <div class="decoration"></div>
 
-            <form id="formCompraBilhetes" class=>
+            <form id="formCompraBilhetes">
                 <div class="container no-bottom">
                     <div class="one-half-responsive">
                         <h5>Escolha do bilhete</h5>
@@ -133,7 +133,7 @@
                 <div class="decoration"></div>
                 <div class="container no-bottom">
                     <div class="one-half-responsive">
-                        <button type="button" id="efetuarPagamento"
+                        <button type="submit" id="efetuarPagamento"
                             class="button center-button button-blue full-bottom detected-button"
                             style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px; ;">Efetuar
                             Pagamento</button>
@@ -184,7 +184,8 @@
         }
         loadOption();
 
-        document.getElementById('efetuarPagamento').addEventListener('click', (e) => {
+        document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
+            event.preventDefault();
             document.getElementById('compra').style.display = "none";
             document.getElementById('pagamento').style.display = "block";
         })
