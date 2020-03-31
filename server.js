@@ -5,7 +5,7 @@ const dirName = __dirname + '/template/code/';
 app.use(express.static(dirName));
 
 app.set('view engine', 'ejs');
-app.set('views', 'template/code');
+app.set('views', dirName);
 
 app.get("/", (request, response) => {
     response.set('Content-Type', 'text/html');
