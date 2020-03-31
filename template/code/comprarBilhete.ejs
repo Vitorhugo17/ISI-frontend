@@ -205,7 +205,6 @@
             if (tipoBilhete != "" && quantidade != "") {
                 let res = tipoBilhete.split("-");
                 if (quantidade <= 50 && res[0].includes("único")) {
-                    console.log(1);
                     if (quantidade % 5 == 0 && res[1].includes("Barquense")) {
                         for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
                             let tipo = document.getElementById("tipoBilhete").options[i].text;

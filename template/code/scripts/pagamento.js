@@ -145,10 +145,8 @@ var orderComplete = function (clientSecret) {
     method: 'POST',
     body: JSON.stringify(data)
   }).then(response => {
-    console.log(response);
     return response.json();
   }).then(result => {
-    console.log(result);
     if (result.message == "Purchase inserted with success") {
       swal({
         title: 'Compra efetuada com sucesso!',
