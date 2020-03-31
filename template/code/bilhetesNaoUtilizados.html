@@ -59,15 +59,16 @@
             <ul class="submenu show-submenu">
                 <li><a href="comprarBilhete.html"><i class="fa fa-angle-right"></i>Comprar<i
                             class="fa fa-circle"></i></a></li>
-                <li class="active-menu"></li> <a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não Utilizados<i
-                            class="fa fa-circle"></i></a></li>
-                <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i
-                            class="fa fa-circle"></i></a></li>
-            </ul>
+                <li class="active-menu"></li> <a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não
+                    Utilizados<i class="fa fa-circle"></i></a>
         </li>
-        <li><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-angle-rightfa fa-circle"></i></a>
-        </li>
-        <li><a href="#"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
+        <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i
+                    class="fa fa-circle"></i></a></li>
+    </ul>
+    </li>
+    <li><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-angle-rightfa fa-circle"></i></a>
+    </li>
+    <li><a href="#"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
     <div class="header">
@@ -96,19 +97,32 @@
                         <td class="table-sub-title"> Único</td>
                         <td>7</td>
                         <td>Transdev</td>
-                        <td><input type ="radio" id="" value =""></td>
+                        <td>
+                            <li>
+                                <input id="r1" type="radio" name="radio" value="1" invisible>
+                            </li>
+                        </td>
+                        <!--<td><input type ="radio" id="" value =""></td>-->
                     </tr>
                     <tr class='even'>
                         <td class="table-sub-title"> Ida e Volta</td>
                         <td>3</td>
                         <td>Transdev</td>
-                        <td></td>
+                        <td>
+                            <li>
+                                <input id="r1" type="radio" name="radio" value="1" invisible>
+                            </li>
+                        </td>
                     </tr>
                     <tr>
                         <td class="table-sub-title"> Único</td>
                         <td>2</td>
                         <td>Barquense</td>
-                        <td></td>
+                        <td>
+                            <li>
+                                <input id="r1" type="radio" name="radio" value="1">
+                            </li>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -123,4 +137,4 @@
                 <a href="" class="button button-blue full-button">Partilhar Bilhete</a>
             </div>
 
-        </body>
+</body>
