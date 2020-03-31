@@ -8,8 +8,9 @@ app.set('view engine', 'ejs');
 app.set('views', dirName);
 
 app.get("/", (request, response) => {
-    response.set('Content-Type', 'text/html');
-    response.render(`${dirName}login`);
+    /*response.set('Content-Type', 'text/html');
+    response.render(`${dirName}login`);*/
+    response.send("OLA");
 })
 
 app.get("/register", (request, response) => {
