@@ -96,17 +96,16 @@
         nif.addEventListener("change", (event) => {
             if (!validaContribuinte(nif.value)) {
                 nif.setCustomValidity("Verifique o NIF!");
-                document.getElementById("registar").disabled = true;
             } else {
                 nif.setCustomValidity("");
                 document.getElementById("registar").disabled = false;
             }
         })
 
+
         pass.addEventListener("change", (event) => {
             if (pass.value != confPass.value && confPass.value != "") {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
-                document.getElementById("registar").disabled = true;
             } else {
                 confPass.setCustomValidity("");
                 document.getElementById("registar").disabled = false;
@@ -115,7 +114,6 @@
         confPass.addEventListener("change", (event) => {
             if (pass.value != confPass.value) {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
-                document.getElementById("registar").disabled = true;
             } else {
                 confPass.setCustomValidity("");
                 document.getElementById("registar").disabled = false;
@@ -125,22 +123,20 @@
         firstname.addEventListener("change", (event) => {
             const letras = /^[a-záàâãéèêíïóôõöúçñ ]+$/i;
             if (firstname.value.match(letras)) {
-                firstname.setCustomValidity("")
+                firstname.setCustomValidity("");
                 document.getElementById("registar").disabled = false;
             } else {
                 firstname.setCustomValidity("Insira apenas letras!");
-                document.getElementById("registar").disabled = true;
             }
         })
 
         lastname.addEventListener("change", (event) => {
             const letras = /^[a-záàâãéèêíïóôõöúçñ ]+$/i;
             if (lastname.value.match(letras)) {
-                lastname.setCustomValidity("")
+                lastname.setCustomValidity("");
                 document.getElementById("registar").disabled = false;
             } else {
-                lastname.setCustomValidity("Insira apenas letras!");
-                document.getElementById("registar").disabled = true;
+                lastname.setCustomValidity("Insira apenas letras!")
             }
         })
 
