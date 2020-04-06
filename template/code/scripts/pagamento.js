@@ -133,7 +133,6 @@ var orderComplete = function (clientSecret) {
   let id = res[0];
   let company = res[1];
   let data = {};
-  data.user_id = '201';
   data.product_id = id;
   data.company = company;
   data.quantity = document.getElementById('quantidade').value;
