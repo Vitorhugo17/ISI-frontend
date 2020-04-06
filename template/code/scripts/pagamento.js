@@ -5,7 +5,9 @@ let stripe;
 // Disable the button until we have Stripe set up on the page
 document.querySelector("button").disabled = true;
 
-fetch(`${urlBase}/stripe-key`).then(function (result) {
+fetch(`${urlBase}/stripe-key`, {
+  credentials: 'include'
+}).then(function (result) {
   return result.json();
 }).then(function (data) {
   return setupElements(data);
@@ -65,6 +67,7 @@ var handleAction = function (clientSecret) {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify({
           paymentIntentId: data.paymentIntent.id
         })
@@ -107,6 +110,7 @@ var pay = function (stripe, card) {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(orderData)
       });
     }
@@ -142,6 +146,7 @@ var orderComplete = function (clientSecret) {
       'Content-Type': 'application/json'
     },
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(data)
   }).then(response => {
     return response.json();
