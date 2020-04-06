@@ -80,7 +80,7 @@
     <div class="menu-wrapper-background"></div>
 
     <script>
-        const urlBase = `http://localhost:8080`;
+        const urlBase = `https://test-api-isicampus.herokuapp.com/`;
 
         const formLogin = document.getElementById('formLogin');
 
@@ -124,13 +124,13 @@
                         timer: 2000
                     })
                 } else {
-                    if (result.isEmpresa) {
+                    /*if (result.isEmpresa) {
                         window.location.reload(); //rota do leitor quando fizer a pagina
                     } else {
                         sessionStorage.setItem("user_nome", result.nome + " " + result.apelido);
                         window.location.replace(
                             '/purchase') //  window.location.replace('/profile') //alterar para ejs
-                    }
+                    }*/
                 }
             }).catch(error => {
                 document.getElementById("login").disabled = false;
