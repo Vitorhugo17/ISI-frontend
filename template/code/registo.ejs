@@ -39,6 +39,7 @@
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script type="text/javascript" src="scripts/nif.js"></script>
 
 </head>
 
@@ -90,21 +91,34 @@
         const lastname = document.getElementById("lastname");
         const pass = document.getElementById("pass");
         const confPass = document.getElementById("confPass");
+        const nif = document.getElementById("nif");
+
+        nif.addEventListener("change", (event) => {
+            if (!validaContribuinte(nif.value)) {
+                nif.setCustomValidity("Verifique o NIF!");
+                document.getElementById("registar").disabled = true;
+            } else {
+                nif.setCustomValidity("");
+                document.getElementById("registar").disabled = false;
+            }
+        })
 
         pass.addEventListener("change", (event) => {
             if (pass.value != confPass.value && confPass.value != "") {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
-                document.getElementById("registar").disabled = false;
+                document.getElementById("registar").disabled = true;
             } else {
                 confPass.setCustomValidity("");
+                document.getElementById("registar").disabled = false;
             }
         })
         confPass.addEventListener("change", (event) => {
             if (pass.value != confPass.value) {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
-                document.getElementById("registar").disabled = false;
+                document.getElementById("registar").disabled = true;
             } else {
                 confPass.setCustomValidity("");
+                document.getElementById("registar").disabled = false;
             }
         })
 
@@ -112,8 +126,10 @@
             const letras = /^[a-záàâãéèêíïóôõöúçñ ]+$/i;
             if (firstname.value.match(letras)) {
                 firstname.setCustomValidity("")
+                document.getElementById("registar").disabled = false;
             } else {
-                firstname.setCustomValidity("Insira apenas letras!")
+                firstname.setCustomValidity("Insira apenas letras!");
+                document.getElementById("registar").disabled = true;
             }
         })
 
@@ -121,8 +137,10 @@
             const letras = /^[a-záàâãéèêíïóôõöúçñ ]+$/i;
             if (lastname.value.match(letras)) {
                 lastname.setCustomValidity("")
+                document.getElementById("registar").disabled = false;
             } else {
-                lastname.setCustomValidity("Insira apenas letras!")
+                lastname.setCustomValidity("Insira apenas letras!");
+                document.getElementById("registar").disabled = true;
             }
         })
 
