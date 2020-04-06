@@ -167,12 +167,14 @@
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
-        const urlBase = `https://test-api-isicampus.herokuapp.com`;
+        const urlBase = `http://192.168.56.1:8080`;
 
         document.getElementById("nomeUtilizador").innerHTML = sessionStorage.getItem("user_nome");
 
         const loadOption = async () => {
-            const response = await fetch(`${urlBase}/products`);
+            const response = await fetch(`${urlBase}/products`, {
+                credentials: 'include'
+            });
             const result = await response.json();
             const products = result.products;
             let opcao = `<option value="" selected disabled hidden>Tipo de bilhete</option>`;

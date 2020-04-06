@@ -80,7 +80,7 @@
     <div class="menu-wrapper-background"></div>
 
     <script>
-        const urlBase = `https://test-api-isicampus.herokuapp.com`;
+        const urlBase = `http://192.168.56.1:8080`;
 
         const formLogin = document.getElementById('formLogin');
 
@@ -100,6 +100,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 method: 'POST',
                 body: JSON.stringify(data)
             }).then(response => {
