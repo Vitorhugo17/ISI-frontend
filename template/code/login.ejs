@@ -37,6 +37,7 @@
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -56,28 +57,93 @@
         <div class="login-page-wrapper">
             <br>
             <br>
+            <br>
             <div>
                 <h4 class="header-logo1" style="color: #fff; width: 100%; font-size: 30px; text-align: center;">
                     Login</h4>
             </div>
             <br>
-            <input type="email" class="login" placeholder="Email" id="email" required>
-            <input type="password" class="login" placeholder="Palavra-passe" id="password" required>
-            <br>
-            <div class="one-half">
-                <a href="#" class="button button-green full-button" id="login">Login</a>
-            </div>
-            <div class="one-half last-column">
-                <a href="registo.html" class="button button-blue full-button">Registar</a>
-            </div>
-            <div class="clear"></div>
-            <a class="forgot" href="recuperar.html">Esqueceu-se da palavra-passe?</a>
+            <form id="formLogin">
+                <input type="email" class="login" placeholder="Email" id="email" required>
+                <input type="password" class="login" placeholder="Palavra-passe" id="pass" required>
+                <br>
+                <center>
+                    <button type="submit" id="login"
+                        class="button center-button button-blue full-bottom detected-button"
+                        style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px; margin-bottom: 15px!important;">Login</button>
+                </center>
+                <a class="forgot" href="/register">Ainda não possui conta? Registe-se!</a>
+                <a class="forgot" href="recuperar.html" style="margin-top: 8px;">Esqueceu-se da palavra-passe?</a>
+            </form>
         </div>
     </div>
     <div class="menu-wrapper-background"></div>
 
     <script>
+        const urlBase = `http://localhost:8080`;
 
+        const formLogin = document.getElementById('formLogin');
+
+        formLogin.addEventListener('submit', (event) => {
+            document.getElementById("login").disabled = true;
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+
+            let data = {
+                email: email,
+                password: pass
+            }
+
+            return fetch(`${urlBase}/login`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(data)
+            }).then(response => {
+                return response.json();
+            }).then(result => {
+                if (result.message == "user not found") {
+                    document.getElementById("login").disabled = false;
+                    swal({
+                        title: 'Insira o email corretamente!',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        type: 'error',
+                        timer: 2000
+                    })
+                } else if (result.message == "password invalid") {
+                    document.getElementById("login").disabled = false;
+                    swal({
+                        title: 'Insira a palavra-passe corretamente!',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        type: 'error',
+                        timer: 2000
+                    })
+                } else {
+                    if (result.isEmpresa) {
+                        window.location.reload(); //rota do leitor quando fizer a pagina
+                    } else {
+                        sessionStorage.setItem("user_nome", result.nome + " " + result.apelido);
+                        window.location.replace(
+                            '/purchase') //  window.location.replace('/profile') //alterar para ejs
+                    }
+                }
+            }).catch(error => {
+                document.getElementById("login").disabled = false;
+                console.log(error);
+                swal({
+                    title: 'Impossível efetuar o login. Tente mais tarde!',
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    type: 'error',
+                    timer: 2000
+                })
+            })
+        })
     </script>
 
 </body>

@@ -78,8 +78,7 @@
     </ul>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
-            Adriana Rodrigues</h4>
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador"></h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
     <div class="header-clear-big"></div>
@@ -169,6 +168,8 @@
     <div class="menu-wrapper-background"></div>
     <script>
         const urlBase = `http://localhost:8080`;
+
+        document.getElementById("nomeUtilizador").innerHTML = sessionStorage.getItem("user_nome");
 
         const loadOption = async () => {
             const response = await fetch(`${urlBase}/products`);
