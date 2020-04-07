@@ -2,6 +2,18 @@ require('dotenv').config();
 
 const express = require("express");
 const app = express();
+const bodyParser = require('body-parser');
+const validator = require('express-validator');
+const sanitizer = require('express-sanitizer');
+
+
+app.use(bodyParser.json({
+    limit: '50mb'
+}), bodyParser.urlencoded({
+    extended: true
+}));
+app.use(sanitizer());
+app.use(validator());
 
 const dirName = __dirname + '/template/code/';
 app.use(express.static(dirName));
@@ -24,9 +36,12 @@ app.get("/recover", (request, response) => {
     response.render(`${dirName}recuperar`);
 })
 
-app.get("/recoverPass", (request, response) => {
+app.get("/recoverPass/:id", (request, response) => {
+    const user_id = request.sanitize("id").escape();
     response.set('Content-Type', 'text/html');
-    response.render(`${dirName}alterarPass`);
+    response.render(`${dirName}alterarPass`, {
+        user_id: user_id
+    });
 })
 
 app.get("/purchase", (request, response) => {

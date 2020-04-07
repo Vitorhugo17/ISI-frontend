@@ -37,6 +37,7 @@
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -61,7 +62,8 @@
                     Recuperar Palavra-passe</h4>
             </div>
             <br>
-            <p style="line-height: 19px; color: #fff; font-family: 'Roboto', sans-serif;">Deseja recuperar a sua palavra-passe? Insira o seu email no campo abaixo e, de seguida, consulte-o.</p>
+            <p style="line-height: 19px; color: #fff; font-family: 'Roboto', sans-serif;">Deseja recuperar a sua
+                palavra-passe? Insira o seu email no campo abaixo e, de seguida, consulte-o.</p>
             <form id="formMail">
                 <input type="email" class="login" placeholder="Email" id="email" required>
                 <br>
@@ -77,7 +79,7 @@
     <div class="menu-wrapper-background"></div>
     <script>
         const urlBase = `http://localhost:8080`;
-        
+
         const email = document.getElementById("email");
 
         const formMail = document.getElementById("formMail");
@@ -89,7 +91,7 @@
             let data = {
                 email: email.value
             }
-            return fetch(`${urlBase}/`, {
+            return fetch(`${urlBase}/recoverPass`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -99,7 +101,7 @@
             }).then(response => {
                 return response.json();
             }).then(result => {
-                if (result.message == "User inserted with success") {
+                if (result.message == "mail sent") {
                     swal({
                         title: 'Email enviado com sucesso!',
                         type: 'success',
@@ -110,13 +112,10 @@
                     }).then(result => {
                         window.location.replace('/')
                     })
+                } else if (result.message == "User not found") {
+                    throw new Error("Email inválido!");
                 } else {
-                    console.log(result);
-                    if (result.error == "CONTACT_EXISTS") {
-                        throw new Error(result.error);
-                    } else {
-                        throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
-                    }
+                    throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
                 }
             }).catch(error => {
                 document.getElementById("enviarMail").disabled = false;
