@@ -50,32 +50,83 @@
             </p>
         </div>
     </div>
-    <div class="recover-page bg1" style="background-position: 100% 100%; opacity: 0.8;">
-        <div class="recover-page-overlay"></div>
-        <div class="recover-page-wrapper">
+    <div class="login-page bg1" style="background-position: 100% 100%; opacity: 0.8;">
+        <div class="login-page-overlay"></div>
+        <div class="login-page-wrapper">
             <br>
             <br>
             <div>
-                <h4 class="header-logo1" style="color: #fff; width: 100%; font-size: 30px; text-align: center;">
-                   Recuperação</h4>
+                <h4 class="header-logo1"
+                    style="color: #fff; width: 100%; font-size: 24px; text-align: center; margin-top: 88px;">
+                    Recuperar Palavra-passe</h4>
             </div>
             <br>
-            <p style="color:#fff;width: 100%; font-size: 13px; text-align: center; line-height: 20px; font-family: 'Roboto', sans-serif;"> 
-                Deseja recuperar a sua palavra-passe?
-                Insira o seu e-mail no campo abaixo e, de seguida, consulte-o.
-            </p>
-            
-            <input type="email" class="recover" placeholder="Email" id="email">
-            <br>
-            <div class="one-half">
-                <a href="#" class="button button-green full-button" id="recuperar">Recuperar</a>
-            </div>
-            <div class="one-half last-column">
-                <a href="login.html" class="button button-blue full-button">Login</a>
-            </div>
+            <form id="formMail">
+                <input type="email" class="login" placeholder="Email" id="email" required>
+                <br>
+                <center>
+                    <button type="submit" id="enviarMail"
+                        class="button center-button button-blue full-bottom detected-button"
+                        style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px; margin-bottom: 15px!important;">Recuperar</button>
+                </center>
+                <a class="forgot" href="/">Já não pretende recuperar a palavra-passe? Volte para o login!</a>
+            </form>
         </div>
+    </div>
+    <div class="menu-wrapper-background"></div>
+    <script>
+        const urlBase = `http://localhost:8080`;
 
-        <div class="menu-wrapper-background"></div>
+        const email = document.getElementById("email");
 
+        const formMail = document.getElementById("formMail");
+
+        formMail.addEventListener('submit', (event) => {
+            document.getElementById("enviarMail").disabled = true;
+            event.preventDefault();
+
+            let data = {
+                email: email.value
+            }
+            return fetch(`${urlBase}/`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                method: 'POST',
+                body: JSON.stringify(data)
+            }).then(response => {
+                return response.json();
+            }).then(result => {
+                if (result.message == "User inserted with success") {
+                    swal({
+                        title: 'Email enviado com sucesso!',
+                        type: 'success',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        showLoaderOnConfirm: false,
+                        timer: 2000
+                    }).then(result => {
+                        window.location.replace('/')
+                    })
+                } else {
+                    console.log(result);
+                    if (result.error == "CONTACT_EXISTS") {
+                        throw new Error(result.error);
+                    } else {
+                        throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
+                    }
+                }
+            }).catch(error => {
+                document.getElementById("enviarMail").disabled = false;
+                swal({
+                    title: error.message,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    type: 'error',
+                    timer: 2000
+                })
+            });
+        })
+    </script>
 </body>
-<!---->

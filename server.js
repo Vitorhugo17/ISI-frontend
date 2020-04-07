@@ -24,6 +24,11 @@ app.get("/recover", (request, response) => {
     response.render(`${dirName}recuperar`);
 })
 
+app.get("/recoverPass", (request, response) => {
+    response.set('Content-Type', 'text/html');
+    response.render(`${dirName}alterarPass`);
+})
+
 app.get("/purchase", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}comprarBilhete`);
