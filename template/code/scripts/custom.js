@@ -422,29 +422,29 @@ $(document).ready(function() {
 		//build progress bar elements
 		buildProgressBar();
 		//start counting
-		start();
+	//	start();
 	}
 	
 	//create div#progressBar and div#bar then prepend to $("#owl-demo")
 	function buildProgressBar(){
-		$progressBar = $("<div>",{
+	/*	$progressBar = $("<div>",{
 			id:"progressBar"
 		});
 		$bar = $("<div>",{
 			id:"bar"
 		});
-		$progressBar.append($bar).prependTo($elem);
+		$progressBar.append($bar).prependTo($elem);*/
 	}
 	
-	function start() {
+/*	function start() {
 		//reset timer
 		percentTime = 0;
 		isPause = false;
 		//run interval every 0.01 second
 		tick = setInterval(interval, 10);
-	};
+	}; */
 	
-	function interval() {
+/*	function interval() {
 		if(isPause === false){
 			percentTime += 1 / time;
 			$bar.css({
@@ -456,7 +456,7 @@ $(document).ready(function() {
 			  $elem.trigger('owl.next')
 			}
 		}
-	}
+	} */
 	
 	//pause while dragging 
 	function pauseOnDragging(){
@@ -468,7 +468,7 @@ $(document).ready(function() {
 		//clear interval
 		clearTimeout(tick);
 		//start again
-		start();
+	//	start();
 	}
 	
 	
@@ -505,7 +505,7 @@ $(document).ready(function() {
 		afterInit : progressBar,
 		afterMove : moved,
 		startDragging : pauseOnDragging
-	});
+	}); 
     
 
 	$.scrollIt();
