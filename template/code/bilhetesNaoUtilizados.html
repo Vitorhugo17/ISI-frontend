@@ -38,6 +38,11 @@
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
 
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/global.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
+
 </head>
 
 <body>
@@ -55,86 +60,69 @@
     <ul class="menu-top">
         <li><a href="horarios.html"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
         <li>
-            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i class="fa fa-plus"></i></a>
+            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
+                    class="fa fa-plus active-plus"></i></a>
             <ul class="submenu show-submenu">
                 <li><a href="comprarBilhete.html"><i class="fa fa-angle-right"></i>Comprar<i
                             class="fa fa-circle"></i></a></li>
-                <li class="active-menu"></li> <a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não
-                    Utilizados<i class="fa fa-circle"></i></a>
+                <li class="active-menu"><a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não
+                        Utilizados<i class="fa fa-circle"></i></a></li>
+                <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+            </ul>
         </li>
-        <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i
-                    class="fa fa-circle"></i></a></li>
-    </ul>
-    </li>
-    <li><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-angle-rightfa fa-circle"></i></a>
-    </li>
-    <li><a href="#"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
+        <li><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
+        <li><a href="#"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
-            Pedro Oliveira</h4>
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">Pedro Oliveira
+        </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
     <div class="header-clear-big"></div>
 
     <div class="content">
         <div class="container no-bottom">
-
-
-
-            <div class="container no-bottom">
-                <h3>Bilhetes Não Utilizados</h3>
-                <p>Verifique abaixo os bilhetes que ainda pode utilizar.</p>
-                <table cellspacing='0' class="table">
-                    <tr>
-                        <th>Tipo de bilhete</th>
-                        <th class="table-title">Quantidade</th>
-                        <th class="table-title">Companhia</th>
-                        <th class="table-title"></th>
-                    </tr>
-                    <tr>
-                        <td class="table-sub-title"> Único</td>
-                        <td>7</td>
-                        <td>Transdev</td>
-                        <td>
-                            <li>
-                                <input id="r1" type="radio" name="radio" value="1" invisible>
-                            </li>
-                        </td>
-                        <!--<td><input type ="radio" id="" value =""></td>-->
-                    </tr>
-                    <tr class='even'>
-                        <td class="table-sub-title"> Ida e Volta</td>
-                        <td>3</td>
-                        <td>Transdev</td>
-                        <td>
-                            <li>
-                                <input id="r1" type="radio" name="radio" value="1" invisible>
-                            </li>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table-sub-title"> Único</td>
-                        <td>2</td>
-                        <td>Barquense</td>
-                        <td>
-                            <li>
-                                <input id="r1" type="radio" name="radio" value="1">
-                            </li>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
+            <h3>Bilhetes Não Utilizados</h3>
             <div class="decoration"></div>
-            <div class="menu-wrapper-background"></div>
-
-            <div class="one-half">
-                <a href="#" class="button button-green full-button" id="registo">Gerar Qr Code</a>
-            </div>
-            <div class="one-half last-column">
-                <a href="" class="button button-blue full-button">Partilhar Bilhete</a>
-            </div>
+            <table cellspacing='0' class="table">
+                <tr style="line-height: 10px;">
+                    <th class="table-title" style="padding: 21px 1px 22px 1px;"></th>
+                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
+                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
+                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
+                </tr>
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                    <td>3</td>
+                    <td>Transdev</td>
+                </tr>
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
+                    <td>1</td>
+                    <td>Transdev</td>
+                </tr>
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" class="checkbox radio-two">&nbsp;</a></td>
+                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                    <td>9</td>
+                    <td>Barquense</td>
+                </tr>
+            </table>
+        </div>
+        <div class="decoration"></div>
+        <div class="container no-bottom" style="float: right;">
+           
+                <a href="#" class="button button-green" style="font-size: 13px;">Pedir Qr Code</a>
+                <a href="#" class="button button-blue" style="font-size: 13px;">Partilhar Bilhete</a>
+           
+        </div>
+    </div>
+    <div class="menu-wrapper-background"></div>
 
 </body>
