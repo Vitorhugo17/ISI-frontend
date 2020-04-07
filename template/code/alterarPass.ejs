@@ -119,17 +119,17 @@
                 user_id: document.getElementById("user_id").value,
                 password: pass.value,
             }
-            return fetch(`${urlBase}/`, { //falta rota
+            return fetch(`${urlBase}/password/update`, { 
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 credentials: 'include',
-                method: 'POST',
+                method: 'PUT',
                 body: JSON.stringify(data)
             }).then(response => {
                 return response.json();
             }).then(result => {
-                if (result.message == "User inserted with success") { //falta mensagens
+                if (result.message == "Password updated with success") { 
                     swal({
                         title: 'Palavra-passe alterada com sucesso!',
                         type: 'success',
@@ -140,13 +140,8 @@
                     }).then(result => {
                         window.location.replace('/')
                     })
-                } else {
-                    console.log(result);
-                    if (result.error == "CONTACT_EXISTS") {
-                        throw new Error(result.error);
-                    } else {
+                } else {       
                         throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
-                    }
                 }
             }).catch(error => {
                 document.getElementById("alterarPass").disabled = false;
