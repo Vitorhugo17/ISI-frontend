@@ -118,6 +118,7 @@
             let data = {
                 user_id: document.getElementById("user_id").value,
                 password: pass.value,
+                type: "recover"
             }
             return fetch(`${urlBase}/password/update`, { 
                 headers: {
