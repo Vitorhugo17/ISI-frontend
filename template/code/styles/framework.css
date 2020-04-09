@@ -3410,6 +3410,7 @@ table tr:hover td{
     font-size:16px;
 }
 
+
 .coverpage-style-1 img{
     position:absolute;
     z-index:999999;
@@ -3466,7 +3467,7 @@ table tr:hover td{
     margin-top:-40px;
 }
 
-.coverpage-style-3 p{
+.coverpage-style-3 p input{
     position:absolute!important;
     z-index:999999;
     color:#FFFFFF;
