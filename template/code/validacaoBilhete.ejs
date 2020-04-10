@@ -74,14 +74,6 @@
         QrScanner.WORKER_PATH = './scripts/qr-scanner-worker.min.js';
     
         const video = document.getElementById('qr-video');
-        
-        function setResult(label, result) {
-            label.textContent = result;
-            camQrResultTimestamp.textContent = new Date().toString();
-            label.style.color = 'teal';
-            clearTimeout(label.highlightTimeout);
-            label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
-        }
 
         QrScanner.hasCamera().then(hasCamera =>{ 
             if (hasCamera) {
@@ -103,10 +95,10 @@
                         if(response.status == 200) {*/
                             scanner.pause();
                             alert(result);
-                            document.getElementById("video").hidden = true;
+                            document.getElementById("video").style.display = "none";
                             document.getElementById("resultado").style.cssText = "position: fixed; z-index: 99999; background-color: rgba(27, 169, 102, 0.6); width: 100%; height: 100%; top: 60px; left: 0px; display: block;";
                             setTimeout(() => {
-                                document.getElementById("video").hidden = false;
+                            document.getElementById("video").style.display = "block";
                                 document.getElementById("resultado").style.display = "none";
                                 scanner.start();
                             }, 3000)
