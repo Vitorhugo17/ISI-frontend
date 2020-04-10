@@ -63,7 +63,7 @@
             <h3>Validação de Bilhetes</h3>
             <div class="decoration"></div>
             <div class="one-half-responsive" style="height: auto; width: auto;">
-                <video muted playsinline id="qr-video" width="auto" height="auto" ></video>
+                <video muted playsinline id="qr-video" width="auto" height="auto"></video>
             </div>
         </div>
     </div>
@@ -82,40 +82,41 @@
             clearTimeout(label.highlightTimeout);
             label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
         }
-    
-        // ####### Web Cam Scanning #######
-    
-        QrScanner.hasCamera().then(hasCamera => console.log(hasCamera));
+
+        QrScanner.hasCamera().then(hasCamera =>{ 
+            if (hasCamera) {
+                const scanner = new QrScanner(video, result => {
+                /*if (result.qrCodeID) {
+                    let data = {
+                        qrCodeId: result.qrCodeID,
+                        company: "Barquense"
+                    }
+                    return fetch(`${urlBase}/`, {  //url
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: "include",
+                    method: 'PUT', //pode ter que alterar
+                    body: JSON.stringify(data)
+                    }).then(response => {
+                        if(response.status == 200) {*/
+                            scanner.pause();
+                            console.log(result);
+                            document.getElementById("video").hidden = true;
+                            document.getElementById("resultado").style.cssText = "position: fixed; z-index: 99999; background-color: rgba(27, 169, 102, 0.6); width: 100%; height: 100%; top: 60px; left: 0px; display: block;";
+                            setTimeout(() => {
+                                document.getElementById("video").hidden = false;
+                                document.getElementById("resultado").style.display = "none";
+                                scanner.start();
+                            }, 3000)
+                        /*}
+                    })
+                }*/                
+            });
+            scanner.start();
+        }
+    });
         
-        const scanner = new QrScanner(video, result => {
-           /* if (result.qrCodeID) {
-                let data = {
-                    qrCodeId: result.qrCodeID,
-                    company: "Barquense"
-                }
-                return fetch(`${urlBase}/`, {  //url
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: "include",
-                method: 'PUT', //pode ter que alterar
-                body: JSON.stringify(data)
-                }).then(response => {
-                    if(response.status == 200) {*/
-                        scanner.pause();
-                        console.log(result);
-                        document.getElementById("video").hidden = true;
-                        document.getElementById("resultado").style.cssText = "position: fixed; z-index: 99999; background-color: rgba(27, 169, 102, 0.6); width: 100%; height: 100%; top: 60px; left: 0px; display: block;";
-                        setTimeout(() => {
-                            document.getElementById("video").hidden = false;
-                            document.getElementById("resultado").style.display = "none";
-                            scanner.start();
-                        }, 3000)
-                    /*}
-                })
-            }*/
-            
-        });
-        scanner.start();
+        
     </script>
 </body>
