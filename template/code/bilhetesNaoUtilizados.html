@@ -87,48 +87,48 @@
             <h3>Bilhetes Não Utilizados</h3>
             <div class="decoration"></div>
             <form>
-            <table cellspacing='0' class="table">
-                <tr style="line-height: 10px;">
-                    <th class="table-title" style="padding: 21px 1px 22px 1px;"></th>
-                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
-                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
-                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
-                  <!--  <th id="th"class="table-title" style="padding: 21px 6px 22px 6px;">QRCode</th>-->
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td id="radio" style="padding: 1px; font-size:1px;"><a href="#"
-                            class="checkbox radio-two">&nbsp;</a>
-                    </td>
-                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
-                    <td>3</td>
-                    <td>Transdev</td>
-                  <!--  <td id="1">
+                <table cellspacing='0' class="table">
+                    <tr style="line-height: 10px;">
+                        <th class="table-title" style="padding: 21px 1px 22px 1px;"></th>
+                        <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
+                        <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
+                        <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
+                        <!--  <th id="th"class="table-title" style="padding: 21px 6px 22px 6px;">QRCode</th>-->
+                    </tr>
+                    <tr style="line-height: 10px;">
+                        <td id="radio" style="padding: 1px; font-size:1px;"><a id="0" href="#"
+                                class="checkbox radio-two">&nbsp;</a>
+                        </td>
+                        <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                        <td>3</td>
+                        <td>Transdev</td>
+                        <!--  <td id="1">
                         <img src="images\qrcode.png" class="center" height="50" width="50">
                     </td> -->
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td id="radio1" style="padding: 1px; font-size:1px;"><a href="#"
-                            class="checkbox radio-two">&nbsp;</a>
-                    </td>
-                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
-                    <td>1</td>
-                    <td>Transdev</td>
-                <!--    <td id="2">
+                    </tr>
+                    <tr style="line-height: 10px;">
+                        <td id="radio1" style="padding: 1px; font-size:1px;"><a id="1" href="#"
+                                class="checkbox radio-two">&nbsp;</a>
+                        </td>
+                        <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
+                        <td>1</td>
+                        <td>Transdev</td>
+                        <!--    <td id="2">
                         <img src="images\qrcode.png" class="center" height="50" width="50">
                     </td> -->
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td id="radio2" style="padding: 1px; font-size:1px;"><a href="#"
-                            class="checkbox radio-two">&nbsp;</a></td>
-                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
-                    <td>9</td>
-                    <td>Barquense</td>
-                <!--    <td id="3">
+                    </tr>
+                    <tr style="line-height: 10px;">
+                        <td id="radio2" style="padding: 1px; font-size:1px;"><a id="2" href="#"
+                                class="checkbox radio-two">&nbsp;</a></td>
+                        <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                        <td>9</td>
+                        <td>Barquense</td>
+                        <!--    <td id="3">
                         <img src="images\qrcode.png" class="center" height="50" width="50">
                     </td>-->
-                </tr>
-            </table>
-        </form>
+                    </tr>
+                </table>
+            </form>
         </div>
         <div class="decoration"></div>
         <div class="container no-bottom" style="float: right;">
@@ -140,4 +140,21 @@
     </div>
     <div class="menu-wrapper-background"></div>
 
+    <script>
+        const radioButtons = document.getElementsByClassName("radio-two");
+        for (let i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].addEventListener("click", (event) => {
+                event.preventDefault();
+                if (radioButtons[i].className == "checkbox radio-two") {
+                    for (let j = 0; j < radioButtons.length; j++) {
+                        if (radioButtons[i].id != radioButtons[j].id) {
+                            radioButtons[j].className ="checkbox radio-two";
+                        }
+                    }
+                } else {
+                    radioButtons[i].className ="checkbox radio-two";
+                }
+            })
+        }
+    </script>
 </body>
