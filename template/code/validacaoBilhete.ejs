@@ -27,19 +27,21 @@
     <title>Validação de Bilhetes</title>
 
 
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link href="styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="styles/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="styles/swipebox.css" rel="stylesheet" type="text/css">
     <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="styles/validacaoBilhete.css" rel="stylesheet" type="text/css">
+    <link href="styles/animate.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
 
-    <script src="scripts/instascan.min.js"></script>
 </head>
 
 <body>
-
     <div id="preloader">
         <div id="status">
             <p class="center-text">
@@ -56,28 +58,64 @@
     </div>
     <div class="header-clear-big"></div>
 
-    <div class="content">
+    <div class="content" id="video">
         <div class="container no-bottom">
             <h3>Validação de Bilhetes</h3>
             <div class="decoration"></div>
-            <video id="preview"></video>
+            <div class="one-half-responsive" style="height: auto; width: auto;">
+                <video muted playsinline id="qr-video" width="auto" height="auto" ></video>
+            </div>
         </div>
     </div>
-    <script type="text/javascript">
-        let scanner = new Instascan.Scanner({
-            video: document.getElementById('preview')
+    <div id="resultado" style="display: none;">
+    </div>
+    <script type="module">
+        import QrScanner from "./scripts/qr-scanner.min.js";
+        QrScanner.WORKER_PATH = './scripts/qr-scanner-worker.min.js';
+    
+        const video = document.getElementById('qr-video');
+        
+        function setResult(label, result) {
+            label.textContent = result;
+            camQrResultTimestamp.textContent = new Date().toString();
+            label.style.color = 'teal';
+            clearTimeout(label.highlightTimeout);
+            label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+        }
+    
+        // ####### Web Cam Scanning #######
+    
+        QrScanner.hasCamera().then(hasCamera => console.log(hasCamera));
+        
+        const scanner = new QrScanner(video, result => {
+           /* if (result.qrCodeID) {
+                let data = {
+                    qrCodeId: result.qrCodeID,
+                    company: "Barquense"
+                }
+                return fetch(`${urlBase}/`, {  //url
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: "include",
+                method: 'PUT', //pode ter que alterar
+                body: JSON.stringify(data)
+                }).then(response => {
+                    if(response.status == 200) {*/
+                        scanner.pause();
+                        console.log(result);
+                        document.getElementById("video").hidden = true;
+                        document.getElementById("resultado").style.cssText = "position: fixed; z-index: 99999; background-color: rgba(27, 169, 102, 0.6); width: 100%; height: 100%; top: 60px; left: 0px; display: block;";
+                        setTimeout(() => {
+                            document.getElementById("video").hidden = false;
+                            document.getElementById("resultado").style.display = "none";
+                            scanner.start();
+                        }, 3000)
+                    /*}
+                })
+            }*/
+            
         });
-        scanner.addListener('scan', function (content) {
-            alert(content);
-        });
-        Instascan.Camera.getCameras().then(function (cameras) {
-            if (cameras.length > 0) {
-                scanner.start(cameras[0]);
-            } else {
-                console.error('No cameras found.');
-            }
-        }).catch(function (e) {
-            console.error(e);
-        });
+        scanner.start();
     </script>
 </body>

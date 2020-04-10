@@ -140,28 +140,43 @@ h3 {
     height: 90px;
 }
 
-input {
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    text-align: start;
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-
-    font: 400 13.3333px Arial;
-}
 
 @media (min-width:760px) {
-
+    .one-third-responsive {
+        width: 30%;
+        float: left;
+    }
 
     .one-half-responsive {
         width: 46%;
         float: left;
         margin-right: 8%;
+    }
+
+    .sidebar-left-big {
+        width: 70%;
+        float: left;
+        margin-right: 5%
+    }
+
+    .sidebar-right-small {
+        width: 25%;
+        float: right;
+    }
+
+    .sidebar-right-big {
+        width: 70%;
+        float: right;
+    }
+
+    .sidebar-left-small {
+        width: 25%;
+        float: left;
+        margin-right: 5%;
+    }
+
+    .hide-if-responsive {
+        display: none;
     }
 
 }
