@@ -1,4 +1,4 @@
-input,
+/*input,
 label {
     vertical-align: middle
 }
@@ -30,7 +30,7 @@ label {
     width: 1px;
     height: 1px;
     opacity: 0
-}
+} */
 
 .content {
     clear: both;
