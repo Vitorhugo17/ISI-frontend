@@ -168,6 +168,23 @@
     <div class="menu-wrapper-background"></div>
     <script>
         const urlBase = "<%=urlBase%>";
+        //verificar se o utilizador está autenticado
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated) {
+                throw new Error("Não autenticado");
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
         document.getElementById("nomeUtilizador").innerHTML = sessionStorage.getItem("user_nome");
 
         const loadOption = async () => {
@@ -193,44 +210,68 @@
         })
 
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
-            verificarQuantidade();
+            verificarPreco();
         })
 
         document.getElementById("quantidade").addEventListener("change", (e) => {
-            verificarQuantidade();
+            verificarPreco();
         })
 
 
-        function verificarQuantidade() {
+        function verificarPreco() {
             let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete")
                 .selectedIndex].text;
             let quantidade = document.getElementById("quantidade").value;
+
+            let quantidadeF = [];
             if (tipoBilhete != "" && quantidade != "") {
                 let res = tipoBilhete.split("-");
                 if (quantidade <= 50 && res[0].includes("único")) {
-                    if (quantidade % 5 == 0 && res[1].includes("Barquense")) {
-                        for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
-                            let tipo = document.getElementById("tipoBilhete").options[i].text;
-                            if (tipo.includes("Barquense") && tipo.includes("Pack")) {
-                                document.getElementById("tipoBilhete").selectedIndex = i;
-                                tipoBilhete = document.getElementById("tipoBilhete").options[i].text;
-                                document.getElementById("quantidade").value = quantidade / 5;
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                                let tipo = document.getElementById("tipoBilhete").options[i].text;
+                                if (tipo.includes("Barquense") && tipo.includes("Pack")) {
+                                    let preco = tipo.split("-")[2].trim();
+                                    let data = {
+                                        quantidade: Math.floor(quantidade / 5),
+                                        preco: preco
+                                    }
+                                    quantidadeF.push(data);
+                                    quantidade = quantidade % 5;
+                                }
                             }
                         }
-                    } else if (quantidade % 10 == 0 && res[1].includes("Transdev")) {
-                        for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
-                            let tipo = document.getElementById("tipoBilhete").options[i].text;
-                            if (tipo.includes("Transdev") && tipo.includes("Pack")) {
-                                document.getElementById("tipoBilhete").selectedIndex = i;
-                                tipoBilhete = document.getElementById("tipoBilhete").options[i].text;
-                                document.getElementById("quantidade").value = quantidade / 10;
+                    } else if (res[1].includes("Transdev")) {
+                        if (quantidade >= 10) {
+                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                                let tipo = document.getElementById("tipoBilhete").options[i].text;
+                                if (tipo.includes("Transdev") && tipo.includes("Pack")) {
+                                    let preco = tipo.split("-")[2].trim();
+                                    let data = {
+                                        quantidade: Math.floor(quantidade / 10),
+                                        preco: preco
+                                    }
+                                    quantidadeF.push(data);
+                                    quantidade = quantidade % 10;
+                                }
                             }
                         }
                     }
 
-                    quantidade = document.getElementById("quantidade").value;
-                    res = tipoBilhete.split("-")
-                    let total = (quantidade * parseFloat(res[2].replace("€", "").trim())).toFixed(2);
+                    if (quantidade != 0) {
+                        let data = {
+                            quantidade: quantidade,
+                            preco: res[2].trim()
+                        }
+                        quantidadeF.push(data);
+                    }
+                    console.log(quantidadeF);
+                    let total = 0;
+                    for (let i = 0; i < quantidadeF.length; i++) {
+                        total += parseFloat((quantidadeF[i].quantidade * parseFloat(quantidadeF[i].preco.replace("€", ""))).toFixed(2));
+                    }
+                    total = total.toFixed(2);
                     if (Number.isInteger(total)) {
                         total += ",00";
                     } else {
@@ -238,8 +279,8 @@
                         total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
                     }
                     document.getElementById("preco").value = total;
-                } else if (quantidade <= 10 && res[0].includes("Pack") && res[1].includes("Barquense")) {
-                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
+                } else if (quantidade <= 50) {
+                    let total = (quantidade * parseFloat(res[2].trim().replace("€", ""))).toFixed(2);
                     if (Number.isInteger(total)) {
                         total += ",00";
                     } else {
@@ -247,15 +288,8 @@
                         total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
                     }
                     document.getElementById("preco").value = total;
-                } else if (quantidade <= 5 && res[0].includes("Pack") && res[1].includes("Transdev")) {
-                    let total = (quantidade * parseFloat(res[2])).toFixed(2);
-                    if (Number.isInteger(total)) {
-                        total += ",00";
-                    } else {
-                        let x = total.toString().split(".");
-                        total = x[0] + "," + (x[1].length == 1 ? x[1] + "0" : x[1]);
-                    }
-                    document.getElementById("preco").value = total;
+                } else {
+                    //codigo para informar que a quantidade tem de ser inferior ou igual a 50
                 }
             }
         }
