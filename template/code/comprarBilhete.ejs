@@ -167,8 +167,7 @@
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
-        const urlBase = `http://localhost:8080`;
-
+        const urlBase = "<%=urlBase%>";
         document.getElementById("nomeUtilizador").innerHTML = sessionStorage.getItem("user_nome");
 
         const loadOption = async () => {
