@@ -87,4 +87,11 @@ app.get("/busSchedules", (request, response) => {
     });
 })
 
+app.get("/qrcodeReader", (request, response) => {
+    response.set('Content-Type', 'text/html');
+    response.render(`${dirName}validacaoBilhete`, {
+        urlBase: urlBase
+    });
+})
+
 app.listen(process.env.PORT, () => console.log(`Node server listening on port ${process.env.PORT}!`));
