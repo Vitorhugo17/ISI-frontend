@@ -30,10 +30,7 @@
     <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="styles/validacaoBilhete.css" rel="stylesheet" type="text/css">
 
-    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js">
-    </script>
-    <script type="text/javascript" src="scripts/qrcode.js"></script>
-    <script type="text/javascript" src="scripts/uploadQRcode.js"></script>
+
 
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
@@ -65,14 +62,25 @@
         <div class="container no-bottom">
             <h3>Validação de Bilhetes</h3>
             <div class="decoration"></div>
-            <form id="formValidacao">
-                <div class="one-half-responsive">
-                    <form id="formValidacao">
-                        <input type=text size=16 placeholder="Tracking Code" class=qrcode-text><label
-                            class=qrcode-text-btn><input type=file accept="image/*" capture=environment
-                                onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1></label>
-                </div>
-            </form>
+            <video id="preview"></video>
+
         </div>
     </div>
+    <script type="text/javascript">
+        let scanner = new Instascan.Scanner({
+            video: document.getElementById('preview')
+        });
+        scanner.addListener('scan', function (content) {
+            alert(content);
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        });
+    </script>
 </body>
