@@ -70,7 +70,13 @@
         scanner.addListener('scan', function (content) {
             alert(content);
         });
-        Instascan.Camera.getCameras().then(function (cameras) {
+        Instascan.Camera.getCameras({
+            video: {
+                facingMode: {
+                    exact: "environment"
+                }
+            }
+        }).then(function (cameras) {
             if (cameras.length > 0) {
                 alert(cameras[0]);
                 scanner.start(cameras[0]);
