@@ -80,7 +80,7 @@ app.get("/usedTickets", (request, response) => {
     });
 })
 
-app.get("/busSchedules", (request, response) => {
+app.get("/bus", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}horarios`, {
         urlBase: urlBase
