@@ -25,8 +25,8 @@
         media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
-   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script> -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <title>Registo</title>
 
@@ -42,7 +42,7 @@
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
     <script type="text/javascript" src="scripts/nif.js"></script>
-    
+
 
 </head>
 
@@ -106,23 +106,6 @@
         })
 
         pass.addEventListener("change", (event) => {
-            let validator = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{9,13}$/";
-            if(!pass.value.match(validator)){
-                swal({
-                        html: '<strong><h3>A sua palavra-passe deve conter no mínimo 9 caracteres e no máximo 13, em que exista pelo menos um caracter especial, uma letra maiúscula, uma letra minúscula e um número.</h3></strong>',
-                        type: 'error',
-                        showCloseButton: true,
-                        showConfirmButton: false,
-                        focusConfirm: false,
-                        timer: 9000
-                    })
-            } else {
-                pass.setCustomValidity("");
-                document.getElementById("registar").disabled = false;
-            }
-        })
-
-        pass.addEventListener("change", (event) => {
             if (pass.value != confPass.value && confPass.value != "") {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
             } else {
@@ -134,8 +117,57 @@
             if (pass.value != confPass.value) {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
             } else {
-                confPass.setCustomValidity("");
-                document.getElementById("registar").disabled = false;
+                if (pass.value.length >= 9) {
+                    let validator = {
+                        maiuscula: 0,
+                        minuscula: 0,
+                        numero: 0,
+                        especial: 0
+                    }
+
+                    for (let i = 0; i < pass.value.length; i++) {
+                        if ("0123456789".includes(pass.value.charAt(i))) {
+                            validator.numero = 1;
+                        } else if ("[`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~]".includes(pass.value.charAt(i))) {
+                            validator.especial = 1;
+                        } else if (pass.value.charAt(i) === pass.value.charAt(i).toLowerCase()) {
+                            validator.minuscula = 1;
+                        } else if (pass.value.charAt(i) === pass.value.charAt(i).toUpperCase()) {
+                            validator.maiuscula = 1;
+                        }
+                        console.log(pass.value.charAt(i),
+                            pass.value.charAt(i) === pass.value.charAt(i).toLowerCase(),
+                            pass.value.charAt(i) === pass.value.charAt(i).toUpperCase(),
+                            "0123456789".includes(pass.value.charAt(i)),
+                            "[`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~]".includes(pass.value.charAt(i)));
+
+                    }
+
+                    console.log(pass.value);
+                    console.log(validator);
+                    if (validator.maiuscula + validator.minuscula + validator.especial + validator.numero < 3) {
+                        swal({
+                            html: '<strong><h3>A sua palavra-passe deve conter pelo menos três dos seguintes caracteres (um caracter especial, uma letra maiúscula, uma letra minúscula ou um número).</h3></strong>',
+                            type: 'error',
+                            showCloseButton: true,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 9000
+                        })
+                    } else {
+                        pass.setCustomValidity("");
+                        document.getElementById("registar").disabled = false;
+                    }
+                } else {
+                    swal({
+                        html: '<strong><h3>A sua palavra-passe deve conter no mínimo 9 caracteres.</h3></strong>',
+                        type: 'error',
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 9000
+                    })
+                }
             }
         })
 
@@ -194,7 +226,7 @@
                     })
                 } else {
                     console.log(result);
-                    if(result.error == "CONTACT_EXISTS") {
+                    if (result.error == "CONTACT_EXISTS") {
                         throw new Error(result.error);
                     } else {
                         throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
