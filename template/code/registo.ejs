@@ -106,14 +106,6 @@
         })
 
         pass.addEventListener("change", (event) => {
-            if (pass.value != confPass.value && confPass.value != "") {
-                confPass.setCustomValidity("As palavras-passe não correspondem!");
-            } else {
-                confPass.setCustomValidity("");
-                document.getElementById("registar").disabled = false;
-            }
-        })
-        confPass.addEventListener("change", (event) => {
             if (pass.value != confPass.value) {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
             } else {
@@ -168,6 +160,14 @@
                         timer: 9000
                     })
                 }
+            }
+        })
+        confPass.addEventListener("change", (event) => {
+            if (pass.value != confPass.value && confPass.value != "") {
+                confPass.setCustomValidity("As palavras-passe não correspondem!");
+            } else {
+                confPass.setCustomValidity("");
+                document.getElementById("registar").disabled = false;
             }
         })
 
