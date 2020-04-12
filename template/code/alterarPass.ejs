@@ -147,7 +147,7 @@
             }).catch(error => {
                 document.getElementById("alterarPass").disabled = false;
                 swal({
-                    title: error.message,
+                    html: '<strong><h3>Ocorreu um erro! Tente novamente mais tarde. Obrigado!</h3></strong>',
                     showCancelButton: false,
                     showConfirmButton: false,
                     type: 'error',
