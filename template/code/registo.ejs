@@ -106,7 +106,7 @@
         })
 
         pass.addEventListener("change", (event) => {
-            if (pass.value != confPass.value) {
+            if (pass.value != confPass.value && confPass.value != "") {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
             } else {
                 if (pass.value.length >= 9) {
