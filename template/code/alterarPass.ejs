@@ -86,7 +86,6 @@
     <script>
         const urlBase = `<%=urlBase%>`;
 
-
         const pass = document.getElementById("pass");
         const confPass = document.getElementById("confPass");
 
@@ -120,8 +119,6 @@
 
                     }
 
-                    console.log(pass.value);
-                    console.log(validator);
                     if (validator.maiuscula + validator.minuscula + validator.especial + validator.numero < 3) {
                         swal({
                             html: '<strong><h3>A sua palavra-passe deve conter pelo menos três dos seguintes caracteres: um caracter especial, uma letra maiúscula, uma letra minúscula ou um número!</h3></strong>',
@@ -147,6 +144,7 @@
                 }
             }
         })
+
         confPass.addEventListener("change", (event) => {
             if (pass.value != confPass.value) {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
