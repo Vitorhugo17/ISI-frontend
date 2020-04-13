@@ -39,6 +39,7 @@
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
     <script type="text/javascript" src="scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -54,7 +55,7 @@
 
     <div class="header">
         <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="companhia"></h4>
-        <a href="#" class="header-navigation"><i class="fa fa-power-off"
+        <a href="#" id="logout" class="header-navigation"><i class="fa fa-power-off"
                 style="font-size: large; line-height: 66px;"></i></a>
     </div>
     <div class="header-clear-big"></div>
@@ -137,5 +138,35 @@
     });
         
         
+    document.getElementById('logout').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            return fetch(`${urlBase}/logout`, {
+                credentials: 'include'
+            }).then(response => {
+                if (response.status == 200) {
+                    localStorage.removeItem('user_nome');
+                    swal({
+                        title: 'Logout efetuado com sucesso!',
+                        type: 'success',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    }).then(result => {window.location.replace("/") });
+                } else {
+                    throw new Error("Erro");
+                }
+            }).catch(error => {
+                swal({
+                    title: 'Ocorreu um erro. Tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
+        })
     </script>
 </body>

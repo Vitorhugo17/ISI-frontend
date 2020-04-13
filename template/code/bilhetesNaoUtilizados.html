@@ -72,7 +72,7 @@
             </ul>
         </li>
         <li><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
-        <li><a href="#"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
+        <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
     <div class="header">
@@ -153,5 +153,34 @@
                 }
             })
         }
-    </script>
-</body>
+    document.getElementById('logout').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            return fetch(`${urlBase}/logout`, {
+                credentials: 'include'
+            }).then(response => {
+                if (response.status == 200) {
+                    localStorage.removeItem('user_nome');
+                    swal({
+                        title: 'Logout efetuado com sucesso!',
+                        type: 'success',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    }).then(result => {window.location.replace("/") });
+                } else {
+                    throw new Error("Erro");
+                }
+            }).catch(error => {
+                swal({
+                    title: 'Ocorreu um erro. Tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
+        })
+    </script></body>
