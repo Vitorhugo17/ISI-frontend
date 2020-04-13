@@ -57,7 +57,8 @@
         <div class="login-page-wrapper">
             <br>
             <div>
-                <h4 class="header-logo1" style="color: #fff; width: 100%; font-size: 30px; text-align: center; margin-top: 88px;">
+                <h4 class="header-logo1"
+                    style="color: #fff; width: 100%; font-size: 30px; text-align: center; margin-top: 88px;">
                     Login</h4>
             </div>
             <br>
@@ -79,6 +80,24 @@
 
     <script>
         const urlBase = `<%=urlBase%>`;
+
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            }
+        }).then(result => {
+            if (result.isAuthenticated) {
+                if (result.isEmpresa) {
+                    window.location.replace("/qrcodeReader");
+                } else {
+                    window.location.replace("/purchase");
+                }
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
 
         const formLogin = document.getElementById('formLogin');
 
@@ -124,9 +143,10 @@
                     })
                 } else {
                     if (result.isEmpresa) {
-                        window.location.reload(); //rota do leitor quando fizer a pagina
+                        localStorage.setItem("user_nome", result.nome);
+                        window.location.replace('/qrcodeReader');
                     } else {
-                        sessionStorage.setItem("user_nome", result.nome + " " + result.apelido);
+                        localStorage.setItem("user_nome", result.nome + " " + result.apelido);
                         window.location.replace(
                             '/purchase') //  window.location.replace('/profile') //alterar para ejs
                     }

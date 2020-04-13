@@ -33,7 +33,7 @@
     <link href="styles/swipebox.css" rel="stylesheet" type="text/css">
     <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="styles/animate.css" rel="stylesheet" type="text/css">
-   
+
 
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/jqueryui.js"></script>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="companhia">Barquense</h4>
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="companhia"></h4>
         <a href="#" class="header-navigation"><i class="fa fa-power-off"
                 style="font-size: large; line-height: 66px;"></i></a>
     </div>
@@ -71,6 +71,26 @@
     <div id="resultado" style="display: none;">
     </div>
     <script type="module">
+        const urlBase = "<%=urlBase%>";
+        //verificar se o utilizador está autenticado
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated) {
+                throw new Error("Não autenticado");
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
+        document.getElementById("companhia").innerHTML = localStorage.getItem("user_nome");
+        
         import QrScanner from "./scripts/qr-scanner.min.js";
         QrScanner.WORKER_PATH = './scripts/qr-scanner-worker.min.js';
     
@@ -79,21 +99,18 @@
         QrScanner.hasCamera().then(hasCamera =>{ 
             if (hasCamera) {
                 const scanner = new QrScanner(video, result => {
-                /*if (result.qrCodeID) {
-                    let data = {
-                        qrCodeId: result.qrCodeID,
-                        company: "Barquense"
-                    }
-                    return fetch(`${urlBase}/`, {  //url
+                scanner.pause();
+                result = JSON.parse(result);
+                if (result.qrcode_id) {
+                    return fetch(`${urlBase}/qrcodes/use`, {  
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     credentials: "include",
-                    method: 'PUT', //pode ter que alterar
-                    body: JSON.stringify(data)
+                    method: 'POST',
+                    body: JSON.stringify(result)
                     }).then(response => {
-                        if(response.status == 200) {*/
-                            scanner.pause();
+                        if(response.status == 200) {
                             document.getElementById("video").style.display = "none";
                             document.getElementById("resultado").style.cssText = "position: fixed; z-index: 99999; background-color: rgba(27, 169, 102, 0.6); width: 100%; height: 100%; top: 60px; left: 0px; display: block;";
                             setTimeout(() => {
@@ -101,13 +118,21 @@
                                 document.getElementById("resultado").style.display = "none";
                                 scanner.start();
                             }, 3000)
-                        /*}
+                        } else {
+                            document.getElementById("video").style.display = "none";
+                            document.getElementById("resultado").style.cssText = "position: fixed; z-index: 99999; background-color: rgba(255, 0, 0, 0.6); width: 100%; height: 100%; top: 60px; left: 0px; display: block;";
+                            setTimeout(() => {
+                            document.getElementById("video").style.display = "block";
+                                document.getElementById("resultado").style.display = "none";
+                                scanner.start();
+                            }, 3000)
+                        }
                     })
-                }*/                
+                }             
             });
             scanner.start();
         } else {
-            alert("No camera");
+            alert("Sem acesso à câmara");
         }
     });
         
