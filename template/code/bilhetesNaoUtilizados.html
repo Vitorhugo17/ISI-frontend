@@ -92,35 +92,38 @@
                     <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
                     <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
                     <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
-                   <!-- <th id="th"class="table-title" style="padding: 21px 6px 22px 6px;">QRCode</th>-->
+                    <!-- <th id="th"class="table-title" style="padding: 21px 6px 22px 6px;">QRCode</th>-->
                 </tr>
                 <tr style="line-height: 10px;">
-                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio1" class="checkbox radio-two">&nbsp;</a>
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio1"
+                            class="checkbox radio-two">&nbsp;</a>
                     </td>
                     <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
                     <td>3</td>
                     <td>Transdev</td>
-                 <!--   <td id="1">
+                    <!--   <td id="1">
                         <img src="images\qrcode.png" class="center" height="50" width="50">
                     </td>-->
                 </tr>
                 <tr style="line-height: 10px;">
-                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio2" class="checkbox radio-two">&nbsp;</a>
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio2"
+                            class="checkbox radio-two">&nbsp;</a>
                     </td>
                     <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
                     <td>1</td>
                     <td>Transdev</td>
-                   <!-- <td id="2">
+                    <!-- <td id="2">
                         <img src="images\qrcode.png" class="center" height="50" width="50">
                     </td>-->
                 </tr>
                 <tr style="line-height: 10px;">
-                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio3" class="checkbox radio-two">&nbsp;</a>
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio3"
+                            class="checkbox radio-two">&nbsp;</a>
                     </td>
                     <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
                     <td>9</td>
                     <td>Barquense</td>
-                  <!--  <td id="3">
+                    <!--  <td id="3">
                         <img src="images\qrcode.png" class="center" height="50" width="50">
                     </td>-->
                 </tr>
@@ -145,15 +148,17 @@
                 if (radioButtons[i].className == "checkbox radio-two") {
                     for (let j = 0; j < radioButtons.length; j++) {
                         if (radioButtons[i].id != radioButtons[j].id) {
-                            radioButtons[j].className ="checkbox radio-two";
+                            radioButtons[j].className = "checkbox radio-two";
                         }
                     }
                 } else {
-                    radioButtons[i].className ="checkbox radio-two";
+                    radioButtons[i].className = "checkbox radio-two";
                 }
             })
         }
-    document.getElementById('logout').addEventListener('click', (event) => {
+
+        
+        document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
             return fetch(`${urlBase}/logout`, {
@@ -168,7 +173,9 @@
                         showConfirmButton: false,
                         focusConfirm: false,
                         timer: 2000
-                    }).then(result => {window.location.replace("/") });
+                    }).then(result => {
+                        window.location.replace("/")
+                    });
                 } else {
                     throw new Error("Erro");
                 }
@@ -183,4 +190,5 @@
                 })
             })
         })
-    </script></body>
+    </script>
+</body>

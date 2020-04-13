@@ -101,6 +101,7 @@
             if (hasCamera) {
                 const scanner = new QrScanner(video, result => {
                 scanner.pause();
+                console.log(result);
                 result = JSON.parse(result);
                 if (result.qrcode_id) {
                     return fetch(`${urlBase}/qrcodes/use`, {  
