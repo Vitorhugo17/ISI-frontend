@@ -58,12 +58,11 @@
             <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
                     class="fa fa-plus active-plus"></i></a>
             <ul class="submenu show-submenu">
-                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i
-                            class="fa fa-circle"></i></a></li>
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i
-                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li class="active-menu"><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -85,7 +84,7 @@
                     <h3>Perfil</h3>
                     <div class="decoration"></div>
                     <div class="one-half-responsive">
-                       
+
 
 
                     </div>
@@ -151,7 +150,6 @@
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
-
         const urlBase = "<%=urlBase%>";
         //verificar se o utilizador está autenticado
         fetch(`${urlBase}/authenticated`, {
@@ -172,7 +170,7 @@
 
         document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
 
-
+        //get dados utilizador
         fetch(`${urlBase}/profile`, {
             credentials: "include"
         }).then(response => {
@@ -190,21 +188,21 @@
             const numero_mecanografico = result.numero_mecanografico;
             const nif = result.nif;
 
-                    fetch(`${urlBase}/profile`, {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        method: 'GET',
-                        credentials: 'include',
-                        body: JSON.stringify(data)
-                    }).then(response => {
-                        if (response.status == 200) {
-                            return response.json();
-                        } else {
-                            throw new Error("Erro");
-                        }
-                    }).then(result => {
-                        txt=`<p>
+            fetch(`${urlBase}/profile`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'GET',
+                credentials: 'include',
+                body: JSON.stringify(data)
+            }).then(response => {
+                if (response.status == 200) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro");
+                }
+            }).then(result => {
+                txt = `<p>
                             <strong>Número Mecanográfico: </strong>${numero_mecanografico}<br>
                             <strong>Nome: </strong>${nome}<br>
                             <strong>Email: </strong>${email}<br>
@@ -212,19 +210,19 @@
                             <strong>Contacto: </strong>${numero_telefone} <br>
                             <strong>NIF: </strong>${nif}
                         </p> `
-                    }).catch(error => {
-                        swal({
-                            title: 'Não foi possível mostrar os dados.',
-                            type: 'error',
-                            showCloseButton: false,
-                            showConfirmButton: false,
-                            focusConfirm: false,
-                            timer: 2000
-                        })
-                    })
+            }).catch(error => {
+                swal({
+                    title: 'Não foi possível mostrar os dados.',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
                 })
+            })
+        })
 
-
+        //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
@@ -240,7 +238,9 @@
                         showConfirmButton: false,
                         focusConfirm: false,
                         timer: 2000
-                    }).then(result => {window.location.replace("/") });
+                    }).then(result => {
+                        window.location.replace("/")
+                    });
                 } else {
                     throw new Error("Erro");
                 }
