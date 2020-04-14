@@ -92,7 +92,7 @@
                 if (result.isEmpresa) {
                     window.location.replace("/qrcodeReader");
                 } else {
-                    window.location.replace("/purchase");
+                    window.location.replace("/tickets/unused");
                 }
             }
         }).catch(error => {
@@ -134,7 +134,7 @@
                 } else if (result.message == "password invalid") {
                     document.getElementById("login").disabled = false;
                     swal({
-                        title: 'Insira a palavra-passe corretamente!',
+                        title: 'Combinação incorreta!',
                         showCancelButton: false,
                         showConfirmButton: false,
                         type: 'error',
@@ -146,8 +146,7 @@
                         window.location.replace('/qrcodeReader');
                     } else {
                         localStorage.setItem("user_nome", result.nome + " " + result.apelido);
-                        window.location.replace(
-                            '/purchase') //  window.location.replace('/profile') //alterar para ejs
+                        window.location.replace('/tickets/unused')
                     }
                 }
             }).catch(error => {
