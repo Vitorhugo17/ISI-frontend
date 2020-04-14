@@ -99,7 +99,7 @@
                 throw new Error("Não autenticado");
             }
         }).then(result => {
-            if (!result.isAuthenticated) {
+            if (!result.isAuthenticated || result.isEmpresa || result.isEmpresa) {
                 throw new Error("Não autenticado");
             }
         }).catch(error => {
