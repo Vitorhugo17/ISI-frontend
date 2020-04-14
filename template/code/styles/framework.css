@@ -189,7 +189,7 @@ td {
 	color: #666;
 	padding-top: 9px;
 	padding-bottom: 9px;
-	line-height: 18px;
+	line-height: 25px;
 	vertical-align: middle;
 	background-color: #fdfdfd;
 }
@@ -558,7 +558,6 @@ a{
 	.hide-if-responsive{
 		display:none;
 	}
-
 }
 
 /*	4. Highlights  */ 
@@ -960,24 +959,17 @@ table th {
 	border-bottom:1px solid #e0e0e0;
 }
 
-table th:first-child{
-	text-align: center;
-	padding-left:20px;
-}
-
 table tr{
 	text-align: center;
 	padding-left:20px;
 }
 
 table tr td:first-child{
-	text-align: left;
-	padding-left:20px;
+	text-align: center;
 	border-left: 0;
 }
 
 table tr td {
-	padding:14px;
 	border-top: 1px solid #ffffff;
 	border-bottom:1px solid #e0e0e0;
 	border-left: 0px solid #e0e0e0;
@@ -1206,8 +1198,8 @@ table tr:hover td{
 	background-image:url(../images/ui/radio2.png);
 	background-size:16px 18px;
 	background-repeat:no-repeat;
-	padding-left:30px;
-	background-position:0px 1px;
+	padding-left:31px;
+	background-position:7px 7px;
 	margin-bottom:10px;
 }
 
@@ -3417,6 +3409,7 @@ table tr:hover td{
     font-size:16px;
 }
 
+
 .coverpage-style-1 img{
     position:absolute;
     z-index:999999;
@@ -3473,7 +3466,7 @@ table tr:hover td{
     margin-top:-40px;
 }
 
-.coverpage-style-3 p{
+.coverpage-style-3 p input{
     position:absolute!important;
     z-index:999999;
     color:#FFFFFF;

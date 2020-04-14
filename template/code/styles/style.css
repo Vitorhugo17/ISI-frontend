@@ -233,7 +233,7 @@ body{
 
 .header-logo{
     float:left;
-    background-image:url(../images/logo.png);
+
     width:70px;
     height:15px;
     background-size:70px 15px;
@@ -849,3 +849,14 @@ input[type='radio'].after {
 input[type='radio'].checked {
     --s: .5;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }

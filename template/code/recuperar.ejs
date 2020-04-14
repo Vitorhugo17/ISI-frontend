@@ -24,7 +24,7 @@
     <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"
         media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
 
-    <title>Bilhetes Utilizados</title>
+    <title>Recuperar palavra-passe</title>
 
     <link href="/styles/style.css" rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" rel="stylesheet" type="text/css">
@@ -37,10 +37,6 @@
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
-
-    <link rel="stylesheet" href="/styles/normalize.css" />
-    <link rel="stylesheet" href="/styles/global.css" />
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
@@ -50,98 +46,87 @@
     <div id="preloader">
         <div id="status">
             <p class="center-text">
-                A carregar a página...
+                A carregar a página
                 <em>O carregamento depende da velocidade da sua conexão à internet! Aguarde uns instantes!</em>
             </p>
         </div>
     </div>
-
-
-    <ul class="menu-top">
-        <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
-        <li>
-            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
-                    class="fa fa-plus active-plus"></i></a>
-            <ul class="submenu show-submenu">
-                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i
-                            class="fa fa-circle"></i></a></li>
-                <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
-                            class="fa fa-circle"></i></a></li>
-                <li class="active-menu"><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i
-                            class="fa fa-circle"></i></a></li>
-            </ul>
-        </li>
-        <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
-        <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
-    </ul>
-
-    <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">Pedro Oliveira
-        </h4>
-        <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
-    </div>
-    <div class="header-clear-big"></div>
-
-    <div class="content">
-        <div class="container no-bottom">
-            <h3>Bilhetes Utilizados</h3>
-            <div class="decoration"></div>
-            <table cellspacing='0' class="table">
-                <tr style="line-height: 10px;">
-                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
-                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
-                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td class="table-sub-title">Único</td>
-                    <td>3</td>
-                    <td>Transdev</td>
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td class="table-sub-title">Ida e Volta</td>
-                    <td>1</td>
-                    <td>Transdev</td>
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td class="table-sub-title">Único</td>
-                    <td>9</td>
-                    <td>Barquense</td>
-                </tr>
-            </table>
+    <div class="login-page bg1" style="background-position: 100% 100%; opacity: 0.8;">
+        <div class="login-page-overlay"></div>
+        <div class="login-page-wrapper">
+            <br>
+            <br>
+            <div>
+                <h4 class="header-logo1"
+                    style="color: #fff; width: 100%; font-size: 24px; text-align: center; margin-top: 88px;">
+                    Recuperar Palavra-passe</h4>
+            </div>
+            <br>
+            <p style="line-height: 19px; color: #fff; font-family: 'Roboto', sans-serif;">Deseja recuperar a sua
+                palavra-passe? Insira o seu email no campo abaixo e, de seguida, consulte-o.</p>
+            <form id="formMail">
+                <input type="email" class="login" placeholder="Email" id="email" required>
+                <br>
+                <center>
+                    <button type="submit" id="enviarMail"
+                        class="button center-button button-blue full-bottom detected-button"
+                        style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px; margin-bottom: 15px!important;">Recuperar</button>
+                </center>
+                <a class="forgot" href="/">Já não pretende recuperar a palavra-passe? Volte para o login!</a>
+            </form>
         </div>
-        <div class="decoration"></div>
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
-        document.getElementById('logout').addEventListener('click', (event) => {
+        const urlBase = `<%=urlBase%>`;
+
+        const email = document.getElementById("email");
+
+        const formMail = document.getElementById("formMail");
+
+        formMail.addEventListener('submit', (event) => {
+            document.getElementById("enviarMail").disabled = true;
             event.preventDefault();
 
-            return fetch(`${urlBase}/logout`, {
-                credentials: 'include'
+            let data = {
+                email: email.value
+            }
+            return fetch(`${urlBase}/password/recover`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                method: 'POST',
+                body: JSON.stringify(data)
             }).then(response => {
-                if (response.status == 200) {
-                    localStorage.removeItem('user_nome');
+                return response.json();
+            }).then(result => {
+                if (result.message == "mail sent") {
                     swal({
-                        title: 'Logout efetuado com sucesso!',
+                        title: 'Email enviado com sucesso!',
                         type: 'success',
-                        showCloseButton: false,
+                        showCancelButton: false,
                         showConfirmButton: false,
-                        focusConfirm: false,
+                        showLoaderOnConfirm: false,
                         timer: 2000
-                    }).then(result => {window.location.replace("/") });
+                    }).then(result => {
+                        window.location.replace('/')
+                    })
+                } else if (result.message == "User not found") {
+                    throw new Error("Email inválido!");
                 } else {
-                    throw new Error("Erro");
+                    throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
                 }
             }).catch(error => {
+                document.getElementById("enviarMail").disabled = false;
                 swal({
-                    title: 'Ocorreu um erro. Tente novamente!',
-                    type: 'error',
-                    showCloseButton: false,
+                    html: '<strong><h3>Ocorreu um erro! Tente novamente mais tarde. Obrigado!</h3></strong>',
+                    showCancelButton: false,
                     showConfirmButton: false,
-                    focusConfirm: false,
+                    type: 'error',
                     timer: 2000
                 })
-            })
+            });
         })
     </script>
 </body>

@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
+    <link rel="apple-touch-startup-image" href="images/splash/splash-screen.png"
+        media="screen and (max-device-width: 320px)" />
+    <link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png"
+        media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
+    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
+    <link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
+    <link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape"
+        media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
+    <link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png"
+        media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
+    <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"
+        media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"
+        media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
+
+    <title>Comprar Bilhetes</title>
+
+    <link href="/styles/style.css" rel="stylesheet" type="text/css">
+    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
+    <link href="/styles/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/styles/animate.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
+    <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+
+    <link rel="stylesheet" href="/styles/normalize.css" />
+    <link rel="stylesheet" href="/styles/global.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text">
+                A carregar a página...
+                <em>O carregamento depende da velocidade da sua conexão à internet! Aguarde uns instantes!</em>
+            </p>
+        </div>
+    </div>
+
+
+    <ul class="menu-top">
+        <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
+        <li>
+            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
+                    class="fa fa-plus active-plus"></i></a>
+            <ul class="submenu show-submenu">
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
+                <li class="active-menu"><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
+        <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
+    </ul>
+
+    <div class="header">
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
+        </h4>
+        <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
+    </div>
+    <div class="header-clear-big"></div>
+
+    <div class="content">
+        <div class="container no-bottom">
+            <h3>Bilhetes Não Utilizados</h3>
+            <div class="decoration"></div>
+            <table id="bilhetes_nao_utilizados" cellspacing='0' class="table">
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="" class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                    <td>3</td>
+                    <td>Transdev</td>
+                </tr>
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="radio2"
+                            class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
+                    <td>1</td>
+                    <td>Transdev</td>
+                </tr>
+            </table>
+        </div>
+        <div class="decoration"></div>
+        <div class="container no-bottom" style="float: right;">
+
+            <a href="#" id="askQR" class="button button-green" style="font-size: 13px;">Pedir Qr Code</a>
+            <a href="#" id="share" class="button button-blue" style="font-size: 13px;">Partilhar Bilhete</a>
+
+        </div>
+    </div>
+    <div class="menu-wrapper-background"></div>
+
+    <script>
+        const urlBase = "<%=urlBase%>";
+        //verificar se o utilizador está autenticado
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated) {
+                throw new Error("Não autenticado");
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
+        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
+
+        //colocar apenas 1 radio button selecionado
+        let radioButtons = document.getElementsByClassName("radio-two");
+        //tabela
+        let txt = `<tr style="line-height: 10px;">
+                    <th class="table-title" style="padding: 21px 1px 22px 1px;"></th>
+                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
+                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
+                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
+                </tr>
+                `;
+        fetch(`${urlBase}/tickets/unused`, {
+            credentials: "include"
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error('Não foi possível recolher dados.');
+            }
+        }).then(result => {
+            const bilhetes = result.bilhetes;
+            if (bilhetes.bilhetes_disponiveis_barquense != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="bilhetes_disponiveis_barquense"
+                            class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title tipo" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                    <td class="quantidade">${bilhetes.bilhetes_disponiveis_barquense}</td>
+                    <td class="companhia">Barquense</td>
+                </tr>`
+            }
+            if (bilhetes.bilhetes_ida_e_volta_barquense != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="bilhetes_ida_e_volta_barquense"
+                            class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title tipo" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
+                    <td class="quantidade">${bilhetes.bilhetes_ida_e_volta_barquense}</td>
+                    <td class="companhia">Barquense</td>
+                </tr>`
+            }
+            if (bilhetes.bilhetes_disponiveis_transdev != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="bilhetes_disponiveis_transdev"
+                            class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title tipo" style="padding-right: 2px; padding-left: 2px;">Único</td>
+                    <td class="quantidade">${bilhetes.bilhetes_disponiveis_transdev}</td>
+                    <td class="companhia">Transdev</td>
+                </tr>`
+            }
+            if (bilhetes.bilhetes_ida_e_volta_transdev != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td style="padding: 1px; font-size:1px;"><a href="#" id="bilhetes_ida_e_volta_transdev"
+                            class="checkbox radio-two">&nbsp;</a>
+                    </td>
+                    <td class="table-sub-title tipo" style="padding-right: 2px; padding-left: 2px;">Ida e Volta</td>
+                    <td class="quantidade">${bilhetes.bilhetes_ida_e_volta_transdev}</td>
+                    <td class="companhia">Transdev</td>
+                </tr>`
+            }
+            document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
+            radioButtons = document.getElementsByClassName("radio-two");
+            for (let i = 0; i < radioButtons.length; i++) {
+                radioButtons[i].addEventListener("click", (event) => {
+                    event.preventDefault();
+                    if (radioButtons[i].className == "checkbox radio-two") {
+                        radioButtons[i].setAttribute("class", "checkbox radio-two radio-two-checked");
+                        console.log(radioButtons[i].className);
+                        for (let j = 0; j < radioButtons.length; j++) {
+                            if (radioButtons[i].id != radioButtons[j].id) {
+                                radioButtons[j].className = "checkbox radio-two";
+                            }
+                        }
+                    } else {
+                        radioButtons[i].className = "checkbox radio-two";
+                    }
+                })
+            }
+        }).catch(error => {
+            document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
+        })
+
+        // pedir código QR
+        document.getElementById('askQR').addEventListener('click', (event) => {
+            event.preventDefault();
+            let radioId = "";
+            for (let i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].className == "checkbox radio-two radio-two-checked") {
+                    radioId = radioButtons[i].id;
+                }
+            };
+            if (radioId != "") {
+                const companhia = document.getElementById(radioId).parentNode.parentNode.getElementsByClassName("companhia")[0].innerHTML;
+                console.log(radioId, companhia);
+                let data = {
+                    company: companhia,
+                    product_type: radioId
+                }
+                fetch(`${urlBase}/qrcodes`, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST',
+                    credentials: 'include',
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    if (response.status == 200) {
+                        return response.json();
+                    } else {
+                        throw new Error("Erro");
+                    }
+                }).then(result => {
+                    window.location.href = `/qrcodes/${result.qrcode_id}`;
+                }).catch(error => {
+                    swal({
+                        title: 'Não foi possível gerar o QRCode, tente novamente!',
+                        type: 'error',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    })
+                })
+            } else {
+                swal({
+                    title: 'Selecione uma linha!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            }
+        })
+
+
+
+
+        document.getElementById('logout').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            return fetch(`${urlBase}/logout`, {
+                credentials: 'include'
+            }).then(response => {
+                if (response.status == 200) {
+                    localStorage.removeItem('user_nome');
+                    swal({
+                        title: 'Logout efetuado com sucesso!',
+                        type: 'success',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    }).then(result => {
+                        window.location.replace("/")
+                    });
+                } else {
+                    throw new Error("Erro");
+                }
+            }).catch(error => {
+                swal({
+                    title: 'Ocorreu um erro. Tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
+        })
+    </script>
+</body>

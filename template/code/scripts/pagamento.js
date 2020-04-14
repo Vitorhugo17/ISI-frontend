@@ -5,7 +5,9 @@ let stripe;
 // Disable the button until we have Stripe set up on the page
 document.querySelector("button").disabled = true;
 
-fetch(`${urlBase}/stripe-key`).then(function (result) {
+fetch(`${urlBase}/stripe-key`, {
+  credentials: 'include'
+}).then(function (result) {
   return result.json();
 }).then(function (data) {
   return setupElements(data);
@@ -44,6 +46,7 @@ var setupElements = function (data) {
   };
 
   var card = elements.create("card", {
+    hidePostalCode: true,
     style: style
   });
   card.mount("#card-element");
@@ -65,6 +68,7 @@ var handleAction = function (clientSecret) {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify({
           paymentIntentId: data.paymentIntent.id
         })
@@ -107,6 +111,7 @@ var pay = function (stripe, card) {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: 'include',
         body: JSON.stringify(orderData)
       });
     }
@@ -133,7 +138,6 @@ var orderComplete = function (clientSecret) {
   let id = res[0];
   let company = res[1];
   let data = {};
-  data.user_id = '201';
   data.product_id = id;
   data.company = company;
   data.quantity = document.getElementById('quantidade').value;
@@ -143,6 +147,7 @@ var orderComplete = function (clientSecret) {
       'Content-Type': 'application/json'
     },
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(data)
   }).then(response => {
     return response.json();
@@ -153,11 +158,11 @@ var orderComplete = function (clientSecret) {
         type: 'success',
         showCloseButton: false,
         showConfirmButton: false,
-        focusConfirm: false, 
+        focusConfirm: false,
         timer: 2000
-    }).then(() => {
-      window.location.reload();
-    })
+      }).then(() => {
+        window.location.reload();
+      })
     } else {
       throw new Error(result.message);
     }
