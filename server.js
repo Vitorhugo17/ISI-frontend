@@ -66,14 +66,14 @@ app.get("/profile", (request, response) => {
     });
 })
 
-app.get("/unused/tickets", (request, response) => {
+app.get("/tickets/unused", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesNaoUtilizados`, {
         urlBase: urlBase
     });
 })
 
-app.get("/used/tickets", (request, response) => {
+app.get("/tickets/used", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesUtilizados`, {
         urlBase: urlBase
