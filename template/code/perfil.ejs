@@ -37,6 +37,7 @@
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -83,7 +84,7 @@
                     <br>
                     <h3>Perfil</h3>
                     <div class="decoration"></div>
-                    <div class="one-half-responsive">
+                    <div class="one-half-responsive" id="profile">
 
 
 
@@ -180,45 +181,31 @@
                 throw new Error('Não é possível mostrar informações.');
             }
         }).then(result => {
-            const nome = result.nome;
-            const apelido = result.apelido;
-            const email = result.email;
-            const data_nascimento = result.data_nascimento;
-            const numero_telefone = result.numero_telefone;
-            const numero_mecanografico = result.numero_mecanografico;
-            const nif = result.nif;
+            const nome = result.user.nome;
+            const apelido = result.user.apelido;
+            const email = result.user.email;
+            const data_nascimento = result.user.data_nascimento;
+            const numero_telefone = result.user.numero_telefone;
+            const numero_mecanografico = result.user.numero_mecanografico;
+            const nif = result.user.nif;
 
-            fetch(`${urlBase}/profile`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: 'GET',
-                credentials: 'include',
-                body: JSON.stringify(data)
-            }).then(response => {
-                if (response.status == 200) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro");
-                }
-            }).then(result => {
-                txt = `<p>
-                            <strong>Número Mecanográfico: </strong>${numero_mecanografico}<br>
-                            <strong>Nome: </strong>${nome}<br>
+            txt = `<p>
+                            <strong>Número Mecanográfico: </strong>${(numero_mecanografico ? numero_mecanografico: "-----------------------------------------------")}<br>
+                            <strong>Nome: </strong>${nome} ${apelido}<br>
                             <strong>Email: </strong>${email}<br>
-                            <strong>Data de Nascimento: </strong>${data_nascimento} <br>
-                            <strong>Contacto: </strong>${numero_telefone} <br>
+                            <strong>Data de Nascimento: </strong>${(data_nascimento ? data_nascimento: "----------------------------------")} <br>
+                            <strong>Contacto: </strong>${(numero_telefone? numero_telefone:"-----------------------------------------------")} <br>
                             <strong>NIF: </strong>${nif}
-                        </p> `
-            }).catch(error => {
-                swal({
-                    title: 'Não foi possível mostrar os dados.',
-                    type: 'error',
-                    showCloseButton: false,
-                    showConfirmButton: false,
-                    focusConfirm: false,
-                    timer: 2000
-                })
+                        </p> `;
+            document.getElementById("profile").innerHTML = txt;
+        }).catch(error => {
+            swal({
+                title: 'Não foi possível mostrar os dados.',
+                type: 'error',
+                showCloseButton: false,
+                showConfirmButton: false,
+                focusConfirm: false,
+                timer: 2000
             })
         })
 

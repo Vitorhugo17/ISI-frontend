@@ -17,7 +17,7 @@ app.use(validator());
 const dirName = __dirname + '/template/code/';
 app.use(express.static(dirName));
 
-const urlBase = `http://locahost:8080`;
+const urlBase = `http://localhost:8080`;
 
 app.set('view engine', 'ejs');
 app.set('views', 'template/code');
