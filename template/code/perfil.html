@@ -53,21 +53,20 @@
 
 
     <ul class="menu-top">
-        <li><a href="horarios.html"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
+        <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
         <li>
             <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
                     class="fa fa-plus active-plus"></i></a>
             <ul class="submenu show-submenu">
-                <li><a href="comprarBilhete.html"><i class="fa fa-angle-right"></i>Comprar<i
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="bilhetesNaoUtilizados.html"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                <li><a href="/unused/tickets"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="bilhetesUtilizados.html"><i class="fa fa-angle-right"></i>Utilizados<i
+                <li><a href="/used/tickets"><i class="fa fa-angle-right"></i>Utilizados<i
                             class="fa fa-circle"></i></a></li>
             </ul>
         </li>
-        <li class="active-menu"><a href="perfil.html"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a>
-        </li>
+        <li class="active-menu"><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
         <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
@@ -155,8 +154,37 @@
             </div>
         </div>
     </div>
-
-
     <div class="menu-wrapper-background"></div>
+    <script>
+        document.getElementById('logout').addEventListener('click', (event) => {
+            event.preventDefault();
 
+            return fetch(`${urlBase}/logout`, {
+                credentials: 'include'
+            }).then(response => {
+                if (response.status == 200) {
+                    localStorage.removeItem('user_nome');
+                    swal({
+                        title: 'Logout efetuado com sucesso!',
+                        type: 'success',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    }).then(result => {window.location.replace("/") });
+                } else {
+                    throw new Error("Erro");
+                }
+            }).catch(error => {
+                swal({
+                    title: 'Ocorreu um erro. Tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
+        })
+    </script>
 </body>
