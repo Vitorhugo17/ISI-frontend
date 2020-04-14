@@ -41,8 +41,6 @@
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
-    <script type="text/javascript" src="/scripts/nif.js"></script>
-
 
 </head>
 
@@ -96,15 +94,6 @@
         const confPass = document.getElementById("confPass");
         const nif = document.getElementById("nif");
 
-        nif.addEventListener("change", (event) => {
-            if (!validaContribuinte(nif.value)) {
-                nif.setCustomValidity("Verifique o NIF!");
-            } else {
-                nif.setCustomValidity("");
-                document.getElementById("registar").disabled = false;
-            }
-        })
-
         pass.addEventListener("change", (event) => {
             if (pass.value != confPass.value && confPass.value != "") {
                 confPass.setCustomValidity("As palavras-passe não correspondem!");
@@ -127,12 +116,6 @@
                         } else if (pass.value.charAt(i) === pass.value.charAt(i).toUpperCase()) {
                             validator.maiuscula = 1;
                         }
-                        console.log(pass.value.charAt(i),
-                            pass.value.charAt(i) === pass.value.charAt(i).toLowerCase(),
-                            pass.value.charAt(i) === pass.value.charAt(i).toUpperCase(),
-                            "0123456789".includes(pass.value.charAt(i)),
-                            "[`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~]".includes(pass.value.charAt(i)));
-
                     }
 
                     if (validator.maiuscula + validator.minuscula + validator.especial + validator.numero < 3) {
@@ -196,61 +179,91 @@
             document.getElementById("registar").disabled = true;
             event.preventDefault();
 
-            let data = {
-                nome: document.getElementById("firstname").value,
-                apelido: document.getElementById("lastname").value,
-                email: document.getElementById("email").value,
-                nif: document.getElementById("nif").value,
-                password: pass.value,
-            }
-            return fetch(`${urlBase}/register`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(data)
-            }).then(response => {
-                return response.json();
-            }).then(result => {
-                if (result.message == "User inserted with success") {
-                    swal({
-                        title: 'Registo efetuado com sucesso!',
-                        type: 'success',
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        showLoaderOnConfirm: false,
-                        timer: 2000
-                    }).then(result => {
-                        window.location.replace('/')
-                    })
-                } else {
-                    console.log(result);
-                    if (result.error == "CONTACT_EXISTS") {
-                        throw new Error(result.error);
+            return fetch(
+                    `https://cors-anywhere.herokuapp.com/https://www.nif.pt/?json=1&q=${document.getElementById("nif").value}&key=517d02fba0547e1bd8d68dbcc36e6ea4`
+                )
+                .then(response => {
+                    if (response.status == 200) {
+                        return response.json();
                     } else {
-                        throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
+                        throw new Error(
+                            "Não foi possível verificar o seu NIF. Por favor tente novamente mais tarde!"
+                        );
                     }
-                }
-            }).catch(error => {
-                document.getElementById("registar").disabled = false;
-                if (error.message == 'CONTACT_EXISTS') {
+                }).then(result => {
+                    if (result.nif_validation) {
+                        let data = {
+                            nome: document.getElementById("firstname").value,
+                            apelido: document.getElementById("lastname").value,
+                            email: document.getElementById("email").value,
+                            nif: document.getElementById("nif").value,
+                            password: pass.value,
+                        }
+                        return fetch(`${urlBase}/register`, {
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            method: 'POST',
+                            body: JSON.stringify(data)
+                        }).then(response => {
+                            return response.json();
+                        }).then(result => {
+                            if (result.message == "User inserted with success") {
+                                swal({
+                                    title: 'Registo efetuado com sucesso!',
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    showConfirmButton: false,
+                                    showLoaderOnConfirm: false,
+                                    timer: 2000
+                                }).then(result => {
+                                    window.location.replace('/')
+                                })
+                            } else {
+                                console.log(result);
+                                if (result.error == "CONTACT_EXISTS") {
+                                    throw new Error(result.error);
+                                } else {
+                                    throw new Error(
+                                        "Ocorreu um erro! Tente novamente mais tarde. Obrigado!"
+                                    );
+                                }
+                            }
+                        }).catch(error => {
+                            document.getElementById("registar").disabled = false;
+                            if (error.message == 'CONTACT_EXISTS') {
+                                swal({
+                                    title: 'Este email já existe!',
+                                    showCancelButton: false,
+                                    showConfirmButton: false,
+                                    type: 'error',
+                                    timer: 2000
+                                })
+                            } else {
+                                swal({
+                                    html: '<strong><h3>Ocorreu um erro! Tente novamente mais tarde. Obrigado!</h3></strong>',
+                                    showCancelButton: false,
+                                    showConfirmButton: false,
+                                    type: 'error',
+                                    timer: 2000
+                                })
+                            }
+                        });
+                    } else {
+                        throw new Error(
+                            "O NIF que introduziu não é válido. Verifique se introduziu o seu NIF corretamente!"
+                        );
+                    }
+                }).catch(error => {
                     swal({
-                        title: 'Este email já existe!',
-                        showCancelButton: false,
-                        showConfirmButton: false,
+                        title: error.message,
                         type: 'error',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
                         timer: 2000
                     })
-                } else {
-                    swal({
-                        html: '<strong><h3>Ocorreu um erro! Tente novamente mais tarde. Obrigado!</h3></strong>',
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        type: 'error',
-                        timer: 2000
-                    })
-                }
-            });
+                })
         })
     </script>
 </body>

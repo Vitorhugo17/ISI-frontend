@@ -143,7 +143,7 @@
         
     document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
-
+        
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
