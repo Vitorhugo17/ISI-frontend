@@ -24,22 +24,22 @@
     <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"
         media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
 
-    <title>Bilhetes Não Utilizados</title>
+    <title>Comprar Bilhetes</title>
 
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <link href="styles/framework.css" rel="stylesheet" type="text/css">
-    <link href="styles/owl.theme.css" rel="stylesheet" type="text/css">
-    <link href="styles/swipebox.css" rel="stylesheet" type="text/css">
-    <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="styles/animate.css" rel="stylesheet" type="text/css">
+    <link href="/styles/style.css" rel="stylesheet" type="text/css">
+    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
+    <link href="/styles/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/styles/animate.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="scripts/framework.plugins.js"></script>
-    <script type="text/javascript" src="scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
+    <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
 
-    <link rel="stylesheet" href="styles/normalize.css" />
-    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="/styles/normalize.css" />
+    <link rel="stylesheet" href="/styles/global.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
@@ -135,22 +135,7 @@
         document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
 
         //colocar apenas 1 radio button selecionado
-        const radioButtons = document.getElementsByClassName("radio-two");
-        for (let i = 0; i < radioButtons.length; i++) {
-            radioButtons[i].addEventListener("click", (event) => {
-                event.preventDefault();
-                if (radioButtons[i].className == "checkbox radio-two") {
-                    for (let j = 0; j < radioButtons.length; j++) {
-                        if (radioButtons[i].id != radioButtons[j].id) {
-                            radioButtons[j].className = "checkbox radio-two";
-                        }
-                    }
-                } else {
-                    radioButtons[i].className = "checkbox radio-two";
-                }
-            })
-        }
-
+        let radioButtons = document.getElementsByClassName("radio-two");
         //tabela
         let txt = `<tr style="line-height: 10px;">
                     <th class="table-title" style="padding: 21px 1px 22px 1px;"></th>
@@ -214,45 +199,60 @@
                 </tr>`
             }
             document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
+            radioButtons = document.getElementsByClassName("radio-two");
+            for (let i = 0; i < radioButtons.length; i++) {
+                radioButtons[i].addEventListener("click", (event) => {
+                    event.preventDefault();
+                    if (radioButtons[i].className == "checkbox radio-two") {
+                        radioButtons[i].setAttribute("class", "checkbox radio-two radio-two-checked");
+                        console.log(radioButtons[i].className);
+                        for (let j = 0; j < radioButtons.length; j++) {
+                            if (radioButtons[i].id != radioButtons[j].id) {
+                                radioButtons[j].className = "checkbox radio-two";
+                            }
+                        }
+                    } else {
+                        radioButtons[i].className = "checkbox radio-two";
+                    }
+                })
+            }
         }).catch(error => {
             document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
         })
 
-
         // pedir código QR
         document.getElementById('askQR').addEventListener('click', (event) => {
-                event.preventDefault();
-                let radioId = "";
-                for (let i = 0; i < radioButtons.length; i++) {
-                    if (radioButtons[i].className == "checkbox radio-two radio-two-checked") {
-                        radioId = radioButtons[i].id;
+            event.preventDefault();
+            let radioId = "";
+            for (let i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].className == "checkbox radio-two radio-two-checked") {
+                    radioId = radioButtons[i].id;
+                }
+            };
+            if (radioId != "") {
+                const companhia = document.getElementById(radioId).parentNode.parentNode.getElementsByClassName("companhia")[0].innerHTML;
+                console.log(radioId, companhia);
+                let data = {
+                    company: companhia,
+                    product_type: radioId
+                }
+                fetch(`${urlBase}/qrcodes`, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST',
+                    credentials: 'include',
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    if (response.status == 200) {
+                        return response.json();
+                    } else {
+                        throw new Error("Erro");
                     }
-                };
-                if (radioId != "") {
-                    const companhia = document.getElementById(radioId).parentNode.getElementsByClassName(
-                        "companhia")[0].value;
-                    console.log(radioId, companhia);
-                    let data = {
-                        company: companhia,
-                        product_type: radioId
-                    }
-                    fetch(`${urlBase}/qrcodes`, {
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        method: 'POST',
-                        credentials: 'include',
-                        body: JSON.stringify(data)
-                    }).then(response => {
-                        if(response.status == 200) {
-                            return response.json();
-                        } else {
-                            throw new Error("Erro");
-                        }
-                    }).then(result => {
-                        windows.location.href = `/qrcodes/${result.qrcode_id}`;
-                    }).catch(error => {
-                        swal({
+                }).then(result => {
+                    window.location.href = `/qrcodes/${result.qrcode_id}`;
+                }).catch(error => {
+                    swal({
                         title: 'Não foi possível gerar o QRCode, tente novamente!',
                         type: 'error',
                         showCloseButton: false,
@@ -260,24 +260,18 @@
                         focusConfirm: false,
                         timer: 2000
                     })
-                    })
-
-                } else {
-                    swal({
-                        title: 'Selecione uma linha!',
-                        type: 'error',
-                        showCloseButton: false,
-                        showConfirmButton: false,
-                        focusConfirm: false,
-                        timer: 2000
-                    })
-                }
-
+                })
+            } else {
+                swal({
+                    title: 'Selecione uma linha!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
             }
-
-
-
-        )
+        })
 
 
 
