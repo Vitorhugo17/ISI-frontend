@@ -71,7 +71,7 @@
     </ul>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">Pedro Oliveira
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
         </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
@@ -85,14 +85,9 @@
                     <h3>Perfil</h3>
                     <div class="decoration"></div>
                     <div class="one-half-responsive">
-                        <p>
-                            <strong>Número Mecanográfico: </strong>A85972 <br>
-                            <strong>Nome: </strong>Pedro Oliveira <br>
-                            <strong>Email: </strong>pedro.oliveira@gmail.com <br>
-                            <strong>Data de Nascimento: </strong>-------------------------------- <br>
-                            <strong>Contacto: </strong>968745692 <br>
-                            <strong>NIF: </strong>-----------------------------------------------------------
-                        </p>
+                       
+
+
                     </div>
                 </div>
                 <div class="decoration"></div>
@@ -156,6 +151,80 @@
     </div>
     <div class="menu-wrapper-background"></div>
     <script>
+
+        const urlBase = "<%=urlBase%>";
+        //verificar se o utilizador está autenticado
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated) {
+                throw new Error("Não autenticado");
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
+        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
+
+
+        fetch(`${urlBase}/profile`, {
+            credentials: "include"
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error('Não é possível mostrar informações.');
+            }
+        }).then(result => {
+            const nome = result.nome;
+            const apelido = result.apelido;
+            const email = result.email;
+            const data_nascimento = result.data_nascimento;
+            const numero_telefone = result.numero_telefone;
+            const numero_mecanografico = result.numero_mecanografico;
+            const nif = result.nif;
+
+                    fetch(`${urlBase}/profile`, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'GET',
+                        credentials: 'include',
+                        body: JSON.stringify(data)
+                    }).then(response => {
+                        if (response.status == 200) {
+                            return response.json();
+                        } else {
+                            throw new Error("Erro");
+                        }
+                    }).then(result => {
+                        txt=`<p>
+                            <strong>Número Mecanográfico: </strong>${numero_mecanografico}<br>
+                            <strong>Nome: </strong>${nome}<br>
+                            <strong>Email: </strong>${email}<br>
+                            <strong>Data de Nascimento: </strong>${data_nascimento} <br>
+                            <strong>Contacto: </strong>${numero_telefone} <br>
+                            <strong>NIF: </strong>${nif}
+                        </p> `
+                    }).catch(error => {
+                        swal({
+                            title: 'Não foi possível mostrar os dados.',
+                            type: 'error',
+                            showCloseButton: false,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 2000
+                        })
+                    })
+                })
+
+
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
