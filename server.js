@@ -73,6 +73,15 @@ app.get("/tickets/unused", (request, response) => {
     });
 })
 
+app.get("/qrcodes/:id", (request, response) => {
+    const qrcode_id = request.sanitize("id").escape();
+    response.set('Content-Type', 'text/html');
+    response.render(`${dirName}qrcode`, {
+        urlBase: urlBase,
+        qrcode_id: qrcode_id
+    });
+})
+
 app.get("/tickets/used", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesUtilizados`, {

@@ -213,23 +213,55 @@
                     <td class="companhia">Transdev</td>
                 </tr>`
             }
-            document.getElementById('bilhetes_nao_utilizados').innerHTML= txt;
+            document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
         }).catch(error => {
-            document.getElementById('bilhetes_nao_utilizados').innerHTML= txt;
+            document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
         })
 
 
         // pedir código QR
         document.getElementById('askQR').addEventListener('click', (event) => {
                 event.preventDefault();
-                let radioId = -1;
+                let radioId = "";
                 for (let i = 0; i < radioButtons.length; i++) {
                     if (radioButtons[i].className == "checkbox radio-two radio-two-checked") {
                         radioId = radioButtons[i].id;
                     }
                 };
-                if (radioId != -1) {
-                    radioId;
+                if (radioId != "") {
+                    const companhia = document.getElementById(radioId).parentNode.getElementsByClassName(
+                        "companhia")[0].value;
+                    console.log(radioId, companhia);
+                    let data = {
+                        company: companhia,
+                        product_type: radioId
+                    }
+                    fetch(`${urlBase}/qrcodes`, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'POST',
+                        credentials: 'include',
+                        body: JSON.stringify(data)
+                    }).then(response => {
+                        if(response.status == 200) {
+                            return response.json();
+                        } else {
+                            throw new Error("Erro");
+                        }
+                    }).then(result => {
+                        windows.location.href = `/qrcodes/${result.qrcode_id}`;
+                    }).catch(error => {
+                        swal({
+                        title: 'Não foi possível gerar o QRCode, tente novamente!',
+                        type: 'error',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    })
+                    })
+
                 } else {
                     swal({
                         title: 'Selecione uma linha!',
