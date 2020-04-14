@@ -256,7 +256,7 @@
                     }
                 }).catch(error => {
                     swal({
-                        title: error.message,
+                        html: '<strong><h3>O NIF que introduziu não é válido. Verifique se introduziu o seu NIF corretamente!</h3></strong>',
                         type: 'error',
                         showCloseButton: false,
                         showConfirmButton: false,
