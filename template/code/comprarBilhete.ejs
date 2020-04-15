@@ -59,7 +59,7 @@
     </div>
 
 
-    <ul class="menu-top">
+    <ul class="menu-top" id="menu">
         <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
         <li>
             <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
@@ -69,8 +69,8 @@
                             class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i
-                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -305,6 +305,8 @@
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
+            document.getElementById("menu").setAttribute("class", "menu-top");
+            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {

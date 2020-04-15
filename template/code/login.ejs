@@ -92,11 +92,10 @@
                 if (result.isEmpresa) {
                     window.location.replace("/qrcodeReader");
                 } else {
-                    window.location.replace("/purchase");
+                    window.location.replace("/tickets/unused");
                 }
             }
-        }).catch(error => {
-        })
+        }).catch(error => {})
 
         const formLogin = document.getElementById('formLogin');
 
@@ -120,46 +119,40 @@
                 method: 'POST',
                 body: JSON.stringify(data)
             }).then(response => {
-                return response.json();
+                if (response.status == 200) {
+                    return response.json();
+                } else {
+                    throw new Error(
+                        "Combinação entre email e palavra-passe incorreta. Tente novamente!")
+                }
             }).then(result => {
-                if (result.message == "user not found") {
-                    document.getElementById("login").disabled = false;
+                if (result.isEmpresa) {
+                    localStorage.setItem("user_nome", result.nome);
+                    window.location.replace('/qrcodeReader');
+                } else {
+                    localStorage.setItem("user_nome", result.nome + " " + result.apelido);
+                    window.location.replace('/tickets/unused')
+                }
+            }).catch(error => {
+                document.getElementById("login").disabled = false;
+                if (error.message ==
+                    "Combinação entre email e palavra-passe incorreta. Tente novamente!") {
                     swal({
-                        title: 'Insira o email corretamente!',
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        type: 'error',
-                        timer: 2000
-                    })
-                } else if (result.message == "password invalid") {
-                    document.getElementById("login").disabled = false;
-                    swal({
-                        title: 'Insira a palavra-passe corretamente!',
+                        html: '<strong><h3>Combinação entre email e palavra-passe incorreta. Tente novamente!</h3></strong>',
                         showCancelButton: false,
                         showConfirmButton: false,
                         type: 'error',
                         timer: 2000
                     })
                 } else {
-                    if (result.isEmpresa) {
-                        localStorage.setItem("user_nome", result.nome);
-                        window.location.replace('/qrcodeReader');
-                    } else {
-                        localStorage.setItem("user_nome", result.nome + " " + result.apelido);
-                        window.location.replace(
-                            '/purchase') //  window.location.replace('/profile') //alterar para ejs
-                    }
+                    swal({
+                        html: '<strong><h3>Impossível efetuar o login. Tente mais tarde!</h3></strong>',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        type: 'error',
+                        timer: 2000
+                    })
                 }
-            }).catch(error => {
-                document.getElementById("login").disabled = false;
-                console.log(error);
-                swal({
-                    html: '<strong><h3>Impossível efetuar o login. Tente mais tarde!</h3></strong>',
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                    type: 'error',
-                    timer: 2000
-                })
             })
         })
     </script>

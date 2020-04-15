@@ -37,6 +37,7 @@
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -52,18 +53,17 @@
     </div>
 
 
-    <ul class="menu-top">
+    <ul class="menu-top" id="menu">
         <li class="active-menu"><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
         <li>
             <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
                     class="fa fa-plus active-plus"></i></a>
             <ul class="submenu show-submenu">
-                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i
-                            class="fa fa-circle"></i></a></li>
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i
-                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -80,7 +80,7 @@
         <div class="horario-page-wrapper">
             <div class="container no-bottom">
                 <div class="container no-bottom">
-                    <img id="qrcode" src="<%=urlBase%>/qrcodes/<%=qrcode_id%>" alt="Não foi possivel obter o QRCode" class="center">
+                    <img id="qrcode" class="center" style="display:none">
                 </div>
 
             </div>
@@ -108,10 +108,30 @@
 
         document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
 
+        fetch(`${urlBase}/qrcodes/<%=qrcode_id%>`, {
+            credentials: "include"
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json();
+            } else {
+                throw new Error("Não foi possivel obter o QRCode");
+            }
+        }).then(result => {
+            console.log(result.data);
+            document.getElementById("qrcode").src = result.data;
+            document.getElementById("qrcode").style.cssText = "display: block";
+        }).catch(error => {
+            document.getElementById("qrcode").src = "";
+            document.getElementById("qrcode").alt = "Não foi possivel obter o QRCode";
+            document.getElementById("qrcode").style.cssText = "display: block";
+        })
+
         //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
+            document.getElementById("menu").setAttribute("class", "menu-top");
+            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
@@ -124,7 +144,9 @@
                         showConfirmButton: false,
                         focusConfirm: false,
                         timer: 2000
-                    }).then(result => {window.location.replace("/") });
+                    }).then(result => {
+                        window.location.replace("/")
+                    });
                 } else {
                     throw new Error("Erro");
                 }
@@ -139,4 +161,5 @@
                 })
             })
         })
-    </script></body>
+    </script>
+</body>
