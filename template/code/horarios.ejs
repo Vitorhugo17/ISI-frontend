@@ -83,23 +83,33 @@
                     <h3>Horário Transdev</h3>
                     <div class="decoration"></div>
                     <img src="images\transdev.JPG" class="center">
-                    <p><a href="https://www.transdev.pt/sites/default/files/anexos-cic-noticias/afi_bp5_braga_-_guimaraes_a4_1909_0.pdf">Visite a página para mais informações.</a></p>
-
-                    <br><br>
+                    <br>
+                    <center>
+                        <p><a
+                                href="https://www.transdev.pt/sites/default/files/anexos-cic-noticias/afi_bp5_braga_-_guimaraes_a4_1909_0.pdf">Visite
+                                a página para mais informações.</a></p>
+                    </center>
+                    <br>
 
                     <h3>Horário Barquense</h3>
                     <div class="decoration"></div>
                     <img src="images\barquense.JPG" class="center">
-                    <p><a href="https://www.aaum.pt/servicos/transportes">Visite a página para mais informações.</a></p>
+                    <br>
+                    <center>
+                        <p><a href="https://www.aaum.pt/servicos/transportes">Visite a página para mais informações.</a>
+                        </p>
+                    </center>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="menu-wrapper-background"></div>
-    <div id="loading" style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
+    <div id="loading"
+        style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
         <center>
-            <img src="/images/loading.gif" width="20%" height="20%" style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <img src="/images/loading.gif" width="20%" height="20%"
+                style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
     <script>
@@ -122,19 +132,19 @@
         })
 
         document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
-        
+
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
-            
+
             document.getElementById("menu").setAttribute("class", "menu-top");
             document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
-            document.getElementById("loading").style.display="block";
+            document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
                 if (response.status == 200) {
                     localStorage.removeItem('user_nome');
-                    document.getElementById("loading").style.display="none";
+                    document.getElementById("loading").style.display = "none";
                     swal({
                         title: 'Logout efetuado com sucesso!',
                         type: 'success',
@@ -149,7 +159,7 @@
                     throw new Error("Erro");
                 }
             }).catch(error => {
-                document.getElementById("loading").style.display="none";
+                document.getElementById("loading").style.display = "none";
                 swal({
                     title: 'Ocorreu um erro. Tente novamente!',
                     type: 'error',
