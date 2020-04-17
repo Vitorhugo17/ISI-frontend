@@ -92,10 +92,9 @@
             }
         }).then(result => {
             console.log(result);
-            setTimeout(() => {
             if (!result.isAuthenticated || !result.isEmpresa) {
                 throw new Error("Não autenticado");
-            }}, 2000);
+            }
         }).catch(error => {
             window.location.replace("/");
         })
