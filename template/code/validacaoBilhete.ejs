@@ -160,8 +160,6 @@
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
             
-            document.getElementById("menu").setAttribute("class", "menu-top");
-            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
             document.getElementById("loading").style.display="block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
