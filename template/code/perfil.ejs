@@ -96,63 +96,69 @@
 
         <div class="coverpage-image coverpage-style-3">
             <div class="content">
-                <div class="container no-bottom">
-                    <br>
-                    <h3>Editar Perfil</h3>
+                <form id="formAlterarPerfil">
+                    <div class="container no-bottom">
+                        <br>
+                        <h3>Editar Perfil</h3>
+                        <div class="decoration"></div>
+                        <div class="one-half-responsive">
+                            <input type="text" class="text-input-one" id="numeroMec" name="numeroMec"
+                                placeholder="Número Mecanográfico"></input>
+                            <input type="text" class="text-input-one" id="firstName" name="firstName"
+                                placeholder="Primeiro nome" required></input>
+                            <input type="text" class="text-input-one" id="lastName" name="lastName"
+                                placeholder="Último nome" required></input>
+                            <input type="date" class="text-input-one" id="dataNasc" name="dataNasc"></input>
+                            <input type="text" class="text-input-one" id="contacto" name="contacto"
+                                placeholder="Contacto"></input>
+                        </div>
+                    </div>
                     <div class="decoration"></div>
-                    <div class="one-half-responsive">
-                        <input type="text" class="text-input-one" id="numeroMec" name="numeroMec"
-                            placeholder="Número Mecanográfico" value="A85972"></input>
-                        <input type="text" class="text-input-one" id="firstName" name="firstName"
-                            placeholder="Primeiro nome" value="Pedro"></input>
-                        <input type="text" class="text-input-one" id="lastName" name="lastName"
-                            placeholder="Último nome" value="Oliveira"></input>
-                        <input type="date" class="text-input-one" id="dataNasc" name="dataNasc"></input>
-                        <input type="text" class="text-input-one" id="contacto" name="contacto" placeholder="Contacto"
-                            value="968745692"></input>
+                    <div class="container no-bottom">
+                        <div class="one-half-responsive">
+                            <button type="submit" id="alterarPerfil"
+                                class="button center-button button-blue full-bottom detected-button"
+                                style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
+                                Edição</button>
+                        </div>
                     </div>
-                </div>
-                <div class="decoration"></div>
-                <div class="container no-bottom">
-                    <div class="one-half-responsive">
-                        <button type="submit" id="alterarPerfil"
-                            class="button center-button button-blue full-bottom detected-button"
-                            style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
-                            Edição</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
         <div class="coverpage-image coverpage-style-3">
             <div class="content">
-                <div class="container no-bottom">
-                    <br>
-                    <h3>Editar Palavra-passe</h3>
+                <form id="formEditarPass">
+                    <div class="container no-bottom">
+                        <br>
+                        <h3>Editar Palavra-passe</h3>
+                        <div class="decoration"></div>
+                        <div class="one-half-responsive">
+                            <input type="password" class="text-input-one" id="pass" name="pass"
+                                placeholder="Nova palavra-passe" required></input>
+                            <input type="password" class="text-input-one" id="confPass" name="confPass"
+                                placeholder="Confirmar palavra-passe" required></input>
+                        </div>
+                    </div>
                     <div class="decoration"></div>
-                    <div class="one-half-responsive">
-                        <input type="password" class="text-input-one" id="pass" name="pass"
-                            placeholder="Nova palavra-passe" value="123456789"></input>
-                        <input type="password" class="text-input-one" id="confPass" name="confPass"
-                            placeholder="Confirmar palavra-passe" value="123456789"></input>
+                    <div class="container no-bottom">
+                        <div class="one-half-responsive">
+                            <button type="submit" id="alterarPass"
+                                class="button center-button button-blue full-bottom detected-button"
+                                style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
+                                Edição</button>
+                        </div>
                     </div>
-                </div>
-                <div class="decoration"></div>
-                <div class="container no-bottom">
-                    <div class="one-half-responsive">
-                        <button type="submit" id="alterarPass"
-                            class="button center-button button-blue full-bottom detected-button"
-                            style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
-                            Edição</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="menu-wrapper-background"></div>
-    <div id="loading" style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
+    <div id="loading"
+        style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
         <center>
-            <img src="/images/loading.gif" width="20%" height="20%" style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <img src="/images/loading.gif" width="20%" height="20%"
+                style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
     <script>
@@ -195,11 +201,11 @@
             const nif = result.user.nif;
 
             txt = `<p>
-                            <strong>Número Mecanográfico: </strong>${(numero_mecanografico ? numero_mecanografico: "-----------------------------------------------")}<br>
+                            <strong>Número Mecanográfico: </strong>${(numero_mecanografico ? numero_mecanografico: "--------------------------------")}<br>
                             <strong>Nome: </strong>${nome} ${apelido}<br>
                             <strong>Email: </strong>${email}<br>
-                            <strong>Data de Nascimento: </strong>${(data_nascimento ? data_nascimento: "----------------------------------")} <br>
-                            <strong>Contacto: </strong>${(numero_telefone? numero_telefone:"-----------------------------------------------")} <br>
+                            <strong>Data de Nascimento: </strong>${(data_nascimento ? data_nascimento: "-------------------------------------")} <br>
+                            <strong>Contacto: </strong>${(numero_telefone? numero_telefone: "-------------------------------------------------------")} <br>
                             <strong>NIF: </strong>${nif}
                         </p> `;
             document.getElementById("profile").innerHTML = txt;
@@ -217,16 +223,16 @@
         //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
-            
+
             document.getElementById("menu").setAttribute("class", "menu-top");
             document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
-            document.getElementById("loading").style.display="block";
+            document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
                 if (response.status == 200) {
                     localStorage.removeItem('user_nome');
-                    document.getElementById("loading").style.display="none";
+                    document.getElementById("loading").style.display = "none";
                     swal({
                         title: 'Logout efetuado com sucesso!',
                         type: 'success',
@@ -241,7 +247,7 @@
                     throw new Error("Erro");
                 }
             }).catch(error => {
-                document.getElementById("loading").style.display="none";
+                document.getElementById("loading").style.display = "none";
                 swal({
                     title: 'Ocorreu um erro. Tente novamente!',
                     type: 'error',
