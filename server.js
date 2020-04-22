@@ -59,6 +59,13 @@ app.get("/purchase", (request, response) => {
     });
 })
 
+app.get("/purchase/historic", (request, response) => {
+    response.set('Content-Type', 'text/html');
+    response.render(`${dirName}historicoCompras`, {
+        urlBase: urlBase
+    });
+})
+
 app.get("/profile", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}perfil`, {

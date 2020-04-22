@@ -24,19 +24,20 @@
     <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"
         media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
 
-    <title>QRCode</title>
+    <title>Histórico de Compras</title>
 
-    <link href="/styles/style.css" rel="stylesheet" type="text/css">
-    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
-    <link href="/styles/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="/styles/animate.css" rel="stylesheet" type="text/css">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link href="styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="styles/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="styles/swipebox.css" rel="stylesheet" type="text/css">
+    <link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="styles/animate.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/jqueryui.js"></script>
+    <script type="text/javascript" src="scripts/framework.plugins.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
 </head>
@@ -54,7 +55,7 @@
 
 
     <ul class="menu-top" id="menu">
-        <li class="active-menu"><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
+        <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
         <li>
             <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
                     class="fa fa-plus active-plus"></i></a>
@@ -64,8 +65,8 @@
                             class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
                 </li>
-                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de Compras<i
-                            class="fa fa-circle"></i></a>
+                <li class="active-menu"><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de
+                        Compras<i class="fa fa-circle"></i></a>
                 </li>
             </ul>
         </li>
@@ -74,18 +75,75 @@
     </ul>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador"></h4>
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">Pedro Oliveira
+        </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
     <div class="header-clear-big"></div>
 
     <div class="content">
-        <div class="horario-page-wrapper">
-            <div class="container no-bottom">
-                <div class="container no-bottom">
-                    <img id="qrcode" class="center" style="display:none">
+        <div class="container no-bottom">
+            <h3>Histórico de Compras</h3>
+            <div class="decoration"></div>
+        </div>
+        <div class="one-half-responsive">
+            <div class="container">
+                <div class="toggle-2">
+                    <a href="#" class="deploy-toggle-2"
+                        style="font-weight: bold; border-bottom: solid 1px rgba(0,0,0,0.05);">Bilhete Único</a>
+                    <div class="toggle-content" style="margin-bottom: 20px; margin-top: 20px;">
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Data da compra: 22/04/2020</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Companhia: Transdev</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Quantidade: 5</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Preço Único: 1,30€</a>
+                        <div class="portfolio-one-links" style="margin-top: 15px;">
+                            <a href="#" style="font-size: 12px;"><i class="fa fa-download"></i>Download da fatura</a>
+                            <a href="#" style="cursor: context-menu; font-size: 12px;">Total: 6,50€ </a>
+                        </div>
+                    </div>
                 </div>
-
+                <br>
+                <div class="toggle-2">
+                    <a href="#" class="deploy-toggle-2"
+                        style="font-weight: bold; border-bottom: solid 1px rgba(0,0,0,0.05);">Pack 5 bilhetes</a>
+                    <div class="toggle-content" style="margin-bottom: 20px; margin-top: 20px;">
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Data da compra: 22/04/2020</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Companhia: Transdev</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Quantidade: 5</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Preço Único: 1,30€</a>
+                        <div class="portfolio-one-links" style="margin-top: 15px;">
+                            <a href="#" style="font-size: 12px;"><i class="fa fa-download"></i>Download da fatura</a>
+                            <a href="#" style="cursor: context-menu; font-size: 12px;">Total: 6,50€ </a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="toggle-2">
+                    <a href="#" class="deploy-toggle-2"
+                        style="font-weight: bold; border-bottom: solid 1px rgba(0,0,0,0.05);">Bilhete Ida e Volta</a>
+                    <div class="toggle-content" style="margin-bottom: 20px; margin-top: 20px;">
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Data da compra: 22/04/2020</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Companhia: Transdev</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Quantidade: 5</a>
+                        <a href="#" style="cursor:context-menu; margin-left: 30px; font-size: 12px; color: #666666;"><i
+                                class="fa fa-arrow-right"></i> Preço Único: 1,30€</a>
+                        <div class="portfolio-one-links" style="margin-top: 15px;">
+                            <a href="#" style="font-size: 12px;"><i class="fa fa-download"></i>Download da fatura</a>
+                            <a href="#" style="cursor: context-menu; font-size: 12px;">Total: 6,50€ </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -98,7 +156,7 @@
         </center>
     </div>
     <script>
-        const urlBase = "<%=urlBase%>";
+     /*   const urlBase = "<%=urlBase%>";
         //verificar se o utilizador está autenticado
         fetch(`${urlBase}/authenticated`, {
             credentials: 'include'
@@ -116,27 +174,9 @@
             window.location.replace("/");
         })
 
-        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
 
-        fetch(`${urlBase}/qrcodes/<%=qrcode_id%>`, {
-            credentials: "include"
-        }).then(response => {
-            if (response.status == 200) {
-                return response.json();
-            } else {
-                throw new Error("Não foi possivel obter o QRCode");
-            }
-        }).then(result => {
-            console.log(result.data);
-            document.getElementById("qrcode").src = result.data;
-            document.getElementById("qrcode").style.cssText = "display: block";
-        }).catch(error => {
-            document.getElementById("qrcode").src = "";
-            document.getElementById("qrcode").alt = "Não foi possivel obter o QRCode";
-            document.getElementById("qrcode").style.cssText = "display: block";
-        })
+        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome"); */
 
-        //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 

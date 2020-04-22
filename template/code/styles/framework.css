@@ -1571,10 +1571,6 @@ table tr:hover td{
 	background-color:#eeeeee;   
 }
 
-.toggle-3{
-
-
-}
 
 .deploy-toggle-1{
 	padding:15px;
@@ -1597,7 +1593,6 @@ table tr:hover td{
 	padding-left:50px;
 	font-size:13px;
 	color:#343434;
-	text-transform:uppercase;
 	background-image:url(../images/lists/plus_48.png);
 	background-repeat:no-repeat;
 	background-size:14px 14px;
@@ -1926,7 +1921,7 @@ table tr:hover td{
 
 .contact-call i{
 	width:12px;
-	diplay:block;
+	display:block;
 	margin-right:20px;	
 }
 
@@ -1938,7 +1933,7 @@ table tr:hover td{
 
 .contact-text i{
 	width:12px;
-	diplay:block;
+	display:block;
 	margin-right:20px;	
 }
 
@@ -1950,7 +1945,7 @@ table tr:hover td{
 
 .contact-mail i{
 	width:12px;
-	diplay:block;
+	display:block;
 	margin-right:20px;	
 }
 
@@ -1962,7 +1957,7 @@ table tr:hover td{
 
 .contact-facebook i{
 	width:12px;
-	diplay:block;
+	display:block;
 	margin-right:20px;	
 }
 
@@ -1974,7 +1969,7 @@ table tr:hover td{
 
 .contact-twitter i{
 	width:12px;
-	diplay:block;
+	display:block;
 	margin-right:20px;	
 }
 
@@ -2436,14 +2431,16 @@ table tr:hover td{
 
 .portfolio-one-links a:first-child{
 	float:left;
+	padding-left: 16px;
 	font-size:12px;	
 }
 
 .portfolio-one-links a:first-child i{
-	padding-right:10px;	
+	padding-right:4px;	
 }
 
 .portfolio-one-links a:last-child{
+	padding-right: 16px;
 	float:right;
 	font-size:12px;	
 }
