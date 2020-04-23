@@ -92,7 +92,7 @@
         </div>
 
         <div class="decoration"></div>
-        <div id="compra" style="display: none;">
+        <div id="compra">
             <div class="container" style="margin-bottom: 0px;">
                 <div class="one-third" style="width: 175px; margin-right: 2px;">
                     <h5 style="line-height: 30px;">Temos uma solução para si!</h5>
@@ -192,7 +192,7 @@
             </div>
         </div>
 
-        <div class="one-half-responsive" id="pagamentoReferencia" style="display: block;">
+        <div class="one-half-responsive" id="pagamentoReferencia" style="display: none;">
             <br>
             <div style="border: 2px; border-style: ridge;">
                 <br>
@@ -257,6 +257,7 @@
 
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
+          
             document.getElementById('compra').style.display = "none";
             document.getElementById('pagamentoCartao').style.display = "block";
         })
