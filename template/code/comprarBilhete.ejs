@@ -92,7 +92,7 @@
         </div>
 
         <div class="decoration"></div>
-        <div id="compra">
+        <div id="compra" style="display: none;">
             <div class="container" style="margin-bottom: 0px;">
                 <div class="one-third" style="width: 175px; margin-right: 2px;">
                     <h5 style="line-height: 30px;">Temos uma solução para si!</h5>
@@ -132,17 +132,30 @@
                     </div>
 
                 </div>
-                <div class="decoration" style="margin-bottom: 21px;"></div>
+                <div class="decoration" style="margin-bottom: 30px;"></div>
                 <div class="container no-bottom">
                     <div class="one-half-responsive">
-                        <h5 style="margin-bottom: 11px;">Escolha uma forma de pagamento</h5>
+                        <h5 style="margin-bottom: 15px;">Escolha uma forma de pagamento</h5>
 
-                        <a href="#" id="cartao" class="checkbox radio-two" style="background-position: 1px 6px; margin-bottom: -9px; padding-left: 26px;">
+                        <a href="#" id="cartao" class="checkbox radio-two"
+                            style="display: inline-block; background-position: 1px 6px; padding-left: 22px; padding-right: 2px;">
+
                             <p class="half-bottom">Cartão de Crédito</p>
                         </a>
-                        <a href="#" id="referencia" class="checkbox radio-two" style="background-position: 1px 6px; margin-bottom: -9px; padding-left: 26px;">
-                            <p class="half-bottom">Referência de Multibanco</p>
+                        <div style="display: inline-block; top:-15px">
+                            <img src="/images/maestro.png" style="width: 42px; display: inline-block;"><img
+                                src="/images/mastercard.png" style="width: 42px; display: inline-block;"><img
+                                src="/images/visa.jpg" style="width: 44px; display: inline-block; top:-12px">
+                        </div>
+                        <br>
+                        <a href="#" id="referencia" class="checkbox radio-two"
+                            style="display: inline-block; background-position: 1px 6px; padding-left: 22px; padding-right: 8px;">
+
+                            <p class="half-bottom">Referência Multibanco</p>
                         </a>
+                        <div style="display: inline-block; top:-15px">
+                            <img src="/images/multibanco.png" style="width: 30px; display: inline-block;">
+                        </div>
                     </div>
 
                 </div>
@@ -160,9 +173,7 @@
 
 
 
-        <div class="one-half-responsive" id="pagamento" style="display: none;">
-            <br>
-            <br>
+        <div class="one-half-responsive" id="pagamentoCartao" style="display: none;">
             <br>
             <form id="payment-form" class="sr-payment-form">
                 <div class="sr-combo-inputs-row">
@@ -179,6 +190,23 @@
             <div class="sr-result hidden">
                 <p>Compra realizada com sucesso!<br /></p>
             </div>
+        </div>
+
+        <div class="one-half-responsive" id="pagamentoReferencia" style="display: block;">
+            <br>
+            <div style="border: 2px; border-style: ridge;">
+                <br>
+                <p style="line-height: 27px; font-size: 15px; text-align: center; margin-bottom: 20px;">
+                    <strong>Entidade: </strong>10559 <br>
+                    <strong>Referência: </strong>803 000 127 <br>
+                    <strong>Valor: </strong>20,5 €
+                </p>
+            </div>
+            <br>
+            <center>
+                <img src="/images/warning.gif" style="width: 40px; margin-bottom: 6px;"><p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referêcia
+                tem uma validade de <strong>8 horas</strong>!</p>
+            </center>
         </div>
 
     </div>
@@ -230,7 +258,7 @@
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
             document.getElementById('compra').style.display = "none";
-            document.getElementById('pagamento').style.display = "block";
+            document.getElementById('pagamentoCartao').style.display = "block";
         })
 
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
