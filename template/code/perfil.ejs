@@ -86,8 +86,6 @@
                     <div class="decoration"></div>
                     <div class="one-half-responsive" id="profile">
 
-
-
                     </div>
                 </div>
                 <div class="decoration"></div>
@@ -212,6 +210,127 @@
                 focusConfirm: false,
                 timer: 2000
             })
+        })
+
+
+
+
+        //alterar palavra passe
+        const pass = document.getElementById("pass");
+        const confPass = document.getElementById("confPass");
+
+        pass.addEventListener("change", (event) => {
+            if (pass.value != confPass.value && confPass.value != "") {
+                confPass.setCustomValidity("As palavras-passe não correspondem!");
+            } else {
+                if (pass.value.length >= 9) {
+                    let validator = {
+                        maiuscula: 0,
+                        minuscula: 0,
+                        numero: 0,
+                        especial: 0
+                    }
+
+                    for (let i = 0; i < pass.value.length; i++) {
+                        if ("0123456789".includes(pass.value.charAt(i))) {
+                            validator.numero = 1;
+                        } else if ("[`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~]".includes(pass.value.charAt(i))) {
+                            validator.especial = 1;
+                        } else if (pass.value.charAt(i) === pass.value.charAt(i).toLowerCase()) {
+                            validator.minuscula = 1;
+                        } else if (pass.value.charAt(i) === pass.value.charAt(i).toUpperCase()) {
+                            validator.maiuscula = 1;
+                        }
+                        console.log(pass.value.charAt(i),
+                            pass.value.charAt(i) === pass.value.charAt(i).toLowerCase(),
+                            pass.value.charAt(i) === pass.value.charAt(i).toUpperCase(),
+                            "0123456789".includes(pass.value.charAt(i)),
+                            "[`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~]".includes(pass.value.charAt(i)));
+
+                    }
+
+                    if (validator.maiuscula + validator.minuscula + validator.especial + validator.numero < 3) {
+                        swal({
+                            html: '<strong><h3>A sua palavra-passe deve conter pelo menos três dos seguintes caracteres: um caracter especial, uma letra maiúscula, uma letra minúscula ou um número!</h3></strong>',
+                            type: 'error',
+                            showCloseButton: true,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 9000
+                        })
+                    } else {
+                        pass.setCustomValidity("");
+                    }
+                } else {
+                    swal({
+                        html: '<strong><h3>A sua palavra-passe deve conter no mínimo 9 caracteres.</h3></strong>',
+                        type: 'error',
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 9000
+                    })
+                }
+            }
+        })
+
+        confPass.addEventListener("change", (event) => {
+            if (pass.value != confPass.value) {
+                confPass.setCustomValidity("As palavras-passe não correspondem!");
+            } else {
+                confPass.setCustomValidity("");
+                document.getElementById("alterarPass").disabled = false;
+            }
+        })
+
+
+
+        const formAlterarPass = document.getElementById("formAlterarPass");
+
+        formAlterarPass.addEventListener('submit', (event) => {
+            document.getElementById("alterarPass").disabled = true;
+            event.preventDefault();
+
+            let data = {
+                user_id: document.getElementById("user_id").value,
+                password: pass.value,
+                type: "recover"
+            }
+            return fetch(`${urlBase}/password/update`, { 
+                headers: {
+                    'Content-Type': 'update',
+                    'password': 'password'
+                },
+                credentials: 'include',
+                method: 'PUT',
+                body: JSON.stringify(data)
+            }).then(response => {
+                return response.json();
+            }).then(result => {
+                if (result.message == "Password updated with success") { 
+                    swal({
+                        title: 'Palavra-passe alterada com sucesso!',
+                        type: 'success',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        showLoaderOnConfirm: false,
+                        timer: 2000
+                    }).then(result => {
+                        window.location.replace('/')
+                    })
+                } else {       
+                        throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
+                }
+            }).catch(error => {
+                document.getElementById("alterarPass").disabled = false;
+                swal({
+                    html: '<strong><h3>Ocorreu um erro! Tente novamente mais tarde. Obrigado!</h3></strong>',
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    type: 'error',
+                    timer: 2000
+                })
+            });
         })
 
         //logout
