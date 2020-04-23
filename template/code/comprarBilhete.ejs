@@ -204,11 +204,11 @@
             </div>
             <br>
             <center>
-                <img src="/images/warning.gif" style="width: 40px; margin-bottom: 6px;"><p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referêcia
-                tem uma validade de <strong>8 horas</strong>!</p>
+                <img src="/images/warning.gif" style="width: 40px; margin-bottom: 6px;">
+                <p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referêcia
+                    tem uma validade de <strong>8 horas</strong>!</p>
             </center>
         </div>
-
     </div>
     <div class="menu-wrapper-background"></div>
     <div id="loading"
@@ -257,9 +257,24 @@
 
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
-          
-            document.getElementById('compra').style.display = "none";
-            document.getElementById('pagamentoCartao').style.display = "block";
+            if (document.getElementById('referencia').className == "checkbox radio-two radio-two-checked") {
+                document.getElementById('compra').style.display = "none";
+                document.getElementById('pagamentoCartao').style.display = "none";
+                document.getElementById('pagamentoReferencia').style.display = "block";
+            } else if (document.getElementById('cartao').className == "checkbox radio-two radio-two-checked") {
+                document.getElementById('compra').style.display = "none";
+                document.getElementById('pagamentoCartao').style.display = "block";
+                document.getElementById('pagamentoReferencia').style.display = "none";
+            } else {
+                swal({
+                        title: 'Selecione um método de pagamento!',
+                        type: 'warning',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    })
+            }
         })
 
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
