@@ -220,7 +220,6 @@
                                     window.location.replace('/')
                                 })
                             } else {
-                                console.log(result);
                                 if (result.error == "CONTACT_EXISTS") {
                                     throw new Error(result.error);
                                 } else {

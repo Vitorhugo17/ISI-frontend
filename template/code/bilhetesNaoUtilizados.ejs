@@ -215,7 +215,6 @@
                     event.preventDefault();
                     if (radioButtons[i].className == "checkbox radio-two") {
                         radioButtons[i].setAttribute("class", "checkbox radio-two radio-two-checked");
-                        console.log(radioButtons[i].className);
                         for (let j = 0; j < radioButtons.length; j++) {
                             if (radioButtons[i].id != radioButtons[j].id) {
                                 radioButtons[j].className = "checkbox radio-two";
@@ -242,7 +241,6 @@
             if (radioId != "") {
                 const companhia = document.getElementById(radioId).parentNode.parentNode.getElementsByClassName(
                     "companhia")[0].innerHTML;
-                console.log(radioId, companhia);
                 let data = {
                     company: companhia,
                     product_type: radioId

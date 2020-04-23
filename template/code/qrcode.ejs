@@ -127,7 +127,6 @@
                 throw new Error("Não foi possivel obter o QRCode");
             }
         }).then(result => {
-            console.log(result.data);
             document.getElementById("qrcode").src = result.data;
             document.getElementById("qrcode").style.cssText = "display: block";
         }).catch(error => {
