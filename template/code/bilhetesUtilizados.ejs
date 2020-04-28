@@ -26,20 +26,20 @@
 
     <title>Bilhetes Utilizados</title>
 
-    <link href="./styles/style.css" rel="stylesheet" type="text/css">
-    <link href="./styles/framework.css" rel="stylesheet" type="text/css">
-    <link href="./styles/owl.theme.css" rel="stylesheet" type="text/css">
-    <link href="./styles/swipebox.css" rel="stylesheet" type="text/css">
-    <link href="./styles/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="./styles/animate.css" rel="stylesheet" type="text/css">
+    <link href="/styles/style.css" rel="stylesheet" type="text/css">
+    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
+    <link href="/styles/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/styles/animate.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="./scripts/jquery.js"></script>
-    <script type="text/javascript" src="./scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="./scripts/framework.plugins.js"></script>
-    <script type="text/javascript" src="./scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
+    <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
 
-    <link rel="stylesheet" href="./styles/normalize.css" />
-    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="/styles/normalize.css" />
+    <link rel="stylesheet" href="/styles/global.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
@@ -57,7 +57,7 @@
     </div>
 
 
-    <ul class="menu-top">
+    <ul class="menu-top" id="menu">
         <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
         <li>
             <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
@@ -68,14 +68,18 @@
                             class="fa fa-circle"></i></a></li>
                 <li class="active-menu"><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i
                             class="fa fa-circle"></i></a></li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de Compras<i
+                            class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
         <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
-    <div class="header">Pedro
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador"></h4>
+    <div class="header">
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">Pedro Oliveira
+        </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
     <div class="header-clear-big"></div>
@@ -84,8 +88,8 @@
         <div class="container no-bottom">
             <h3>Bilhetes Utilizados</h3>
             <div class="decoration"></div>
-            <table cellspacing='0' class="table">
-                <tr style="line-height: 10px;">
+            <table cellspacing='0' class="table" id="bilhetes_utilizados">
+                <!--    <tr style="line-height: 10px;">
                     <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
                     <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
                     <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
@@ -104,13 +108,19 @@
                     <td class="table-sub-title">Único</td>
                     <td>9</td>
                     <td>Barquense</td>
-                </tr>
+                </tr>-->
             </table>
         </div>
         <div class="decoration"></div>
     </div>
     <div class="menu-wrapper-background"></div>
-
+    <div id="loading"
+        style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
+        <center>
+            <img src="/images/loading.gif" width="20%" height="20%"
+                style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        </center>
+    </div>
     <script>
         const urlBase = "<%=urlBase%>";
 
