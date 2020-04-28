@@ -215,6 +215,7 @@
             document.getElementById('bilhetes_nao_utilizados').innerHTML = txt;
         })
 
+
         // pedir código QR
         document.getElementById('askQR').addEventListener('click', (event) => {
             event.preventDefault();
@@ -268,6 +269,71 @@
             }
         })
 
+
+        //partilha bilhetes
+        document.getElementById('share').addEventListener('click', (event) => {
+            event.preventDefault();
+            let radioId = "";
+            for (let i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].className == "checkbox radio-two radio-two-checked") {
+                    radioId = radioButtons[i].id;
+                }
+            };
+            if (radioId != "") {
+                const companhia = document.getElementById(radioId).parentNode.parentNode.getElementsByClassName(
+                    "companhia")[0].innerHTML;
+                let data = {
+                    company: companhia,
+                    product_type: radioId
+                }
+                fetch(`${urlBase}/partilha`, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST',
+                    credentials: 'include',
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    if (response.status == 200) {
+                        return response.json();
+                    } else {
+                        throw new Error("Erro");
+                    }
+                }).then(result => {
+                    //window.location.href = ``;
+                    swal({
+                        title: 'Escolha uma pessoa para enviar o bilhete!',
+                        showCloseButton: true,
+                        showConfirmButton: true,
+                        focusConfirm: false,
+                        confirmButtonAriaLabel: 'Enviar!',
+                        cancelButtonAriaLabel: 'Cancelar',
+                        timer: 2000
+                    })
+                }).catch(error => {
+                    swal({
+                        title: 'Não foi possível partilhar o bilhete, tente novamente!',
+                        type: 'error',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    })
+                })
+            } else {
+                swal({
+                    title: 'Selecione uma linha!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            }
+        })
+        
+
+        //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 

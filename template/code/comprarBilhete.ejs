@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="/styles/normalize.css" />
     <link rel="stylesheet" href="/styles/global.css" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="/scripts/pagamento.js" defer></script>
+    <script src="/scripts/payment.js" defer></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
@@ -193,21 +193,7 @@
         </div>
 
         <div class="one-half-responsive" id="pagamentoReferencia" style="display: none;">
-            <br>
-            <div style="border: 2px; border-style: ridge;">
-                <br>
-                <p style="line-height: 27px; font-size: 15px; text-align: center; margin-bottom: 20px;">
-                    <strong>Entidade: </strong>10559 <br>
-                    <strong>Referência: </strong>803 000 127 <br>
-                    <strong>Valor: </strong>20,5 €
-                </p>
-            </div>
-            <br>
-            <center>
-                <img src="/images/warning.gif" style="width: 40px; margin-bottom: 6px;">
-                <p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referêcia
-                    tem uma validade de <strong>8 horas</strong>!</p>
-            </center>
+
         </div>
     </div>
     <div class="menu-wrapper-background"></div>
@@ -267,13 +253,13 @@
                 document.getElementById('pagamentoReferencia').style.display = "none";
             } else {
                 swal({
-                        title: 'Selecione um método de pagamento!',
-                        type: 'warning',
-                        showCloseButton: false,
-                        showConfirmButton: false,
-                        focusConfirm: false,
-                        timer: 2000
-                    })
+                    title: 'Selecione um método de pagamento!',
+                    type: 'warning',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
             }
         })
 
