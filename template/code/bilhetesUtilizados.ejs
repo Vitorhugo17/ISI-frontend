@@ -88,8 +88,8 @@
         <div class="container no-bottom">
             <h3>Bilhetes Utilizados</h3>
             <div class="decoration"></div>
-            <table cellspacing='0' class="table">
-                <tr style="line-height: 10px;">
+            <table cellspacing='0' class="table" id="bilhetes_utilizados">
+                <!--    <tr style="line-height: 10px;">
                     <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
                     <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
                     <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
@@ -108,7 +108,7 @@
                     <td class="table-sub-title">Único</td>
                     <td>9</td>
                     <td>Barquense</td>
-                </tr>
+                </tr>-->
             </table>
         </div>
         <div class="decoration"></div>
@@ -122,18 +122,97 @@
         </center>
     </div>
     <script>
+        const urlBase = "<%=urlBase%>";
+
+        //verificar se o utilizador está autenticado
+
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated) {
+                throw new Error("Não autenticado");
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
+        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
+
+
+
+
+        //tabela bilhetes utilizados
+        let txt = `<tr style="line-height: 10px;">
+                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
+                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
+                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
+                </tr>
+                `;
+        fetch(`${urlBase}/tickets/used`, {
+            credentials: "include"
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error('Não foi possível recolher dados.');
+            }
+        }).then(result => {
+            const bilhetes = result.bilhetes;
+            if (bilhetes.bilhetes_disponiveis_barquense != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td class="table-sub-title"> Único </td>
+                    <td class="quantidade">${bilhetes.bilhetes_disponiveis_barquense}</td>
+                    <td class="companhia">Barquense</td>
+                </tr>`
+            }
+            if (bilhetes.bilhetes_ida_e_volta_barquense != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td class="table-sub-title">Ida e Volta</td>
+                    <td class="quantidade">${bilhetes.bilhetes_ida_e_volta_barquense}</td>
+                    <td class="companhia">Barquense</td>
+                </tr>`
+            }
+            if (bilhetes.bilhetes_disponiveis_transdev != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td class="table-sub-title">Único</td>
+                    <td class="quantidade">${bilhetes.bilhetes_disponiveis_transdev}</td>
+                    <td class="companhia">Transdev</td>
+                </tr>`
+            }
+            if (bilhetes.bilhetes_ida_e_volta_transdev != 0) {
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td class="table-sub-title">Ida e Volta</td>
+                    <td class="quantidade">${bilhetes.bilhetes_ida_e_volta_transdev}</td>
+                    <td class="companhia">Transdev</td>
+                </tr>`
+            }
+
+            document.getElementById('bilhetes_utilizados').innerHTML = txt;
+        }).catch(error => {
+            document.getElementById('bilhetes_utilizados').innerHTML = txt;
+        })
+
+
+
+        //logout		
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
-            document.getElementById("menu").setAttribute("class", "menu-top");
-            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
-            document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
                 if (response.status == 200) {
                     localStorage.removeItem('user_nome');
-                    document.getElementById("loading").style.display = "none";
                     swal({
                         title: 'Logout efetuado com sucesso!',
                         type: 'success',
@@ -148,7 +227,6 @@
                     throw new Error("Erro");
                 }
             }).catch(error => {
-                document.getElementById("loading").style.display = "none";
                 swal({
                     title: 'Ocorreu um erro. Tente novamente!',
                     type: 'error',
