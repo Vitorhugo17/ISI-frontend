@@ -1816,15 +1816,15 @@ table tr:hover td {
 	padding-left: 50px;
 	font-size: 13px;
 	color: #343434;
-	background-image: url(../images/lists/plus_48.png);
+	background-image: url(../images/lists/down_48.png);
 	background-repeat: no-repeat;
 	background-size: 14px 14px;
 	background-position: 15px 18px;
 }
 
-.toggle-2-active {
+/*.toggle-2-active {
 	background-image: url(../images/lists/delete_48.png);
-}
+}*/
 
 .deploy-toggle-3 {
 	padding: 15px;
