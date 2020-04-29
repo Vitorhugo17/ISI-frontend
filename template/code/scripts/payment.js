@@ -233,6 +233,8 @@ function handlePayment(paymentResponse) {
             showConfirmButton: false,
             focusConfirm: false,
             timer: 2000
+        }).then(() => {
+            window.location.reload();
         })
     } else if (paymentIntent.status === 'succeeded') {
         swal({
@@ -242,6 +244,8 @@ function handlePayment(paymentResponse) {
             showConfirmButton: false,
             focusConfirm: false,
             timer: 2000
+        }).then(() => {
+            window.location.reload();
         })
     } else if (paymentIntent.status === 'processing') {
         swal({
@@ -251,6 +255,8 @@ function handlePayment(paymentResponse) {
             showConfirmButton: false,
             focusConfirm: false,
             timer: 2000
+        }).then(() => {
+            window.location.reload();
         })
     } else {
         swal({
@@ -260,6 +266,8 @@ function handlePayment(paymentResponse) {
             showConfirmButton: false,
             focusConfirm: false,
             timer: 2000
+        }).then(() => {
+            window.location.reload();
         })
     }
 }
