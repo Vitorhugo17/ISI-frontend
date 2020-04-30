@@ -209,6 +209,26 @@
                             <strong>NIF: </strong>${nif}
                         </p> `;
             document.getElementById("profile").innerHTML = txt;
+
+            document.getElementById("numeroMec").value = numero_mecanografico;
+            document.getElementById("firstName").value = nome;
+            document.getElementById("lastName").value = apelido;
+            const x = data_nascimento.split("/");
+            const date = new Date(x[2], x[1] - 1, x[0]);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            if (day < 10 && month > 9) {
+                document.querySelector('input[type="date"]').value = `${year}-${month}-0${day}`;
+            } else if (day > 10 && month < 9) {
+                document.querySelector('input[type="date"]').value = `${year}-0${month}-${day}`;
+            } else if (day < 10 && month < 10) {
+                document.querySelector('input[type="date"]').value = `${year}-0${month}-0${day}`;
+            } else {
+                document.querySelector('input[type="date"]').value = `${year}-${month}-${day}`;
+            }
+
+            document.getElementById("contacto").value = numero_telefone;
         }).catch(error => {
             swal({
                 title: 'Não foi possível mostrar os dados.',
@@ -222,52 +242,25 @@
 
 
 
-        //preencher dados para editar
-        document.getElementById("divEditar").addEventListener('change', (event) => {
-            if (response.status == 200) {
-                const user = await response.json();
-
-                document.getElementById("numeroMec").value = user.numeroMec;
-                document.getElementById("firstName").value = user.firstName;
-                document.getElementById("lastName").value = user.lastName;
-                const date = new Date(user.dataNasc);
-                const year = date.getFullYear();
-                const month = date.getMonth() + 1;
-                const day = date.getDate();
-                if (day < 10 && month > 9) {
-                    document.querySelector('input[type="date"]').value = `${year}-${month}-0${day}`;
-                } else if (day > 10 && month < 9) {
-                    document.querySelector('input[type="date"]').value = `${year}-0${month}-${day}`;
-                } else if (day < 10 && month < 10) {
-                    document.querySelector('input[type="date"]').value = `${year}-0${month}-0${day}`;
-                } else {
-                    document.querySelector('input[type="date"]').value = `${year}-${month}-${day}`;
-                }
-
-                document.getElementById("contacto").value = user.contacto;
-            }
-        })
-
-
-
         //alterar dados
-        const btnGuardarDados = document.getElementById("alterarPerfil");
+        const btnGuardarDados = document.getElementById("formAlterarPerfil");
 
         btnGuardarDados.addEventListener("submit", async (event) => {
+            event.preventDefault();
             let data = {}
 
-            data.numeroMec = document.getElementById("numeroMec").value;
-            data.firstName = document.getElementById("firstName").value;
-            data.lastName = document.getElementById("lastName").value;
-            data.dataNasc = new Date(document.querySelector('input[type="date"]').value).toJSON()
-            data.contacto = document.getElementById("contacto").value;
+            data.student_number = document.getElementById("numeroMec").value;
+            data.name = document.getElementById("firstName").value;
+            data.lastname = document.getElementById("lastName").value;
+            data.birth_date = new Date(document.querySelector('input[type="date"]').value).toJSON()
+            data.contact = document.getElementById("contacto").value;
 
 
-            const response = await fetch(`${urlBaseSQL}/update/user/${idUser}`, {
+            const response = await fetch(`${urlBase}/profile/edit`, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': auth
+                    'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 method: 'PUT',
                 body: JSON.stringify(data)
             });
@@ -278,11 +271,9 @@
                     showCloseButton: false,
                     showConfirmButton: false,
                     focusConfirm: false,
-                    timer: 1500
+                    timer: 2000
                 }).then(result => {
-                    if (result.value) {
-                        window.location.reload()
-                    }
+                    window.location.reload();
                 });
             } else {
                 swal({
@@ -431,7 +422,7 @@
         })
 
 
-        
+
         //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
