@@ -21,46 +21,6 @@ fetch(`${urlBase}/stripe-key`, {
 
 async function pay() {
     await createPaymentIntent();
-    const paymentRequest = stripe.paymentRequest({
-        country: 'PT',
-        currency: 'eur',
-        total: {
-            label: 'Total',
-            amount: parseInt((parseFloat(document.getElementById('preco').value.replace(",", ".")) * 100).toFixed(0)),
-        },
-        requestPayerName: true
-    });
-
-    // Callback when a payment method is created.
-    paymentRequest.on('paymentmethod', async event => {
-        // Confirm the PaymentIntent with the payment method returned from the payment request.
-        console.log(1);
-        const {
-            error
-        } = await stripe.confirmCardPayment(
-            paymentIntent.client_secret, {
-                payment_method: event.paymentMethod.id,
-            }, {
-                handleActions: false
-            }
-        );
-        if (error) {
-            // Report to the browser that the payment failed.
-            event.complete('fail');
-            handlePayment({
-                error
-            });
-        } else {
-            // Report to the browser that the confirmation was successful, prompting
-            // it to close the browser payment method collection interface.
-            event.complete('success');
-            // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
-            const response = await stripe.confirmCardPayment(
-                paymentIntent.client_secret
-            );
-            handlePayment(response);
-        }
-    });
 
     if (document.getElementById('referencia').className == "checkbox radio-two radio-two-checked") {
         const sourceData = {
@@ -180,8 +140,8 @@ function handleSourceActiviation(source) {
             <br>
             <center>
                 <img src="/images/warning.gif" style="width: 40px; margin-bottom: 6px;">
-                <p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referêcia
-                    tem uma validade de <strong>8 horas</strong>!</p>
+                <p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referência
+                    tem uma validade de <strong>6 horas</strong>!</p>
             </center>`;
         } else {
             console.log('Unhandled receiver flow.', source);
@@ -192,20 +152,20 @@ function handleSourceActiviation(source) {
 };
 
 async function pollPaymentIntentStatus(paymentIntent, start) {
-    let timeout = 3000000;
+    let timeout = 30000;
     let interval = 500;
-    start = start ? start : new Date();
-    console.log(start, new Date());
+    start = start ? start : new Date().getTime();
     const endStates = ['succeeded', 'processing', 'canceled'];
     // Retrieve the PaymentIntent status from our server.
     const rawResponse = await fetch(`${urlBase}/payment/${paymentIntent}/status`, {
         credentials: 'include'
     })
     const response = await rawResponse.json();
-    if (!endStates.includes(response.paymentIntent.status) && new Date() < start + timeout) {
+    console.log(response);
+    if (!endStates.includes(response.paymentIntent.status) && new Date().getTime() < start + timeout) {
         // Not done yet. Let's wait and check again.
         setTimeout(
-            pollPaymentIntentStatus(paymentIntent, start),
+            await pollPaymentIntentStatus(paymentIntent, start),
             interval
         );
     } else {
