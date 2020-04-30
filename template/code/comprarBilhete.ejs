@@ -241,16 +241,119 @@
         }
         loadOption();
 
+
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
+            let txt;
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
+                    "tipoBilhete")
+                .selectedIndex].text;
+            let quantidade = document.getElementById("quantidade").value;
+            if (tipoBilhete != "" && quantidade != "") {
+                let res = tipoBilhete.split("-");
+                if (res[0].includes("único")) {
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            if (quantidade % 5 != 0) {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/5))} packs e ${quantidade%5} bilhetes únicos!`
+                            } else {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/5))} packs!`
+                            }
+                        }
+                    } else {
+                        if (quantidade >= 10) {
+                            if (quantidade % 10 != 0) {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/10))} packs e ${quantidade%10} bilhetes únicos!`
+                            } else {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/10))} packs!`
+                            }
+                        }
+                    }
+                }
+            }
             if (document.getElementById('referencia').className == "checkbox radio-two radio-two-checked") {
-                document.getElementById('compra').style.display = "none";
-                document.getElementById('pagamentoCartao').style.display = "none";
-                document.getElementById('pagamentoReferencia').style.display = "block";
+                let res = tipoBilhete.split("-");
+                if (res[0].includes("único")) {
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "none";
+                                document.getElementById('pagamentoReferencia').style.display = "block";
+                            })
+                        }
+                    } else {
+                        if (quantidade >= 10) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "none";
+                                document.getElementById('pagamentoReferencia').style.display = "block";
+                            })
+                        }
+                    }
+                } else {
+                    document.getElementById('compra').style.display = "none";
+                    document.getElementById('pagamentoCartao').style.display = "none";
+                    document.getElementById('pagamentoReferencia').style.display = "block";
+                }
             } else if (document.getElementById('cartao').className == "checkbox radio-two radio-two-checked") {
-                document.getElementById('compra').style.display = "none";
-                document.getElementById('pagamentoCartao').style.display = "block";
-                document.getElementById('pagamentoReferencia').style.display = "none";
+                let res = tipoBilhete.split("-");
+                if (res[0].includes("único")) {
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "block";
+                                document.getElementById('pagamentoReferencia').style.display = "none";
+                            })
+                        }
+                    } else {
+                        if (quantidade >= 10) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "block";
+                                document.getElementById('pagamentoReferencia').style.display = "none";
+                            })
+                        }
+                    }
+                } else {
+                    document.getElementById('compra').style.display = "none";
+                    document.getElementById('pagamentoCartao').style.display = "block";
+                    document.getElementById('pagamentoReferencia').style.display = "none";
+                }
+
             } else {
                 swal({
                     title: 'Selecione um método de pagamento!',
@@ -273,7 +376,8 @@
 
 
         function verificarPreco() {
-            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete")
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
+                    "tipoBilhete")
                 .selectedIndex].text;
             let quantidade = document.getElementById("quantidade").value;
 
@@ -283,7 +387,8 @@
                 if (quantidade <= 50 && res[0].includes("único")) {
                     if (res[1].includes("Barquense")) {
                         if (quantidade >= 5) {
-                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            for (let i = 0; i < document.getElementById("tipoBilhete").options
+                                .length; i++) {
                                 let tipo = document.getElementById("tipoBilhete").options[i].text;
                                 if (tipo.includes("Barquense") && tipo.includes("Pack")) {
                                     let preco = tipo.split("-")[2].trim();
@@ -298,7 +403,8 @@
                         }
                     } else if (res[1].includes("Transdev")) {
                         if (quantidade >= 10) {
-                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            for (let i = 0; i < document.getElementById("tipoBilhete").options
+                                .length; i++) {
                                 let tipo = document.getElementById("tipoBilhete").options[i].text;
                                 if (tipo.includes("Transdev") && tipo.includes("Pack")) {
                                     let preco = tipo.split("-")[2].trim();
@@ -323,8 +429,9 @@
 
                     let total = 0;
                     for (let i = 0; i < quantidadeF.length; i++) {
-                        total += parseFloat((quantidadeF[i].quantidade * parseFloat(quantidadeF[i].preco.replace("€",
-                            ""))).toFixed(2));
+                        total += parseFloat((quantidadeF[i].quantidade * parseFloat(quantidadeF[i].preco
+                            .replace("€",
+                                ""))).toFixed(2));
                     }
                     total = total.toFixed(2);
                     if (Number.isInteger(total)) {
@@ -377,7 +484,8 @@
             event.preventDefault();
 
             document.getElementById("menu").setAttribute("class", "menu-top");
-            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
+            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText =
+                "display:none";
             document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
