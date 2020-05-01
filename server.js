@@ -89,15 +89,6 @@ app.get("/qrcodes/:id", (request, response) => {
     });
 })
 
-app.get("/tickets/shared/:id", (request, response) => {
-    const shared_id = request.sanitize("id").escape();
-    response.set('Content-Type', 'text/html');
-    response.render(`${dirName}shared`, {
-        urlBase: urlBase,
-        shared_id: shared_id
-    });
-})
-
 app.get("/tickets/used", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesUtilizados`, {

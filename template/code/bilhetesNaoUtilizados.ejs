@@ -89,7 +89,7 @@
             <h3>Bilhetes Não Utilizados</h3>
             <div class="decoration"></div>
             <table id="bilhetes_nao_utilizados" cellspacing='0' class="table">
-                
+
             </table>
         </div>
         <div class="decoration"></div>
@@ -282,17 +282,9 @@
             if (radioId != "") {
                 const companhia = document.getElementById(radioId).parentNode.parentNode.getElementsByClassName(
                     "companhia")[0].innerHTML;
-                let data = {
-                    company: companhia,
-                    product_type: radioId
-                }
-                fetch(`${urlBase}/tickets/share`, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    method: 'POST',
-                    credentials: 'include',
-                    body: JSON.stringify(data)
+
+                fetch(`${urlBase}/users`, {
+                    credentials: "include"
                 }).then(response => {
                     if (response.status == 200) {
                         return response.json();
@@ -300,15 +292,64 @@
                         throw new Error("Erro");
                     }
                 }).then(result => {
-                    //window.location.href = ``;
+                    const users = result.users;
+                    let txt = "";
+                    for (let i = 0; i < users.length; i++) {
+                        txt += `<option value="${users[i].id}">${users[i].name}</option>`
+                    }
                     swal({
                         title: 'Escolha uma pessoa para enviar o bilhete!',
-                        showCloseButton: true,
+                        html: `<select id="utilizador">${txt}</select>`,
+                        showCloseButton: false,
+                        showCancelButton: true,
                         showConfirmButton: true,
                         focusConfirm: false,
-                        confirmButtonAriaLabel: 'Enviar!',
+                        confirmButtonAriaLabel: 'Enviar',
                         cancelButtonAriaLabel: 'Cancelar',
-                        timer: 2000
+                    }).then(result => {
+                        if (result) {
+                            let select = document.getElementById("utilizador");
+                            let option = select.options[select.selectedIndex].value;
+                            let data = {
+                                company: companhia,
+                                type: radioId,
+                                shared_with_id: option
+                            }
+                            fetch(`${urlBase}/tickets/share`, {
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                method: 'POST',
+                                credentials: 'include',
+                                body: JSON.stringify(data)
+                            }).then(response => {
+                                if (response.status == 200) {
+                                    return response.json();
+                                } else {
+                                    throw new Error("Erro");
+                                }
+                            }).then(result => {
+                                swal({
+                                    title: 'A partilha foi realizada com sucesso!',
+                                    type: 'success',
+                                    showCloseButton: false,
+                                    showConfirmButton: false,
+                                    focusConfirm: false,
+                                    timer: 2000
+                                }).then(result => {
+                                    window.location.reload();
+                                })
+                            }).catch(error => {
+                                swal({
+                                    title: 'Não foi possível partilhar o bilhete, tente novamente!',
+                                    type: 'error',
+                                    showCloseButton: false,
+                                    showConfirmButton: false,
+                                    focusConfirm: false,
+                                    timer: 2000
+                                })
+                            })
+                        }
                     })
                 }).catch(error => {
                     swal({
@@ -331,7 +372,7 @@
                 })
             }
         })
-        
+
 
         //logout
         document.getElementById('logout').addEventListener('click', (event) => {
