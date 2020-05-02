@@ -41,6 +41,7 @@ async function pay() {
         } = await stripe.createSource(sourceData);
         handleSourceActiviation(source);
     } else {
+        console.log(1);
         document.querySelector("button").disabled = false;
         let elements = stripe.elements();
         let style = {
@@ -100,6 +101,7 @@ async function createPaymentIntent(payment_method) {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(orderData),
         });
         const data = await response.json();
