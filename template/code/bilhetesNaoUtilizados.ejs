@@ -298,14 +298,16 @@
                         txt += `<option value="${users[i].id}">${users[i].name}</option>`
                     }
                     swal({
-                        title: 'Escolha uma pessoa para enviar o bilhete!',
-                        html: `<select class="select-input" id="utilizador">${txt}</select>`,
+                        html: `<br> <h4> Escolha uma pessoa para enviar o bilhete!</h4> <br>
+                        <select class="select-input" id="utilizador">${txt}</select>`,
                         showCloseButton: false,
                         showCancelButton: true,
                         showConfirmButton: true,
+                        confirmButtonColor: '#27ae60',
+                        cancelButtonColor: '#d33',
                         focusConfirm: false,
-                        confirmButtonAriaLabel: 'Enviar',
-                        cancelButtonAriaLabel: 'Cancelar',
+                        confirmButtonText: 'Enviar',
+                        cancelButtonText: 'Cancelar',
                     }).then(result => {
                         if (result) {
                             let select = document.getElementById("utilizador");
