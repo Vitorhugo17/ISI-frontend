@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="/styles/normalize.css" />
     <link rel="stylesheet" href="/styles/global.css" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="/scripts/pagamento.js" defer></script>
+    <script src="/scripts/payment.js" defer></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
@@ -70,6 +70,9 @@
                 <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de Compras<i
+                            class="fa fa-circle"></i></a>
                 </li>
             </ul>
         </li>
@@ -129,6 +132,33 @@
                     </div>
 
                 </div>
+                <div class="decoration" style="margin-bottom: 30px;"></div>
+                <div class="container no-bottom">
+                    <div class="one-half-responsive">
+                        <h5 style="margin-bottom: 15px;">Escolha uma forma de pagamento</h5>
+
+                        <a href="#" id="cartao" class="checkbox radio-two"
+                            style="display: inline-block; background-position: 1px 6px; padding-left: 22px; padding-right: 2px;">
+
+                            <p class="half-bottom">Cartão de Crédito</p>
+                        </a>
+                        <div style="display: inline-block; top:-15px">
+                            <img src="/images/maestro.png" style="width: 42px; display: inline-block;"><img
+                                src="/images/mastercard.png" style="width: 42px; display: inline-block;"><img
+                                src="/images/visa.jpg" style="width: 44px; display: inline-block; top:-12px">
+                        </div>
+                        <br>
+                        <a href="#" id="referencia" class="checkbox radio-two"
+                            style="display: inline-block; background-position: 1px 6px; padding-left: 22px; padding-right: 8px;">
+
+                            <p class="half-bottom">Referência Multibanco</p>
+                        </a>
+                        <div style="display: inline-block; top:-15px">
+                            <img src="/images/multibanco.png" style="width: 30px; display: inline-block;">
+                        </div>
+                    </div>
+
+                </div>
                 <div class="decoration"></div>
                 <div class="container no-bottom">
                     <div class="one-half-responsive">
@@ -143,9 +173,7 @@
 
 
 
-        <div class="one-half-responsive" id="pagamento" style="display: none;">
-            <br>
-            <br>
+        <div class="one-half-responsive" id="pagamentoCartao" style="display: none;">
             <br>
             <form id="payment-form" class="sr-payment-form">
                 <div class="sr-combo-inputs-row">
@@ -164,11 +192,16 @@
             </div>
         </div>
 
+        <div class="one-half-responsive" id="pagamentoReferencia" style="display: none;">
+
+        </div>
     </div>
     <div class="menu-wrapper-background"></div>
-    <div id="loading" style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
+    <div id="loading"
+        style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
         <center>
-            <img src="/images/loading.gif" width="20%" height="20%" style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <img src="/images/loading.gif" width="20%" height="20%"
+                style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
     <script>
@@ -208,10 +241,144 @@
         }
         loadOption();
 
+
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
-            document.getElementById('compra').style.display = "none";
-            document.getElementById('pagamento').style.display = "block";
+            let txt;
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
+                    "tipoBilhete")
+                .selectedIndex].text;
+            let quantidade = document.getElementById("quantidade").value;
+            if (tipoBilhete != "" && quantidade != "") {
+                let res = tipoBilhete.split("-");
+                if (res[0].includes("único")) {
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            if (quantidade % 5 != 0) {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/5))} packs e ${quantidade%5} bilhetes únicos!`
+                            } else {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/5))} packs!`
+                            }
+                        }
+                    } else {
+                        if (quantidade >= 10) {
+                            if (quantidade % 10 != 0) {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/10))} packs e ${quantidade%10} bilhetes únicos!`
+                            } else {
+                                txt =
+                                    `Os seus ${quantidade} bilhetes únicos foram convertidos para ${parseInt(Math.floor(quantidade/10))} packs!`
+                            }
+                        }
+                    }
+                }
+            }
+            if (document.getElementById('referencia').className == "checkbox radio-two radio-two-checked") {
+                let res = tipoBilhete.split("-");
+                if (res[0].includes("único")) {
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "none";
+                                document.getElementById('pagamentoReferencia').style.display = "block";
+                            })
+                        } else {
+                            document.getElementById('compra').style.display = "none";
+                            document.getElementById('pagamentoCartao').style.display = "none";
+                            document.getElementById('pagamentoReferencia').style.display = "block";
+                        }
+                    } else {
+                        if (quantidade >= 10) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "none";
+                                document.getElementById('pagamentoReferencia').style.display = "block";
+                            })
+                        } else {
+                            document.getElementById('compra').style.display = "none";
+                            document.getElementById('pagamentoCartao').style.display = "none";
+                            document.getElementById('pagamentoReferencia').style.display = "block";
+                        }
+                    }
+                } else {
+                    document.getElementById('compra').style.display = "none";
+                    document.getElementById('pagamentoCartao').style.display = "none";
+                    document.getElementById('pagamentoReferencia').style.display = "block";
+                }
+            } else if (document.getElementById('cartao').className == "checkbox radio-two radio-two-checked") {
+                let res = tipoBilhete.split("-");
+                if (res[0].includes("único")) {
+                    if (res[1].includes("Barquense")) {
+                        if (quantidade >= 5) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "block";
+                                document.getElementById('pagamentoReferencia').style.display = "none";
+                            })
+                        } else {
+                            document.getElementById('compra').style.display = "none";
+                            document.getElementById('pagamentoCartao').style.display = "block";
+                            document.getElementById('pagamentoReferencia').style.display = "none";
+                        }
+                    } else {
+                        if (quantidade >= 10) {
+                            swal({
+                                title: txt,
+                                type: 'warning',
+                                showCloseButton: false,
+                                showConfirmButton: false,
+                                focusConfirm: false,
+                                timer: 3000
+                            }).then(result => {
+                                document.getElementById('compra').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display = "block";
+                                document.getElementById('pagamentoReferencia').style.display = "none";
+                            })
+                        } else {
+                            document.getElementById('compra').style.display = "none";
+                            document.getElementById('pagamentoCartao').style.display = "block";
+                            document.getElementById('pagamentoReferencia').style.display = "none";
+                        }
+                    }
+                } else {
+                    document.getElementById('compra').style.display = "none";
+                    document.getElementById('pagamentoCartao').style.display = "block";
+                    document.getElementById('pagamentoReferencia').style.display = "none";
+                }
+            } else {
+                swal({
+                    title: 'Selecione um método de pagamento!',
+                    type: 'warning',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            }
         })
 
         document.getElementById("tipoBilhete").addEventListener("change", (e) => {
@@ -224,7 +391,8 @@
 
 
         function verificarPreco() {
-            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById("tipoBilhete")
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
+                    "tipoBilhete")
                 .selectedIndex].text;
             let quantidade = document.getElementById("quantidade").value;
 
@@ -234,7 +402,8 @@
                 if (quantidade <= 50 && res[0].includes("único")) {
                     if (res[1].includes("Barquense")) {
                         if (quantidade >= 5) {
-                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            for (let i = 0; i < document.getElementById("tipoBilhete").options
+                                .length; i++) {
                                 let tipo = document.getElementById("tipoBilhete").options[i].text;
                                 if (tipo.includes("Barquense") && tipo.includes("Pack")) {
                                     let preco = tipo.split("-")[2].trim();
@@ -249,7 +418,8 @@
                         }
                     } else if (res[1].includes("Transdev")) {
                         if (quantidade >= 10) {
-                            for (let i = 0; i < document.getElementById("tipoBilhete").options.length; i++) {
+                            for (let i = 0; i < document.getElementById("tipoBilhete").options
+                                .length; i++) {
                                 let tipo = document.getElementById("tipoBilhete").options[i].text;
                                 if (tipo.includes("Transdev") && tipo.includes("Pack")) {
                                     let preco = tipo.split("-")[2].trim();
@@ -274,8 +444,9 @@
 
                     let total = 0;
                     for (let i = 0; i < quantidadeF.length; i++) {
-                        total += parseFloat((quantidadeF[i].quantidade * parseFloat(quantidadeF[i].preco.replace("€",
-                            ""))).toFixed(2));
+                        total += parseFloat((quantidadeF[i].quantidade * parseFloat(quantidadeF[i].preco
+                            .replace("€",
+                                ""))).toFixed(2));
                     }
                     total = total.toFixed(2);
                     if (Number.isInteger(total)) {
@@ -307,18 +478,36 @@
             }
         }
 
+        //selecionar 1 radio button
+        const radioButtons = document.getElementsByClassName("radio-two");
+        for (let i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].addEventListener("click", (event) => {
+                event.preventDefault();
+                if (radioButtons[i].className == "checkbox radio-two") {
+                    for (let j = 0; j < radioButtons.length; j++) {
+                        if (radioButtons[i].id != radioButtons[j].id) {
+                            radioButtons[j].className = "checkbox radio-two";
+                        }
+                    }
+                } else {
+                    radioButtons[i].className = "checkbox radio-two";
+                }
+            })
+        }
+
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
-            
+
             document.getElementById("menu").setAttribute("class", "menu-top");
-            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
-            document.getElementById("loading").style.display="block";
+            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText =
+                "display:none";
+            document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
                 if (response.status == 200) {
                     localStorage.removeItem('user_nome');
-                    document.getElementById("loading").style.display="none";
+                    document.getElementById("loading").style.display = "none";
                     swal({
                         title: 'Logout efetuado com sucesso!',
                         type: 'success',
@@ -333,7 +522,7 @@
                     throw new Error("Erro");
                 }
             }).catch(error => {
-                document.getElementById("loading").style.display="none";
+                document.getElementById("loading").style.display = "none";
                 swal({
                     title: 'Ocorreu um erro. Tente novamente!',
                     type: 'error',

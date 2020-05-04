@@ -1510,7 +1510,7 @@
             this.touchStartX = i.pageX;
             this.touchStartY = i.pageY;
             if (e.timeStamp - this.lastClickTime < this.tapDelay) {
-                e.preventDefault()
+                e.preventDefault();
             }
             return true
         };

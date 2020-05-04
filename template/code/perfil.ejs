@@ -64,6 +64,9 @@
                             class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
                 </li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de Compras<i
+                            class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li class="active-menu"><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -85,7 +88,6 @@
                     <h3>Perfil</h3>
                     <div class="decoration"></div>
                     <div class="one-half-responsive" id="profile">
-
                     </div>
                 </div>
                 <div class="decoration"></div>
@@ -93,64 +95,70 @@
         </div>
 
         <div class="coverpage-image coverpage-style-3">
-            <div class="content">
-                <div class="container no-bottom">
-                    <br>
-                    <h3>Editar Perfil</h3>
+            <div class="content" id="divEditar">
+                <form id="formAlterarPerfil">
+                    <div class="container no-bottom">
+                        <br>
+                        <h3>Editar Perfil</h3>
+                        <div class="decoration"></div>
+                        <div class="one-half-responsive">
+                            <input type="text" class="text-input-one" id="numeroMec" name="numeroMec"
+                                placeholder="Número Mecanográfico" required></input>
+                            <input type="text" class="text-input-one" id="firstName" name="firstName"
+                                placeholder="Primeiro nome" required></input>
+                            <input type="text" class="text-input-one" id="lastName" name="lastName"
+                                placeholder="Último nome" required></input>
+                            <input type="date" class="text-input-one" id="dataNasc" name="dataNasc" required></input>
+                            <input type="text" class="text-input-one" id="contacto" name="contacto"
+                                placeholder="Contacto" maxlength="9" size="9" required></input>
+                        </div>
+                    </div>
                     <div class="decoration"></div>
-                    <div class="one-half-responsive">
-                        <input type="text" class="text-input-one" id="numeroMec" name="numeroMec"
-                            placeholder="Número Mecanográfico" value="A85972"></input>
-                        <input type="text" class="text-input-one" id="firstName" name="firstName"
-                            placeholder="Primeiro nome" value="Pedro"></input>
-                        <input type="text" class="text-input-one" id="lastName" name="lastName"
-                            placeholder="Último nome" value="Oliveira"></input>
-                        <input type="date" class="text-input-one" id="dataNasc" name="dataNasc"></input>
-                        <input type="text" class="text-input-one" id="contacto" name="contacto" placeholder="Contacto"
-                            value="968745692"></input>
+                    <div class="container no-bottom">
+                        <div class="one-half-responsive">
+                            <button type="submit" id="alterarPerfil"
+                                class="button center-button button-blue full-bottom detected-button"
+                                style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
+                                Edição</button>
+                        </div>
                     </div>
-                </div>
-                <div class="decoration"></div>
-                <div class="container no-bottom">
-                    <div class="one-half-responsive">
-                        <button type="submit" id="alterarPerfil"
-                            class="button center-button button-blue full-bottom detected-button"
-                            style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
-                            Edição</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
         <div class="coverpage-image coverpage-style-3">
             <div class="content">
-                <div class="container no-bottom">
-                    <br>
-                    <h3>Editar Palavra-passe</h3>
+                <form id="formEditarPass">
+                    <div class="container no-bottom">
+                        <br>
+                        <h3>Editar Palavra-passe</h3>
+                        <div class="decoration"></div>
+                        <div class="one-half-responsive">
+                            <input type="password" class="text-input-one" id="pass" name="pass"
+                                placeholder="Nova palavra-passe" required></input>
+                            <input type="password" class="text-input-one" id="confPass" name="confPass"
+                                placeholder="Confirmar palavra-passe" required></input>
+                        </div>
+                    </div>
                     <div class="decoration"></div>
-                    <div class="one-half-responsive">
-                        <input type="password" class="text-input-one" id="pass" name="pass"
-                            placeholder="Nova palavra-passe" value="123456789"></input>
-                        <input type="password" class="text-input-one" id="confPass" name="confPass"
-                            placeholder="Confirmar palavra-passe" value="123456789"></input>
+                    <div class="container no-bottom">
+                        <div class="one-half-responsive">
+                            <button type="submit" id="alterarPass"
+                                class="button center-button button-blue full-bottom detected-button"
+                                style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
+                                Edição</button>
+                        </div>
                     </div>
-                </div>
-                <div class="decoration"></div>
-                <div class="container no-bottom">
-                    <div class="one-half-responsive">
-                        <button type="submit" id="alterarPass"
-                            class="button center-button button-blue full-bottom detected-button"
-                            style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px;">Guardar
-                            Edição</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
     <div class="menu-wrapper-background"></div>
-    <div id="loading" style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
+    <div id="loading"
+        style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
         <center>
-            <img src="/images/loading.gif" width="20%" height="20%" style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <img src="/images/loading.gif" width="20%" height="20%"
+                style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
     <script>
@@ -193,14 +201,34 @@
             const nif = result.user.nif;
 
             txt = `<p>
-                            <strong>Número Mecanográfico: </strong>${(numero_mecanografico ? numero_mecanografico: "-----------------------------------------------")}<br>
+                            <strong>Número Mecanográfico: </strong>${(numero_mecanografico ? numero_mecanografico: "--------------------------------")}<br>
                             <strong>Nome: </strong>${nome} ${apelido}<br>
                             <strong>Email: </strong>${email}<br>
-                            <strong>Data de Nascimento: </strong>${(data_nascimento ? data_nascimento: "----------------------------------")} <br>
-                            <strong>Contacto: </strong>${(numero_telefone? numero_telefone:"-----------------------------------------------")} <br>
+                            <strong>Data de Nascimento: </strong>${(data_nascimento ? data_nascimento: "-------------------------------------")} <br>
+                            <strong>Contacto: </strong>${(numero_telefone? numero_telefone: "-------------------------------------------------------")} <br>
                             <strong>NIF: </strong>${nif}
                         </p> `;
             document.getElementById("profile").innerHTML = txt;
+
+            document.getElementById("numeroMec").value = numero_mecanografico;
+            document.getElementById("firstName").value = nome;
+            document.getElementById("lastName").value = apelido;
+            const x = data_nascimento.split("/");
+            const date = new Date(x[2], x[1] - 1, x[0]);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            if (day < 10 && month > 9) {
+                document.querySelector('input[type="date"]').value = `${year}-${month}-0${day}`;
+            } else if (day > 10 && month < 9) {
+                document.querySelector('input[type="date"]').value = `${year}-0${month}-${day}`;
+            } else if (day < 10 && month < 10) {
+                document.querySelector('input[type="date"]').value = `${year}-0${month}-0${day}`;
+            } else {
+                document.querySelector('input[type="date"]').value = `${year}-${month}-${day}`;
+            }
+
+            document.getElementById("contacto").value = numero_telefone;
         }).catch(error => {
             swal({
                 title: 'Não foi possível mostrar os dados.',
@@ -212,19 +240,202 @@
             })
         })
 
+
+
+        //alterar dados
+        const btnGuardarDados = document.getElementById("formAlterarPerfil");
+
+        btnGuardarDados.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            let data = {}
+
+            data.student_number = document.getElementById("numeroMec").value;
+            data.name = document.getElementById("firstName").value;
+            data.lastname = document.getElementById("lastName").value;
+            data.birth_date = new Date(document.querySelector('input[type="date"]').value).toJSON()
+            data.contact = document.getElementById("contacto").value;
+
+
+            const response = await fetch(`${urlBase}/profile/edit`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                method: 'PUT',
+                body: JSON.stringify(data)
+            });
+            if (response.status == 200) {
+                swal({
+                    title: 'Alteração efetuada com sucesso!',
+                    type: 'success',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                }).then(result => {
+                    window.location.reload();
+                });
+            } else {
+                swal({
+                    title: 'Preencha corretamente os campos.',
+                    type: 'warning',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 3000
+                })
+            }
+        })
+
+
+        //alterar palavra passe
+        const pass = document.getElementById("pass");
+        const confPass = document.getElementById("confPass");
+
+        pass.addEventListener("change", (event) => {
+            if (pass.value != confPass.value && confPass.value != "") {
+                confPass.setCustomValidity("As palavras-passe não correspondem!");
+            } else {
+                if (pass.value.length >= 9) {
+                    let validator = {
+                        maiuscula: 0,
+                        minuscula: 0,
+                        numero: 0,
+                        especial: 0
+                    }
+
+                    for (let i = 0; i < pass.value.length; i++) {
+                        if ("0123456789".includes(pass.value.charAt(i))) {
+                            validator.numero = 1;
+                        } else if ("[`!@#$%^&*()_+-=[]{};':\"\\|,.<>/?~]".includes(pass.value.charAt(i))) {
+                            validator.especial = 1;
+                        } else if (pass.value.charAt(i) === pass.value.charAt(i).toLowerCase()) {
+                            validator.minuscula = 1;
+                        } else if (pass.value.charAt(i) === pass.value.charAt(i).toUpperCase()) {
+                            validator.maiuscula = 1;
+                        }
+                    }
+
+                    if (validator.maiuscula + validator.minuscula + validator.especial + validator.numero < 3) {
+                        swal({
+                            html: '<strong><h3>A sua palavra-passe deve conter pelo menos três dos seguintes caracteres: um caracter especial, uma letra maiúscula, uma letra minúscula ou um número!</h3></strong>',
+                            type: 'error',
+                            showCloseButton: true,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 2000
+                        })
+                    } else {
+                        pass.setCustomValidity("");
+                    }
+                } else {
+                    swal({
+                        html: '<strong><h3>A sua palavra-passe deve conter no mínimo 9 caracteres.</h3></strong>',
+                        type: 'error',
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 9000
+                    })
+                }
+            }
+        })
+
+        confPass.addEventListener("change", (event) => {
+            if (pass.value != confPass.value) {
+                confPass.setCustomValidity("As palavras-passe não correspondem!");
+            } else {
+                confPass.setCustomValidity("");
+                document.getElementById("alterarPass").disabled = false;
+            }
+        })
+
+        const formEditarPass = document.getElementById("formEditarPass");
+
+        formEditarPass.addEventListener('submit', (event) => {
+            document.getElementById("alterarPass").disabled = true;
+            event.preventDefault();
+
+            let data = {
+                password: pass.value,
+                type: "update"
+            }
+
+            return fetch(`${urlBase}/password/update`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                method: 'PUT',
+                body: JSON.stringify(data)
+            }).then(response => {
+                return response.json();
+            }).then(result => {
+                if (result.message == "Password updated with success") {
+                    document.getElementById("menu").setAttribute("class", "menu-top");
+                    document.getElementsByClassName("menu-wrapper-background")[0].style.cssText =
+                        "display:none";
+                    document.getElementById("loading").style.display = "block";
+                    return fetch(`${urlBase}/logout`, {
+                        credentials: 'include'
+                    }).then(response => {
+                        if (response.status == 200) {
+                            localStorage.removeItem('user_nome');
+                            document.getElementById("loading").style.display = "none";
+                            swal({
+                                title: 'Palavra-passe alterada com sucesso!',
+                                type: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                showLoaderOnConfirm: false,
+                                timer: 2000
+                            }).then(result => {
+                                window.location.replace("/")
+                            });
+                        } else {
+                            throw new Error("Erro");
+                        }
+                    }).catch(error => {
+                        document.getElementById("loading").style.display = "none";
+                        swal({
+                            title: 'Ocorreu um erro. Tente novamente!',
+                            type: 'error',
+                            showCloseButton: false,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 2000
+                        })
+                    })
+                } else {
+                    throw new Error("Ocorreu um erro! Tente novamente mais tarde. Obrigado!");
+                }
+            }).catch(error => {
+                document.getElementById("alterarPass").disabled = false;
+                swal({
+                    html: '<strong><h3>Ocorreu um erro! Tente novamente mais tarde. Obrigado!</h3></strong>',
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    type: 'error',
+                    timer: 2000
+                })
+            });
+        })
+
+
+
         //logout
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
-            
+
             document.getElementById("menu").setAttribute("class", "menu-top");
             document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
-            document.getElementById("loading").style.display="block";
+            document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
                 if (response.status == 200) {
                     localStorage.removeItem('user_nome');
-                    document.getElementById("loading").style.display="none";
+                    document.getElementById("loading").style.display = "none";
                     swal({
                         title: 'Logout efetuado com sucesso!',
                         type: 'success',
@@ -239,7 +450,7 @@
                     throw new Error("Erro");
                 }
             }).catch(error => {
-                document.getElementById("loading").style.display="none";
+                document.getElementById("loading").style.display = "none";
                 swal({
                     title: 'Ocorreu um erro. Tente novamente!',
                     type: 'error',

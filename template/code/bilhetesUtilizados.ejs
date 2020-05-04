@@ -68,6 +68,9 @@
                             class="fa fa-circle"></i></a></li>
                 <li class="active-menu"><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i
                             class="fa fa-circle"></i></a></li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de Compras<i
+                            class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -75,7 +78,7 @@
     </ul>
 
     <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">Pedro Oliveira
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
         </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
@@ -85,8 +88,8 @@
         <div class="container no-bottom">
             <h3>Bilhetes Utilizados</h3>
             <div class="decoration"></div>
-            <table cellspacing='0' class="table">
-                <tr style="line-height: 10px;">
+            <table cellspacing='0' class="table" id="bilhetes_utilizados">
+                <!--    <tr style="line-height: 10px;">
                     <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
                     <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
                     <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
@@ -105,7 +108,7 @@
                     <td class="table-sub-title">Único</td>
                     <td>9</td>
                     <td>Barquense</td>
-                </tr>
+                </tr>-->
             </table>
         </div>
         <div class="decoration"></div>
@@ -119,18 +122,109 @@
         </center>
     </div>
     <script>
+        const urlBase = "<%=urlBase%>";
+
+        //verificar se o utilizador está autenticado
+
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated) {
+                throw new Error("Não autenticado");
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
+        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
+
+
+
+
+        //tabela bilhetes utilizados
+        let txt = `<tr style="line-height: 10px;">
+                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
+                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Companhia</th>
+                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Data Utilização</th>
+                </tr>
+                `;
+        fetch(`${urlBase}/tickets/used`, {
+            credentials: "include"
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error('Não foi possível recolher dados.');
+            }
+        }).then(result => {
+            const bilhetes = result.usedTickets;
+            bilhetes.sort((a, b) => {
+                return new Date(b.data_utilizacao).getTime() - new Date(a.data_utilizacao).getTime()
+            })
+
+            for (let i = 0; i < bilhetes.length; i++) {
+                let date = new Date(bilhetes[i].data_utilizacao);
+                let newDate;
+                let hour;
+                if (date.getMonth() + 1 < 10) {
+                    if (date.getDate() < 10) {
+                        newDate = `0${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`;
+                    } else {
+                        newDate = `${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`;
+                    }
+                } else {
+                    if (date.getDate() < 10) {
+                        newDate = `0${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+                    } else {
+                        newDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+                    }
+                }
+
+                if (date.getHours() < 10) {
+                    if (date.getMinutes() < 10) {
+                        hour = `0${date.getHours()}:0${date.getMinutes()}`;
+                    } else {
+                        hour = `0${date.getHours()}:${date.getMinutes()}`;
+                    }
+                } else {
+                    if (date.getMinutes() < 10) {
+                        hour = `${date.getHours()}:0${date.getMinutes()}`;
+                    } else {
+                        hour = `${date.getHours()}:${date.getMinutes()}`;
+                    }
+                }
+                txt += `
+                <tr style="line-height: 10px;">
+                    <td class="table-sub-title">${(bilhetes[i].tipo_bilhete=="normal")?"Único":(bilhetes[i].tipo_bilhete=="ida")?"Ida e Volta":"Ida e Volta"}</td>
+                    <td class="companhia">${bilhetes[i].empresa}</td>
+                    <td class="data">${newDate} ${hour}</td>
+                    
+                </tr>`
+            }
+
+
+            document.getElementById('bilhetes_utilizados').innerHTML = txt;
+        }).catch(error => {
+            document.getElementById('bilhetes_utilizados').innerHTML = txt;
+        })
+
+
+
+        //logout		
         document.getElementById('logout').addEventListener('click', (event) => {
             event.preventDefault();
 
-            document.getElementById("menu").setAttribute("class", "menu-top");
-            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
-            document.getElementById("loading").style.display = "block";
             return fetch(`${urlBase}/logout`, {
                 credentials: 'include'
             }).then(response => {
                 if (response.status == 200) {
                     localStorage.removeItem('user_nome');
-                    document.getElementById("loading").style.display = "none";
                     swal({
                         title: 'Logout efetuado com sucesso!',
                         type: 'success',
@@ -145,7 +239,6 @@
                     throw new Error("Erro");
                 }
             }).catch(error => {
-                document.getElementById("loading").style.display = "none";
                 swal({
                     title: 'Ocorreu um erro. Tente novamente!',
                     type: 'error',

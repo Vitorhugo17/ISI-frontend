@@ -64,6 +64,9 @@
                             class="fa fa-circle"></i></a></li>
                 <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
                 </li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de Compras<i
+                            class="fa fa-circle"></i></a>
+                </li>
             </ul>
         </li>
         <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
@@ -124,7 +127,6 @@
                 throw new Error("Não foi possivel obter o QRCode");
             }
         }).then(result => {
-            console.log(result.data);
             document.getElementById("qrcode").src = result.data;
             document.getElementById("qrcode").style.cssText = "display: block";
         }).catch(error => {

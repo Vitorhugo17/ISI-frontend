@@ -91,7 +91,6 @@
                 throw new Error("Não autenticado");
             }
         }).then(result => {
-            console.log(result);
             if (!result.isAuthenticated || !result.isEmpresa) {
                 throw new Error("Não autenticado");
             }

@@ -272,11 +272,11 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$('.deploy-toggle-2').click(function() {
+/*	$('.deploy-toggle-2').click(function() {
 		$(this).parent().find('.toggle-content').slideToggle(200);
 		$(this).toggleClass('toggle-2-active');
 		return false;
-	});
+	});*/
 	
 	$('.deploy-toggle-3').click(function() {
 		$(this).parent().find('.toggle-content').slideToggle(200);
