@@ -93,12 +93,12 @@
         }).then(result => {
             if (!result.isAuthenticated || !result.isEmpresa) {
                 throw new Error("Não autenticado");
+            } else {
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome;
             }
         }).catch(error => {
             window.location.replace("/");
         })
-
-        document.getElementById("companhia").innerHTML = localStorage.getItem("user_nome");
         
         import QrScanner from "./scripts/qr-scanner.min.js";
         QrScanner.WORKER_PATH = './scripts/qr-scanner-worker.min.js';

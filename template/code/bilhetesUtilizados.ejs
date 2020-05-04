@@ -137,6 +137,8 @@
         }).then(result => {
             if (!result.isAuthenticated || result.isEmpresa) {
                 throw new Error("Não autenticado");
+            } else {
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user.apelido;
             }
         }).catch(error => {
             window.location.replace("/");
@@ -170,6 +172,8 @@
 
             for (let i = 0; i < bilhetes.length; i++) {
                 let date = new Date(bilhetes[i].data_utilizacao);
+                console.log(bilhetes[i].data_utilizacao);
+                console.log(date);
                 let newDate;
                 let hour;
                 if (date.getMonth() + 1 < 10) {
