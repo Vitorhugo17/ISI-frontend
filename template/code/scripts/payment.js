@@ -41,7 +41,6 @@ async function pay() {
         } = await stripe.createSource(sourceData);
         handleSourceActiviation(source);
     } else {
-        console.log(1);
         document.querySelector("button").disabled = false;
         let elements = stripe.elements();
         let style = {
@@ -163,7 +162,6 @@ async function pollPaymentIntentStatus(paymentIntent, start) {
         credentials: 'include'
     })
     const response = await rawResponse.json();
-    console.log(response);
     if (!endStates.includes(response.paymentIntent.status) && new Date().getTime() < start + timeout) {
         // Not done yet. Let's wait and check again.
         setTimeout(
@@ -171,7 +169,6 @@ async function pollPaymentIntentStatus(paymentIntent, start) {
             interval
         );
     } else {
-        console.log(response);
         handlePayment(response);
         if (!endStates.includes(response.paymentIntent.status)) {
             // Status has not changed yet. Let's time out.
@@ -187,7 +184,6 @@ function handlePayment(paymentResponse) {
     } = paymentResponse;
 
     if (error) {
-        console.log(error);
         swal({
             title: 'Ocorreu um erro! Tente novamente mais tarde',
             type: 'error',
