@@ -137,6 +137,8 @@
         }).then(result => {
             if (!result.isAuthenticated || result.isEmpresa) {
                 throw new Error("Não autenticado");
+            } else {
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user.apelido;
             }
         }).catch(error => {
             window.location.replace("/");

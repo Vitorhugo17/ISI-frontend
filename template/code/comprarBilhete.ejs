@@ -216,14 +216,14 @@
                 throw new Error("Não autenticado");
             }
         }).then(result => {
-            if (!result.isAuthenticated) {
+            if (!result.isAuthenticated || result.isEmpresa) {
                 throw new Error("Não autenticado");
+            } else {
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user.apelido;
             }
         }).catch(error => {
             window.location.replace("/");
         })
-
-        document.getElementById("nomeUtilizador").innerHTML = localStorage.getItem("user_nome");
 
         const loadOption = async () => {
             const response = await fetch(`${urlBase}/products`, {
