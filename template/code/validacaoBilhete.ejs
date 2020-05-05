@@ -94,8 +94,7 @@
             if (!result.isAuthenticated || !result.isEmpresa) {
                 throw new Error("Não autenticado");
             } else {
-                console.log(result);
-                document.getElementById("nomeUtilizador").innerHTML = result.user.nome;
+                document.getElementById("companhia").innerHTML = result.user.nome;
             }
         }).catch(error => {
             window.location.replace("/");
