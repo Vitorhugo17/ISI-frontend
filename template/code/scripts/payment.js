@@ -140,7 +140,7 @@ function handleSourceActiviation(source) {
             </div>
             <br>
             <center>
-                <img src="/images/warning.gif" style="width: 40px; margin-bottom: 6px;">
+                <img src="/images/loading1.gif" style="width: 40px; margin-bottom: 6px;">
                 <p style=" text-align:center; line-height: 20px; font-size: 14px;">Atenção! Esta referência
                     tem uma validade de <strong>6 horas</strong>!</p>
             </center>`;
