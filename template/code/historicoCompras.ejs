@@ -2,10 +2,11 @@
 
 <head>
     <title>Histórico de Compras</title>
+    <%- include('header.ejs')  %>
     <script type="text/javascript" src="scripts/moment.min.js"></script>
     <script type="text/javascript" src="scripts/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/daterangepicker.css" />
-
+  
     <script>
         (function ($) {
             $(document).ready(function () {
@@ -48,7 +49,6 @@
             })
         })(jQuery);
     </script>
-    <%- include('header.ejs')  %>
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                 <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
                 <li><a href="/ticketsUnused"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
-                 <li><a href="/ticketsUsed"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                <li><a href="/ticketsUsed"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
                 </li>
                 <li class="active-menu"><a href="/purchaseHistoric"><i class="fa fa-angle-right"></i>Histórico de
                         Compras<i class="fa fa-circle"></i></a>
@@ -153,8 +153,8 @@
                 style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
-    <!--  <script>
-          const urlBase = "<%=urlBase%>";
+    <script>
+        const urlBase = "<%=urlBase%>";
         //verificar se o utilizador está autenticado
         fetch(`${urlBase}/authenticated`, {
             credentials: 'include'
@@ -168,11 +168,12 @@
             if (!result.isAuthenticated || result.isEmpresa) {
                 throw new Error("Não autenticado");
             } else {
-                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user.apelido;
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user
+                    .apelido;
             }
         }).catch(error => {
             window.location.replace("/");
-        }) 
+        })
 
         document.getElementById('buttonDate').addEventListener('click', (event) => {
             console.log(document.getElementById('startDate').value);
@@ -216,5 +217,5 @@
                 })
             })
         })
-    </script>-->
+    </script>
 </body>
