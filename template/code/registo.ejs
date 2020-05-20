@@ -41,7 +41,14 @@
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="module">
+        import 'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js';
 
+        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+        const el = document.createElement('pwa-update');
+        document.body.appendChild(el);
+    </script>
 </head>
 
 <body>

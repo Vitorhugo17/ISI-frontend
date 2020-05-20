@@ -86,7 +86,14 @@
             })
         })(jQuery);
     </script>
+    <script type="module">
+        import 'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js';
 
+    import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+    const el = document.createElement('pwa-update');
+    document.body.appendChild(el);
+    </script>
 </head>
 
 <body>
@@ -135,8 +142,8 @@
         </div>
         <div class="one-half-responsive">
             <input type="text" class="text-date" name="filtro"></input>
-            <input type="text" id="startDate" style="display: none"/>
-            <input type="text" id="endDate" style="display: none"/>
+            <input type="text" id="startDate" style="display: none" />
+            <input type="text" id="endDate" style="display: none" />
             <button type="button" id="buttonDate" style="display: none;"></button>
         </div>
         <div class="one-half-responsive">
@@ -152,7 +159,7 @@
                                 22/04/2020</p>
                         </div>
                     </a>
-                    
+
                 </div>
                 <div class="toggle-2">
                     <a href="#" class="deploy-toggle-2"
@@ -165,7 +172,7 @@
                                 22/04/2020</p>
                         </div>
                     </a>
-                    
+
                 </div>
                 <div class="toggle-2">
                     <a href="#" class="deploy-toggle-2"
@@ -178,8 +185,8 @@
                                 22/04/2020</p>
                         </div>
                     </a>
-                    
-                </div>                             
+
+                </div>
             </div>
         </div>
     </div>
@@ -191,7 +198,7 @@
                 style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
-  <!--  <script>
+    <!--  <script>
           const urlBase = "<%=urlBase%>";
         //verificar se o utilizador está autenticado
         fetch(`${urlBase}/authenticated`, {

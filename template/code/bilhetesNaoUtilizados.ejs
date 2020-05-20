@@ -42,7 +42,14 @@
     <link rel="stylesheet" href="/styles/global.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
+    <script type="module">
+        import 'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js';
 
+        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+        const el = document.createElement('pwa-update');
+        document.body.appendChild(el);
+    </script>
 </head>
 
 <body>

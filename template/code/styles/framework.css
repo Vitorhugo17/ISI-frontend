@@ -4301,7 +4301,7 @@ table tr:hover td {
 /*/////////////*/
 
 .error-page-wrapper {
-	background-image: url(../images/pictures/3.jpg);
+	background-image: url(../images/pictures/bus.jpg);
 	background-position: center center;
 	background-size: cover;
 	position: absolute;
@@ -4311,17 +4311,18 @@ table tr:hover td {
 }
 
 .error-page-wrapper .overlay {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.4);
 }
+
 
 .error-page {
 	position: absolute;
 	z-index: 999999;
-	height: 280px;
+	height: 189px;
 	width: 300px;
 	left: 50%;
 	margin-left: -150px;
-	top: 50%;
+	top: 60%;
 	margin-top: -170px;
 }
 
@@ -4347,14 +4348,13 @@ table tr:hover td {
 }
 
 .error-page a {
-	width: 120px;
+	width: 135px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 	font-size: 13px;
 	color: #FFFFFF;
 	padding: 13px;
-	padding-left: 38px;
 	border: solid 1px rgba(255, 255, 255, 0.5);
 	border-radius: 5px;
 	font-weight: 500;
@@ -4368,8 +4368,9 @@ table tr:hover td {
 }
 
 .error-page a:hover {
-	background-color: rgba(255, 255, 255, 0.1);
-	color: #FFFFFF;
+	background-color: rgba(255, 255, 255, 0.6);
+	color: black;
+	font-weight: bold;
 }
 
 
