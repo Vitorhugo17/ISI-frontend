@@ -1,0 +1,31 @@
+{
+    "name": "ISICampus",
+    "display": "standalone",
+    "start_url": "./",
+    "short_name": "ISICampus",
+    "theme_color": "#2B589F",
+    "orientation": "portrait",
+    "background_color": "#2B589F",
+    "icons": [
+        {
+            "src": "/round/ic_launcher_round-48x48.png",
+            "sizes": "48x48"
+          },
+          {
+            "src": "/round/ic_launcher_round-72x72.png",
+            "sizes": "72x72"
+          },
+          {
+            "src": "/round/ic_launcher_round-96x96.png",
+            "sizes": "96x96"
+          },
+          {
+            "src": "/round/ic_launcher_round-144x144.png",
+            "sizes": "144x144"
+          },
+          {
+            "src": "/round/ic_launcher_round-192x192.png",
+            "sizes": "192x192"
+          }
+    ]
+}
