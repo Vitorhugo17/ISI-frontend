@@ -1,6 +1,10 @@
 
-<%- include('header.ejs')  %>
-    
+<!DOCTYPE HTML>
+
+<head>
+    <title>Login</title>
+    <%- include('header.ejs')  %>
+</head>
 <body>
 
     <div id="preloader">
@@ -53,7 +57,7 @@
                 if (result.isEmpresa) {
                     window.location.replace("/qrcodeReader");
                 } else {
-                    window.location.replace("/tickets/unused");
+                    window.location.replace("/ticketsUnused");
                 }
             }
         }).catch(error => {})
@@ -92,7 +96,7 @@
                     window.location.replace('/qrcodeReader');
                 } else {
                     localStorage.setItem("user_nome", result.nome + " " + result.apelido);
-                    window.location.replace('/tickets/unused')
+                    window.location.replace('/ticketsUnused')
                 }
             }).catch(error => {
                 document.getElementById("login").disabled = false;

@@ -59,7 +59,7 @@ app.get("/purchase", (request, response) => {
     });
 })
 
-app.get("/purchase/historic", (request, response) => {
+app.get("/purchaseHistoric", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}historicoCompras`, {
         urlBase: urlBase
@@ -73,14 +73,14 @@ app.get("/profile", (request, response) => {
     });
 })
 
-app.get("/tickets/unused", (request, response) => {
+app.get("/ticketsUnused", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesNaoUtilizados`, {
         urlBase: urlBase
     });
 })
 
-app.get("/qrcodes/:id", (request, response) => {
+app.get("/qrcodes_:id", (request, response) => {
     const qrcode_id = request.sanitize("id").escape();
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}qrcode`, {
@@ -89,7 +89,7 @@ app.get("/qrcodes/:id", (request, response) => {
     });
 })
 
-app.get("/tickets/used", (request, response) => {
+app.get("/ticketsUsed", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesUtilizados`, {
         urlBase: urlBase
