@@ -62,7 +62,7 @@
         }).then(result => {
             if (result.isAuthenticated) {
                 if (result.isEmpresa) {
-                    window.location.replace("/qrcodeReader");
+                    window.location.replace("/qrcode/reader");
                 } else {
                     window.location.replace("/tickets/unused");
                 }
@@ -100,7 +100,7 @@
             }).then(result => {
                 if (result.isEmpresa) {
                     localStorage.setItem("user_nome", result.nome);
-                    window.location.replace('/qrcodeReader');
+                    window.location.replace('/qrcode/reader');
                 } else {
                     localStorage.setItem("user_nome", result.nome + " " + result.apelido);
                     window.location.replace('/tickets/unused')
