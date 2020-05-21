@@ -1,5 +1,3 @@
-
-
 // This is the "Offline page" service worker
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
@@ -8,10 +6,16 @@ const CACHE = "pwabuilder-page";
 
 // TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
 const offlineFallbackPage = "offlinepage.html";
-const {registerRoute} = workbox.routing;
-const {CacheFirst} = workbox.strategies;
+const {
+  registerRoute
+} = workbox.routing;
+const {
+  CacheFirst
+} = workbox.strategies;
 
-const {CacheableResponse} = workbox.cacheableResponse;
+const {
+  CacheableResponse
+} = workbox.cacheableResponse;
 
 
 
@@ -26,7 +30,10 @@ self.addEventListener("message", (event) => {
 self.addEventListener('install', async (event) => {
   event.waitUntil(
     caches.open(CACHE)
-      .then((cache) => cache.add(offlineFallbackPage))
+    .then((cache) => {
+      cache.add(offlineFallbackPage);
+      cache.add("/images/warning.png");
+    })
   );
 });
 
@@ -35,12 +42,14 @@ if (workbox.navigationPreload.isSupported()) {
 }
 
 registerRoute(
-    /\.(?:png|jpg|jpeg|svg|gif)$/,
-    new CacheFirst({
-        plugins: [
-            new CacheableResponse({statuses: [0, 200]})
-        ],
-    })
+  /\.(?:png|jpg|jpeg|svg|gif|css)$/,
+  new CacheFirst({
+    plugins: [
+      new CacheableResponse({
+        statuses: [0, 200]
+      })
+    ],
+  })
 );
 self.addEventListener('fetch', (event) => {
   if (event.request.mode === 'navigate') {
@@ -57,10 +66,9 @@ self.addEventListener('fetch', (event) => {
       } catch (error) {
 
         const cache = await caches.open(CACHE);
-        const cachedResp = await cache.match(offlineFallbackPage);
+        let cachedResp = await (cache.match(offlineFallbackPage) || cache.match("/images/warning.png"));
         return cachedResp;
       }
     })());
   }
 });
-

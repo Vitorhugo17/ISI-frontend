@@ -73,7 +73,7 @@ app.get("/profile", (request, response) => {
     });
 })
 
-app.get("/ticketsUnused", (request, response) => {
+app.get("/tickets/unused", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}bilhetesNaoUtilizados`, {
         urlBase: urlBase
