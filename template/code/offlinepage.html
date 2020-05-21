@@ -2,22 +2,25 @@
 
 <head>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <title>Offline Page</title>
-
-
-    <link href="styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 
-    <div class="error-page-wrapper" style="background-position: 100% 100%; opacity: 0.8;">
+    <div class="error-page-wrapper">
         <div class="error-page">
             <center>
                 <img src="./images/warning.png" style="width: 60px; margin-bottom: 10px;">
             </center>
             <h4>Não existe ligação à Internet!</h4>
             <br>
-            <a href="#" class="error-button" id="refresh">Tentar novamente</a>
+            <a href="#" id="refresh">Tentar novamente</a>
         </div>
         <div class="overlay"></div>
     </div>
