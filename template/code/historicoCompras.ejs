@@ -3,9 +3,9 @@
 <head>
     <title>Histórico de Compras</title>
     <%- include('header.ejs')  %>
-    <script type="text/javascript" src="scripts/moment.min.js"></script>
-    <script type="text/javascript" src="scripts/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/daterangepicker.css" />
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script type="text/javascript" src="/scripts/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles/daterangepicker.css" />
   
     <script>
         (function ($) {
@@ -70,11 +70,11 @@
                     class="fa fa-plus active-plus"></i></a>
             <ul class="submenu show-submenu">
                 <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
-                <li><a href="/ticketsUnused"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
                             class="fa fa-circle"></i></a></li>
-                <li><a href="/ticketsUsed"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
                 </li>
-                <li class="active-menu"><a href="/purchaseHistoric"><i class="fa fa-angle-right"></i>Histórico de
+                <li class="active-menu"><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de
                         Compras<i class="fa fa-circle"></i></a>
                 </li>
             </ul>

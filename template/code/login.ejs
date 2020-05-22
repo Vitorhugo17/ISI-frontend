@@ -3,6 +3,14 @@
 <head>
     <title>Login</title>
     <%- include('header.ejs')  %>
+    <script type="module">
+        import 'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js';
+
+        import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+        const el = document.createElement('pwa-update');
+        document.body.appendChild(el);
+    </script>
 </head>
 <body>
 
@@ -54,9 +62,9 @@
         }).then(result => {
             if (result.isAuthenticated) {
                 if (result.isEmpresa) {
-                    window.location.replace("/qrcodeReader");
+                    window.location.replace("/qrcode/reader");
                 } else {
-                    window.location.replace("/ticketsUnused");
+                    window.location.replace("/tickets/unused");
                 }
             }
         }).catch(error => {})
@@ -92,10 +100,10 @@
             }).then(result => {
                 if (result.isEmpresa) {
                     localStorage.setItem("user_nome", result.nome);
-                    window.location.replace('/qrcodeReader');
+                    window.location.replace('/qrcode/reader');
                 } else {
                     localStorage.setItem("user_nome", result.nome + " " + result.apelido);
-                    window.location.replace('/ticketsUnused')
+                    window.location.replace('/tickets/unused')
                 }
             }).catch(error => {
                 document.getElementById("login").disabled = false;
