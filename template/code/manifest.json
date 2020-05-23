@@ -1,8 +1,8 @@
 {
   "name": "ISICampus",
   "short_name": "ISICampus",
-  "theme_color": "#bab6b6",
-  "background_color": "#bab6b6",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
   "display": "fullscreen",
   "orientation": "portrait",
   "Scope": "/",
