@@ -3,7 +3,7 @@
   "short_name": "ISICampus",
   "theme_color": "#FFFFFF",
   "background_color": "#FFFFFF",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",
