@@ -62,7 +62,7 @@
             window.location.replace("/");
         })
         
-        import QrScanner from "/scripts/qr-scanner.min.js";
+        import QrScanner from "/scripts/qr-scanner.min.js?ver<%=ver%>";
         QrScanner.WORKER_PATH = '/scripts/qr-scanner-worker.min.js';
     
         const video = document.getElementById('qr-video');
