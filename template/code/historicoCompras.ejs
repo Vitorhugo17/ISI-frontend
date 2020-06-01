@@ -127,7 +127,7 @@
     <script>
         if ((window.fullScreen) ||
             (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
-            alert("FULLSCREEN");
+            alert(window.innerWidth, screen.width, window.innerHeight, screen.height);
             document.getElementById('footer').style.cssText = "bottom: 0; display: block;";
             document.getElementById('header').style.cssText = "display: none;";
             document.getElementById('header-clear-big').style.height = "30px";
@@ -148,7 +148,7 @@
         </li>`;
             document.getElementById('menu').style.maxHeight = '306px';
         } else {
-            alert("NOT FULLSCREEN");
+            alert(window.innerWidth, screen.width, window.innerHeight, screen.height);
             document.getElementById('footer').style.cssText = "bottom: 0; display: none;";
             document.getElementById('header').style.cssText = "display: block;";
         }
