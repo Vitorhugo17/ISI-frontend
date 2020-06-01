@@ -15,7 +15,7 @@ $(document).ready(function() {
         $('.menu-top').toggleClass('show-menus');
         $('.menu-wrapper-background').fadeIn(250);
         return false;
-    });
+	});
     
     $('.close-menu, .menu-wrapper-background').click(function(){
         $('.menu-top').toggleClass('show-menus');
