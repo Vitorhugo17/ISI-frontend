@@ -17,12 +17,8 @@ app.use(validator());
 const dirName = __dirname + '/template/code/';
 app.use(express.static(dirName));
 
-<<<<<<< HEAD
 const urlBase = `https://test-api-isicampus.herokuapp.com`;
-=======
-const urlBase = `http://localhost:8080`;
 const version = "1.0";
->>>>>>> dev
 
 app.set('view engine', 'ejs');
 app.set('views', 'template/code');
