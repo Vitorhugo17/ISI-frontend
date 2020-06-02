@@ -28,7 +28,7 @@ app.get("/", (request, response) => {
     response.render(`${dirName}login`, {
         urlBase: urlBase,
         ver: version,
-        request_url: request.headers.host + request.url
+        request_url: request.secure + ", " + request.protocol + "://" + request.headers.host + request.url
     });
 })
 
