@@ -23,19 +23,12 @@ const version = "1.0";
 app.set('view engine', 'ejs');
 app.set('views', 'template/code');
 
-app.use("/", (request, response) => {
-    if (request.protocol === "http") {
-        response.redirect("https://test-isicampus.herokuapp.com/" + request.url);
-    } else {
-        next();
-    }
-});
-
 app.get("/", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}login`, {
         urlBase: urlBase,
-        ver: version
+        ver: version,
+        request_url: request.headers.host + request.url
     });
 })
 
