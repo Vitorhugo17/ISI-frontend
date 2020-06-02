@@ -26,9 +26,9 @@ app.set('views', 'template/code');
 app.use("/", (request, response, next) => {
     if (!request.secure) {
         // request was via http, so redirect to https
-        response.redirect('https://' + request.headers.host + request.url);
+       return response.redirect('https://' + request.headers.host + request.url);
     } else {
-        next();
+        return next();
     }
 });
 
