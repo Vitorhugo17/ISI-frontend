@@ -23,12 +23,13 @@ const version = "1.0";
 app.set('view engine', 'ejs');
 app.set('views', 'template/code');
 
-app.use("/", (request, response, next) => {
+app.set("trust proxy", 1);
+app.use("/", (request, response) => {
     if (!request.secure) {
         // request was via http, so redirect to https
        return response.redirect('https://' + request.headers.host + request.url);
     } else {
-        return next();
+        next();
     }
 });
 
