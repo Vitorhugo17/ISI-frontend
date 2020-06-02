@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'template/code');
 
 app.use("/", (request, response) => {
-    if (!request.secure) {
+    if (request.protocol === "http") {
         response.redirect("https://test-isicampus.herokuapp.com/" + request.url);
     } else {
         next();
