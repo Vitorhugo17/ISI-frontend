@@ -24,11 +24,12 @@ app.set('view engine', 'ejs');
 app.set('views', 'template/code');
 
 app.use((req, res, next) => {
-    if (req.header('x-forwarded-proto') !== 'https')
-      res.redirect(`https://${req.header('host')}${req.url}`)
-    else
-      next()
-  })
+    if (req.header('x-forwarded-proto') !== 'https') {
+        res.redirect(`https://${req.header('host')}${req.url}`)
+    } else {
+        next()
+    }
+})
 
 app.get("/", (request, response) => {
     response.set('Content-Type', 'text/html');
