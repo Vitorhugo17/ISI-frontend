@@ -369,6 +369,15 @@ h6 {
 	color: #1f1f1f;
 }
 
+p7 {
+	font-size: 13px;
+	margin-bottom: 10px;
+	font-weight: 800;
+	color: #212935;
+	text-align: center;
+	display: block;
+}
+
 a:hover {
 	color: #2980b9;
 	transition: all 200ms ease;
@@ -376,7 +385,7 @@ a:hover {
 
 a {
 	color: #3498db;
-	tramsition: all 200ms ease;
+	transition: all 200ms ease;
 }
 
 /*////////////////////////*/
