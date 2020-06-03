@@ -23,6 +23,7 @@ const version = "1.0";
 app.set('view engine', 'ejs');
 app.set('views', 'template/code');
 
+
 app.use((req, res, next) => {
     if (req.header('x-forwarded-proto') !== 'https') {
         res.redirect(`https://${req.header('host')}${req.url}`)
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
         next()
     }
 })
+
 
 app.get("/", (request, response) => {
     response.set('Content-Type', 'text/html');

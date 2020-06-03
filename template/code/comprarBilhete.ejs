@@ -62,7 +62,7 @@
                     <h5 style="line-height: 30px;">Temos uma sugestão para si!</h5>
                 </div>
                 <div class="one-third" style="width: 15px; margin-right: 10px;">
-                    <a> <img src="images\arrow.png" onclick='abre' style="width: 15px; margin-top: 5px;"></a>
+                    <a> <img src="images\arrow.png" id="recommendation" style="width: 15px; margin-top: 5px;"></a>
                     <!--
                     <ul class="icon-list">
                         <li class="tick-list">
@@ -211,20 +211,6 @@
         }
 
         const urlBase = "<%=urlBase%>";
-        //swal
-        var abre = function () {
-            swal.fire({
-                html: `<br> <h4> Esta é a nossa sugestão para si!</h4>`,
-                showCloseButton: false,
-                showCancelButton: true,
-                showConfirmButton: true,
-                confirmButtonColor: '#27ae60',
-                cancelButtonColor: '#d33',
-                focusConfirm: false,
-                confirmButtonText: 'Aceitar',
-                cancelButtonText: 'Cancelar',
-            })
-        };
 
         //verificar se o utilizador está autenticado
         fetch(`${urlBase}/authenticated`, {
@@ -244,6 +230,73 @@
             }
         }).catch(error => {
             window.location.replace("/");
+        })
+
+        //Swal Recomendação
+        document.getElementById('recommendation').addEventListener('click', (event) => {
+            event.preventDefault();
+
+
+            fetch(`${urlBase}/recommendation`, {
+                credentials: "include"
+            }).then(response => {
+                if (response.status == 200) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro");
+                }
+            }).then(result => {
+                const idBilhete = result.idProduto;
+                const selectTipoBilhete = document.getElementById('tipoBilhete').options;
+                let txt = '';
+                let index = 0;
+
+                for (let i = 0; i < selectTipoBilhete.length; i++) {
+                    const res = selectTipoBilhete[i].value.split('-');
+                    if (res[0] == idBilhete) {
+                        index = i;
+                        const res1 = selectTipoBilhete[i].text.split('-');
+                        txt = `<h2> Esta é a nossa sugestão para si!</h2>  <br>
+                    <h4 style="font-weight: 500;"> Tipo de Bilhete: ${res1[0]} </h4> 
+                    <h4 style="font-weight: 500;"> Companhia: ${res1[1]} </h4>  
+                    <h4 style="font-weight: 500;"> Preço: ${res1[2]} </h4> `
+                    }
+                }
+
+                swal.fire({
+                    html: txt,
+                    showCloseButton: false,
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    confirmButtonColor: '#27ae60',
+                    cancelButtonColor: '#d33',
+                    focusConfirm: false,
+                    confirmButtonText: 'Aceitar',
+                    cancelButtonText: 'Cancelar',
+                }).then(result => {
+                    if (result.value) {
+                        document.getElementById('tipoBilhete').selectedIndex = index;
+                        swal({
+                            title: `Obrigado por confiar em nós! <br>
+                            Complete os dados da compra!`,
+                            type: 'success',
+                            showCloseButton: false,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 3000
+                        })
+                    }
+                })
+            }).catch(error => {
+                swal({
+                    title: 'Não foi possível mostrar a recomendação, tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
         })
 
         const loadOption = async () => {
@@ -266,7 +319,8 @@
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
             let txt;
-            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document
+                .getElementById(
                     "tipoBilhete")
                 .selectedIndex].text;
             let quantidade = document.getElementById("quantidade").value;
@@ -296,7 +350,8 @@
                     }
                 }
             }
-            if (document.getElementById('referencia').className == "checkbox radio-two radio-two-checked") {
+            if (document.getElementById('referencia').className ==
+                "checkbox radio-two radio-two-checked") {
                 let res = tipoBilhete.split("-");
                 if (res[0].includes("único")) {
                     if (res[1].includes("Barquense")) {
@@ -310,8 +365,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "none";
-                                document.getElementById('pagamentoReferencia').style.display = "block";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "none";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "block";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
@@ -329,8 +386,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "none";
-                                document.getElementById('pagamentoReferencia').style.display = "block";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "none";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "block";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
@@ -343,7 +402,8 @@
                     document.getElementById('pagamentoCartao').style.display = "none";
                     document.getElementById('pagamentoReferencia').style.display = "block";
                 }
-            } else if (document.getElementById('cartao').className == "checkbox radio-two radio-two-checked") {
+            } else if (document.getElementById('cartao').className ==
+                "checkbox radio-two radio-two-checked") {
                 let res = tipoBilhete.split("-");
                 if (res[0].includes("único")) {
                     if (res[1].includes("Barquense")) {
@@ -357,8 +417,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "block";
-                                document.getElementById('pagamentoReferencia').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "block";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "none";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
@@ -376,8 +438,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "block";
-                                document.getElementById('pagamentoReferencia').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "block";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "none";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
