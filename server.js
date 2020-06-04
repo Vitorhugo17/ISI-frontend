@@ -31,7 +31,6 @@ app.use((req, res, next) => {
     }
 })
 
-
 app.get("/", (request, response) => {
     response.set('Content-Type', 'text/html');
     response.render(`${dirName}login`, {
