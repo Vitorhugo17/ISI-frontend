@@ -33,14 +33,15 @@
                 <input type="text" class="signup" placeholder="Primeiro nome" id="firstname" required>
                 <input type="text" class="signup" placeholder="Último nome" id="lastname" required>
                 <input type="email" class="signup" placeholder="Email" id="email" required>
+                <input type="text" class="signup" placeholder="Número Mecanográfico" id="numeroMec" required>
                 <input type="text" class="signup" placeholder="NIF" id="nif" maxlength="9" size="9" required>
                 <input type="password" class="signup" placeholder="Palavra-passe" id="pass" required>
                 <input type="password" class="signup" placeholder="Confirmar palavra-passe" id="confPass" required>
-                <br>
+             
                 <center>
                     <button type="submit" id="registar"
                         class="button center-button button-blue full-bottom detected-button"
-                        style="width: 75%; margin-top: 5px; padding: 12px 20px; font-size: 13px; margin-bottom: 15px!important;">Registar</button>
+                        style="width: 75%; margin-top: 15px; padding: 12px 20px; font-size: 13px; margin-bottom: 15px!important;">Registar</button>
                 </center>
                 <a class="forgot" href="/" style="margin-top: 10px;">Já possui uma conta? Efetue o login!</a>
             </form>
@@ -50,11 +51,22 @@
     <script>
         const urlBase = `<%=urlBase%>`;
 
+        const numeroMec = document.getElementById('numeroMec');
         const firstname = document.getElementById("firstname");
         const lastname = document.getElementById("lastname");
         const pass = document.getElementById("pass");
         const confPass = document.getElementById("confPass");
         const nif = document.getElementById("nif");
+
+        numeroMec.addEventListener("change", (event) => {
+            const num_mec = numeroMec.value.toUpperCase();
+            if(((num_mec.charAt(0) == "A" || num_mec.charAt(0) == "D" || num_mec.charAt(0) == "F") && num_mec.substring(1,num_mec.length).match(/^[0-9]+$/)) || (num_mec.charAt(0) == "P" && num_mec.charAt(1) == "G" && num_mec.substring(2,num_mec.length).match(/^[0-9]+$/))) {
+                numeroMec.setCustomValidity("");
+                document.getElementById("registar").disabled = false;
+            } else {
+                numeroMec.setCustomValidity("Insira um número mecanográfico válido!");
+            }
+        })
 
         pass.addEventListener("change", (event) => {
             if (pass.value != confPass.value && confPass.value != "") {
@@ -157,6 +169,7 @@
                         nome: document.getElementById("firstname").value,
                         apelido: document.getElementById("lastname").value,
                         email: document.getElementById("email").value,
+                        numero_mecanografico: document.getElementById('numeroMec').value.toUpperCase(),
                         nif: document.getElementById("nif").value,
                         password: pass.value,
                     }
