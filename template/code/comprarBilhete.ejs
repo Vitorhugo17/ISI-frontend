@@ -1,49 +1,12 @@
 <!DOCTYPE HTML>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen.png"
-        media="screen and (max-device-width: 320px)" />
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png"
-        media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
-    <link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
-    <link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape"
-        media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
-    <link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png"
-        media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
-    <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"
-        media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)" />
-    <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"
-        media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
-
     <title>Comprar Bilhetes</title>
-
-    <link href="/styles/style.css" rel="stylesheet" type="text/css">
-    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
-    <link href="/styles/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="/styles/animate.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
-
-    <link rel="stylesheet" href="/styles/normalize.css" />
-    <link rel="stylesheet" href="/styles/global.css" />
+    <%- include('header.ejs')  %>
+    <link rel="stylesheet" href="/styles/normalize.css?ver<%=ver%>" />
+    <link rel="stylesheet" href="/styles/global.css?ver<%=ver%>" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="/scripts/payment.js" defer></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
+    <script src="/scripts/payment.js?ver<%=ver%>" defer></script>
 
 </head>
 
@@ -80,13 +43,14 @@
         <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
-    <div class="header">
-        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador"></h4>
+    <div class="header" id="header">
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
+        </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
-    <div class="header-clear-big"></div>
+    <div class="header-clear-big" id="header-clear-big"></div>
 
-    <div class="content">
+    <div class="content" id="content">
         <div class="container no-bottom">
             <h3>Comprar Bilhete</h3>
         </div>
@@ -95,15 +59,19 @@
         <div id="compra">
             <div class="container" style="margin-bottom: 0px;">
                 <div class="one-third" style="width: 175px; margin-right: 2px;">
-                    <h5 style="line-height: 30px;">Temos uma solução para si!</h5>
+                    <h5 style="line-height: 30px;">Temos uma sugestão para si!</h5>
                 </div>
-                <div class="one-third" style="width: 20px; margin-right: 10px;">
+                <div class="one-third" style="width: 15px; margin-right: 10px;">
+                    <a> <img src="images\arrow.png" id="recommendation" style="width: 15px; margin-top: 5px;"></a>
+                    <!--
                     <ul class="icon-list">
                         <li class="tick-list">
                             <p>&nbsp;</p>
                         </li>
                     </ul>
+                -->
                 </div>
+                <!--
                 <div class="one-third last-column" style="width: 20px; margin-right: 2px;">
                     <ul class="icon-list">
                         <li class="delete-list">
@@ -111,6 +79,7 @@
                         </li>
                     </ul>
                 </div>
+                -->
             </div>
             <div class="decoration"></div>
 
@@ -204,8 +173,45 @@
                 style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
+    <footer class="header" id="footer" style="bottom: 0;">
+        <a href="/bus" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-bus"></i></a>
+        <a href="#" class="header-navigation show-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-ticket"></i></a>
+        <a href="/profile" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-user"></i></a>
+        <a href="#" id="logout" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-power-off"></i></a>
+    </footer>
     <script>
+        if ((window.matchMedia('(display-mode: standalone)').matches) ||
+            (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+            document.getElementById('footer').style.cssText = "bottom: 0; display: block;";
+            document.getElementById('header').style.cssText = "display: none;";
+            document.getElementById('header-clear-big').style.height = "30px";
+            document.getElementById('content').style.marginBottom = "60px";
+            document.getElementById('menu').innerHTML = `<li>
+            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
+                    class="fa fa-plus active-plus"></i></a>
+            <ul class="submenu show-submenu">
+                <li class="active-menu"><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de
+                        Compras<i class="fa fa-circle"></i></a>
+                </li>
+            </ul>
+        </li>`;
+            document.getElementById('menu').style.maxHeight = '306px';
+        } else {
+            document.getElementById('footer').style.cssText = "bottom: 0; display: none;";
+            document.getElementById('header').style.cssText = "display: block;";
+        }
+
         const urlBase = "<%=urlBase%>";
+
         //verificar se o utilizador está autenticado
         fetch(`${urlBase}/authenticated`, {
             credentials: 'include'
@@ -219,10 +225,78 @@
             if (!result.isAuthenticated || result.isEmpresa) {
                 throw new Error("Não autenticado");
             } else {
-                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user.apelido;
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user
+                    .apelido;
             }
         }).catch(error => {
             window.location.replace("/");
+        })
+
+        //Swal Recomendação
+        document.getElementById('recommendation').addEventListener('click', (event) => {
+            event.preventDefault();
+
+
+            fetch(`${urlBase}/recommendation`, {
+                credentials: "include"
+            }).then(response => {
+                if (response.status == 200) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro");
+                }
+            }).then(result => {
+                const idBilhete = result.idProduto;
+                const selectTipoBilhete = document.getElementById('tipoBilhete').options;
+                let txt = '';
+                let index = 0;
+
+                for (let i = 0; i < selectTipoBilhete.length; i++) {
+                    const res = selectTipoBilhete[i].value.split('-');
+                    if (res[0] == idBilhete) {
+                        index = i;
+                        const res1 = selectTipoBilhete[i].text.split('-');
+                        txt = `<h2> Esta é a nossa sugestão para si!</h2>  <br>
+                    <h4 style="font-weight: 500;"> Tipo de Bilhete: ${res1[0]} </h4> 
+                    <h4 style="font-weight: 500;"> Companhia: ${res1[1]} </h4>  
+                    <h4 style="font-weight: 500;"> Preço: ${res1[2]} </h4> `
+                    }
+                }
+
+                swal.fire({
+                    html: txt,
+                    showCloseButton: false,
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    confirmButtonColor: '#27ae60',
+                    cancelButtonColor: '#d33',
+                    focusConfirm: false,
+                    confirmButtonText: 'Aceitar',
+                    cancelButtonText: 'Cancelar',
+                }).then(result => {
+                    if (result.value) {
+                        document.getElementById('tipoBilhete').selectedIndex = index;
+                        swal({
+                            title: `Obrigado por confiar em nós! <br>
+                            Complete os dados da compra!`,
+                            type: 'success',
+                            showCloseButton: false,
+                            showConfirmButton: false,
+                            focusConfirm: false,
+                            timer: 3000
+                        })
+                    }
+                })
+            }).catch(error => {
+                swal({
+                    title: 'Não foi possível mostrar a recomendação, tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
         })
 
         const loadOption = async () => {
@@ -245,7 +319,8 @@
         document.getElementById('formCompraBilhetes').addEventListener('submit', (event) => {
             event.preventDefault();
             let txt;
-            let tipoBilhete = document.getElementById("tipoBilhete").options[document.getElementById(
+            let tipoBilhete = document.getElementById("tipoBilhete").options[document
+                .getElementById(
                     "tipoBilhete")
                 .selectedIndex].text;
             let quantidade = document.getElementById("quantidade").value;
@@ -275,7 +350,8 @@
                     }
                 }
             }
-            if (document.getElementById('referencia').className == "checkbox radio-two radio-two-checked") {
+            if (document.getElementById('referencia').className ==
+                "checkbox radio-two radio-two-checked") {
                 let res = tipoBilhete.split("-");
                 if (res[0].includes("único")) {
                     if (res[1].includes("Barquense")) {
@@ -289,8 +365,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "none";
-                                document.getElementById('pagamentoReferencia').style.display = "block";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "none";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "block";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
@@ -308,8 +386,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "none";
-                                document.getElementById('pagamentoReferencia').style.display = "block";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "none";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "block";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
@@ -322,7 +402,8 @@
                     document.getElementById('pagamentoCartao').style.display = "none";
                     document.getElementById('pagamentoReferencia').style.display = "block";
                 }
-            } else if (document.getElementById('cartao').className == "checkbox radio-two radio-two-checked") {
+            } else if (document.getElementById('cartao').className ==
+                "checkbox radio-two radio-two-checked") {
                 let res = tipoBilhete.split("-");
                 if (res[0].includes("único")) {
                     if (res[1].includes("Barquense")) {
@@ -336,8 +417,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "block";
-                                document.getElementById('pagamentoReferencia').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "block";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "none";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";
@@ -355,8 +438,10 @@
                                 timer: 3000
                             }).then(result => {
                                 document.getElementById('compra').style.display = "none";
-                                document.getElementById('pagamentoCartao').style.display = "block";
-                                document.getElementById('pagamentoReferencia').style.display = "none";
+                                document.getElementById('pagamentoCartao').style.display =
+                                    "block";
+                                document.getElementById('pagamentoReferencia').style
+                                    .display = "none";
                             })
                         } else {
                             document.getElementById('compra').style.display = "none";

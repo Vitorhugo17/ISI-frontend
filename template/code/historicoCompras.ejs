@@ -1,0 +1,421 @@
+<!DOCTYPE HTML>
+
+<head>
+    <title>Histórico de Compras</title>
+    <%- include('header.ejs')  %>
+    <script type="text/javascript" src="/scripts/moment.min.js?ver<%=ver%>"></script>
+    <script type="text/javascript" src="/scripts/daterangepicker.min.js?ver<%=ver%>"></script>
+    <link rel="stylesheet" type="text/css" href="/styles/daterangepicker.css?ver<%=ver%>" />
+
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                $('input[name="filtro"]').daterangepicker({
+                    "locale": {
+                        "format": "DD/MM/YYYY",
+                        "separator": " - ",
+                        "applyLabel": "Aplicar",
+                        "cancelLabel": "Cancelar",
+                        "daysOfWeek": [
+                            "Dom",
+                            "Seg",
+                            "Ter",
+                            "Qua",
+                            "Qui",
+                            "Sex",
+                            "Sab"
+                        ],
+                        "monthNames": [
+                            "Janeiro",
+                            "Fevereiro",
+                            "Março",
+                            "Abril",
+                            "Maio",
+                            "Junho",
+                            "Julho",
+                            "Agosto",
+                            "Setembro",
+                            "Outubro",
+                            "Novembro",
+                            "Dezembro"
+                        ],
+                        "firstDay": 1
+                    }
+                }, function (start, end) {
+                    $("#startDate").val(start.format("YYYY-MM-DD"));
+                    $("#endDate").val(end.format("YYYY-MM-DD"));
+                    $("#buttonDate").click();
+                })
+            })
+        })(jQuery);
+    </script>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text">
+                A carregar a página...
+                <em>O carregamento depende da velocidade da sua conexão à internet! Aguarde uns instantes!</em>
+            </p>
+        </div>
+    </div>
+
+
+    <ul class="menu-top" id="menu">
+        <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
+        <li>
+            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
+                    class="fa fa-plus active-plus"></i></a>
+            <ul class="submenu show-submenu">
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
+                <li class="active-menu"><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de
+                        Compras<i class="fa fa-circle"></i></a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="/profile"><i class="fa fa-user"></i>Perfil<i class="fa fa-circle"></i></a></li>
+        <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
+    </ul>
+
+    <div class="header" id="header">
+        <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
+        </h4>
+        <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
+    </div>
+    <div class="header-clear-big" id="header-clear-big"></div>
+
+    <div class="content" id="content">
+        <div class="container no-bottom">
+            <h3>Histórico de Compras</h3>
+            <div class="decoration"></div>
+        </div>
+        <div class="one-half-responsive">
+            <input type="text" class="text-date" name="filtro"></input>
+            <input type="text" id="startDate" style="display: none" />
+            <input type="text" id="endDate" style="display: none" />
+            <button type="button" id="buttonDate" style="display: none;"></button>
+        </div>
+        <div class="one-half-responsive">
+            <div class="container" id="historico">
+            </div>
+        </div>
+    </div>
+    <div class="menu-wrapper-background"></div>
+    <div id="loading"
+        style="position:fixed; z-index:99999; background-color:rgba(0,0,0,0.6); width:100%; height:100%; top:0px; left:0px; display:none;">
+        <center>
+            <img src="/images/loading.gif" width="20%" height="20%"
+                style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        </center>
+    </div>
+    <footer class="header" id="footer" style="bottom: 0;">
+        <a href="/bus" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-bus"></i></a>
+        <a href="#" class="header-navigation show-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-ticket"></i></a>
+        <a href="/profile" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-user"></i></a>
+        <a href="#" id="logout" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-power-off"></i></a>
+    </footer>
+    <script>
+        if ((window.matchMedia('(display-mode: standalone)').matches) ||
+            (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+            document.getElementById('footer').style.cssText = "bottom: 0; display: block;";
+            document.getElementById('header').style.cssText = "display: none;";
+            document.getElementById('header-clear-big').style.height = "30px";
+            document.getElementById('content').style.marginBottom = "60px";
+            document.getElementById('menu').innerHTML = `<li>
+            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
+                    class="fa fa-plus active-plus"></i></a>
+            <ul class="submenu show-submenu">
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
+                <li class="active-menu"><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de
+                        Compras<i class="fa fa-circle"></i></a>
+                </li>
+            </ul>
+        </li>`;
+            document.getElementById('menu').style.maxHeight = '306px';
+        } else {
+            document.getElementById('footer').style.cssText = "bottom: 0; display: none;";
+            document.getElementById('header').style.cssText = "display: block;";
+        }
+
+        const urlBase = "<%=urlBase%>";
+        //verificar se o utilizador está autenticado
+        fetch(`${urlBase}/authenticated`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não autenticado");
+            }
+        }).then(result => {
+            if (!result.isAuthenticated || result.isEmpresa) {
+                throw new Error("Não autenticado");
+            } else {
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user
+                    .apelido;
+            }
+        }).catch(error => {
+            window.location.replace("/");
+        })
+
+
+        fetch(`${urlBase}/purchases`, {
+            credentials: 'include'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json()
+            } else {
+                throw new Error("Não foi possível apresentar os dados");
+            }
+        }).then(result => {
+            let txt = "";
+            let compras = result.purchases;
+            compras.sort((a, b) => {
+                return new Date(b.dataCompra).getTime() - new Date(a.dataCompra).getTime()
+            })
+            for (let i = 0; i < compras.length; i++) {
+                let date = new Date(compras[i].dataCompra);
+                let newDate;
+                if (date.getMonth() + 1 < 10) {
+                    if (date.getDate() < 10) {
+                        newDate = `0${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`;
+                    } else {
+                        newDate = `${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`;
+                    }
+                } else {
+                    if (date.getDate() < 10) {
+                        newDate = `0${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+                    } else {
+                        newDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+                    }
+                }
+                let valor = compras[i].valorPago.toString().split(".");
+                let valorPago = "";
+                if (valor.length == 1) {
+                    valorPago = `${valor[0]},00`
+                } else {
+                    if (valor[1].length == 1) {
+                        valorPago = `${valor[0]},${valor[1]}0`
+                    } else {
+                        valorPago = `${valor[0]},${valor[1]}`
+                    }
+                }
+                txt += `<div class="toggle-2">
+                        <a href="#" class="deploy-toggle-2 downloadPDF" id="${compras[i].empresa}-${compras[i].idDocumento}"
+                            style="padding-bottom: 10px; padding-top: 10px; font-weight: bold; border-bottom: solid 1px rgba(0,0,0,0.05);">
+                            <div style="margin-top: -5px">
+                                <p style="display: inline; margin-bottom: 0px;">${compras[i].empresa}</p>
+                                <p style="display: inline; float: right; margin-bottom: 0px;">${valorPago}€</p>
+                                <p
+                                    style="color: #666666; font-size: 11px; opacity: 0.6; line-height: 11px;margin-bottom: 0px;">
+                                    ${newDate}</p>
+                            </div>
+                        </a>
+                    </div>`
+            }
+            document.getElementById("historico").innerHTML = txt;
+            let btnDownload = document.getElementsByClassName("downloadPDF");
+            for (let i = 0; i < btnDownload.length; i++) {
+                btnDownload[i].addEventListener("click", (event) => {
+                    event.preventDefault();
+                    let data = btnDownload[i].getAttribute("id").split("-");
+                    if (data[0] == "Transdev") {
+                        window.open(`${urlBase}/download/${data[0]}/${data[1]}`)
+                    } else {
+                        fetch(`${urlBase}/download/${data[0]}/${data[1]}`)
+                            .then(response => {
+                                if (response.status == 200) {
+                                    return response.json()
+                                } else {
+                                    throw new Error("Não foi possível encontrar a fatura.");
+                                }
+                            }).then(result => {
+                                window.open(result.url);
+                            }).catch(error => {
+                                swal({
+                                    title: 'Não foi possível encontrar a fatura.',
+                                    type: 'error',
+                                    showCloseButton: false,
+                                    showConfirmButton: false,
+                                    focusConfirm: false,
+                                    timer: 2000
+                                })
+                            })
+                    }
+                })
+            }
+
+        }).catch(error => {
+            swal({
+                title: 'Não foi possível apresentar os dados.',
+                type: 'error',
+                showCloseButton: false,
+                showConfirmButton: false,
+                focusConfirm: false,
+                timer: 2000
+            })
+        })
+
+        document.getElementById('buttonDate').addEventListener('click', (event) => {
+            console.log(document.getElementById('startDate').value);
+            console.log(document.getElementById('endDate').value);
+            fetch(`${urlBase}/purchases`, {
+                credentials: 'include'
+            }).then(response => {
+                if (response.status == 200) {
+                    return response.json()
+                } else {
+                    throw new Error("Não foi possível apresentar os dados");
+                }
+            }).then(result => {
+                let txt = "";
+                let compras = result.purchases;
+                compras.sort((a, b) => {
+                    return new Date(b.dataCompra).getTime() - new Date(a.dataCompra).getTime()
+                })
+                for (let i = 0; i < compras.length; i++) {
+                    let date = new Date(compras[i].dataCompra);
+                    if (date.getTime() <= new Date(document.getElementById('endDate').value)
+                        .getTime() && date
+                        .getTime() >= new Date(document.getElementById('startDate').value).getTime()) {
+                        let newDate;
+                        if (date.getMonth() + 1 < 10) {
+                            if (date.getDate() < 10) {
+                                newDate =
+                                    `0${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`;
+                            } else {
+                                newDate =
+                                    `${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`;
+                            }
+                        } else {
+                            if (date.getDate() < 10) {
+                                newDate =
+                                    `0${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+                            } else {
+                                newDate =
+                                    `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+                            }
+                        }
+                        let valor = compras[i].valorPago.toString().split(".");
+                        let valorPago = "";
+                        if (valor.length == 1) {
+                            valorPago = `${valor[0]},00`
+                        } else {
+                            if (valor[1].length == 1) {
+                                valorPago = `${valor[0]},${valor[1]}0`
+                            } else {
+                                valorPago = `${valor[0]},${valor[1]}`
+                            }
+                        }
+                        txt += `<div class="toggle-2">
+                    <a href="#" class="deploy-toggle-2 downloadPDF" id="${compras[i].empresa}-${compras[i].idDocumento}"
+                        style="padding-bottom: 10px; padding-top: 10px; font-weight: bold; border-bottom: solid 1px rgba(0,0,0,0.05);">
+                        <div style="margin-top: -5px">
+                            <p style="display: inline; margin-bottom: 0px;">${compras[i].empresa}</p>
+                            <p style="display: inline; float: right; margin-bottom: 0px;">${valorPago}€</p>
+                            <p
+                                style="color: #666666; font-size: 11px; opacity: 0.6; line-height: 11px;margin-bottom: 0px;">
+                                ${newDate}</p>
+                        </div>
+                    </a>
+                </div>`
+                    }
+                }
+                document.getElementById("historico").innerHTML = txt;
+                let btnDownload = document.getElementsByClassName("downloadPDF");
+                for (let i = 0; i < btnDownload.length; i++) {
+                    btnDownload[i].addEventListener("click", (event) => {
+                        event.preventDefault();
+                        let data = btnDownload[i].getAttribute("id").split("-");
+                        if (data[0] == "Transdev") {
+                            window.open(`${urlBase}/download/${data[0]}/${data[1]}`)
+                        } else {
+                            fetch(`${urlBase}/download/${data[0]}/${data[1]}`)
+                                .then(response => {
+                                    if (response.status == 200) {
+                                        return response.json()
+                                    } else {
+                                        throw new Error(
+                                            "Não foi possível encontrar a fatura.");
+                                    }
+                                }).then(result => {
+                                    window.open(result.url);
+                                }).catch(error => {
+                                    swal({
+                                        title: 'Não foi possível encontrar a fatura.',
+                                        type: 'error',
+                                        showCloseButton: false,
+                                        showConfirmButton: false,
+                                        focusConfirm: false,
+                                        timer: 2000
+                                    })
+                                })
+                        }
+                    })
+                }
+
+            }).catch(error => {
+                swal({
+                    title: 'Não foi possível apresentar os dados.',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
+        });
+
+        document.getElementById('logout').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            document.getElementById("menu").setAttribute("class", "menu-top");
+            document.getElementsByClassName("menu-wrapper-background")[0].style.cssText = "display:none";
+            document.getElementById("loading").style.display = "block";
+            return fetch(`${urlBase}/logout`, {
+                credentials: 'include'
+            }).then(response => {
+                if (response.status == 200) {
+                    localStorage.removeItem('user_nome');
+                    document.getElementById("loading").style.display = "none";
+                    swal({
+                        title: 'Logout efetuado com sucesso!',
+                        type: 'success',
+                        showCloseButton: false,
+                        showConfirmButton: false,
+                        focusConfirm: false,
+                        timer: 2000
+                    }).then(result => {
+                        window.location.replace("/")
+                    });
+                } else {
+                    throw new Error("Erro");
+                }
+            }).catch(error => {
+                document.getElementById("loading").style.display = "none";
+                swal({
+                    title: 'Ocorreu um erro. Tente novamente!',
+                    type: 'error',
+                    showCloseButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    timer: 2000
+                })
+            })
+        })
+    </script>
+</body>

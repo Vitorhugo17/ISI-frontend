@@ -1,47 +1,11 @@
 <!DOCTYPE HTML>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen.png"
-        media="screen and (max-device-width: 320px)" />
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png"
-        media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
-    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
-    <link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
-    <link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape"
-        media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
-    <link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png"
-        media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
-    <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"
-        media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)" />
-    <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"
-        media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)" />
-
     <title>Bilhetes Utilizados</title>
+    <%- include('header.ejs')  %>
 
-    <link href="/styles/style.css" rel="stylesheet" type="text/css">
-    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
-    <link href="/styles/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="/styles/animate.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/framework.plugins.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
-
-    <link rel="stylesheet" href="/styles/normalize.css" />
-    <link rel="stylesheet" href="/styles/global.css" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="/styles/normalize.css?ver<%=ver%>" />
+    <link rel="stylesheet" href="/styles/global.css?ver<%=ver%>" />
 
 </head>
 
@@ -55,7 +19,6 @@
             </p>
         </div>
     </div>
-
 
     <ul class="menu-top" id="menu">
         <li><a href="/bus"><i class="fa fa-bus"></i>Horários<i class="fa fa-circle"></i></a></li>
@@ -77,38 +40,18 @@
         <li><a href="#" id="logout"><i class="fa fa-power-off"></i>Logout<i class="fa fa-circle"></i></a></li>
     </ul>
 
-    <div class="header">
+    <div class="header" id="header">
         <h4 class="header-logo" style="color: #fff; width: 230px; font-size: 17px;" id="nomeUtilizador">
         </h4>
         <a href="#" class="header-navigation show-navigation"><i class="fa fa-navicon"></i></a>
     </div>
-    <div class="header-clear-big"></div>
+    <div class="header-clear-big" id="header-clear-big"></div>
 
-    <div class="content">
+    <div class="content" id="content">
         <div class="container no-bottom">
             <h3>Bilhetes Utilizados</h3>
             <div class="decoration"></div>
             <table cellspacing='0' class="table" id="bilhetes_utilizados">
-                <!--    <tr style="line-height: 10px;">
-                    <th class="table-title" style="padding: 21px 5px 22px 5px;">Tipo</th>
-                    <th class="table-title" style="padding: 21px 8px 22px 8px;">Quantidade</th>
-                    <th class="table-title" style="padding: 21px 6px 22px 6px;">Companhia</th>
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td class="table-sub-title">Único</td>
-                    <td>3</td>
-                    <td>Transdev</td>
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td class="table-sub-title">Ida e Volta</td>
-                    <td>1</td>
-                    <td>Transdev</td>
-                </tr>
-                <tr style="line-height: 10px;">
-                    <td class="table-sub-title">Único</td>
-                    <td>9</td>
-                    <td>Barquense</td>
-                </tr>-->
             </table>
         </div>
         <div class="decoration"></div>
@@ -121,7 +64,43 @@
                 style="position: absolute; margin: 0; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </center>
     </div>
+    <footer class="header" id="footer" style="bottom: 0;">
+        <a href="/bus" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-bus"></i></a>
+        <a href="#" class="header-navigation show-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-ticket"></i></a>
+        <a href="/profile" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-user"></i></a>
+        <a href="#" id="logout" class="header-navigation" style="float: left; font-size: 20px; width: 25%;"><i
+                class="fa fa-power-off"></i></a>
+    </footer>
     <script>
+        if ((window.matchMedia('(display-mode: standalone)').matches) ||
+            (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+            document.getElementById('footer').style.cssText = "bottom: 0; display: block;";
+            document.getElementById('header').style.cssText = "display: none;";
+            document.getElementById('header-clear-big').style.height = "30px";
+            document.getElementById('content').style.marginBottom = "60px";
+            document.getElementById('menu').innerHTML = `<li>
+            <a class="has-submenu" href="#"><i class="fa fa-ticket"></i>Bilhetes<i
+                    class="fa fa-plus active-plus"></i></a>
+            <ul class="submenu show-submenu">
+                <li><a href="/purchase"><i class="fa fa-angle-right"></i>Comprar<i class="fa fa-circle"></i></a></li>
+                <li><a href="/tickets/unused"><i class="fa fa-angle-right"></i>Não Utilizados<i
+                            class="fa fa-circle"></i></a></li>
+                <li class="active-menu"><a href="/tickets/used"><i class="fa fa-angle-right"></i>Utilizados<i class="fa fa-circle"></i></a>
+                </li>
+                <li><a href="/purchase/historic"><i class="fa fa-angle-right"></i>Histórico de
+                        Compras<i class="fa fa-circle"></i></a>
+                </li>
+            </ul>
+        </li>`;
+            document.getElementById('menu').style.maxHeight = '306px';
+        } else {
+            document.getElementById('footer').style.cssText = "bottom: 0; display: none;";
+            document.getElementById('header').style.cssText = "display: block;";
+        }
+
         const urlBase = "<%=urlBase%>";
 
         //verificar se o utilizador está autenticado
@@ -138,7 +117,8 @@
             if (!result.isAuthenticated || result.isEmpresa) {
                 throw new Error("Não autenticado");
             } else {
-                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user.apelido;
+                document.getElementById("nomeUtilizador").innerHTML = result.user.nome + " " + result.user
+                    .apelido;
             }
         }).catch(error => {
             window.location.replace("/");

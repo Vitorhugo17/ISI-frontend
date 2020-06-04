@@ -369,6 +369,15 @@ h6 {
 	color: #1f1f1f;
 }
 
+p7 {
+	font-size: 13px;
+	margin-bottom: 10px;
+	font-weight: 800;
+	color: #212935;
+	text-align: center;
+	display: block;
+}
+
 a:hover {
 	color: #2980b9;
 	transition: all 200ms ease;
@@ -376,7 +385,7 @@ a:hover {
 
 a {
 	color: #3498db;
-	tramsition: all 200ms ease;
+	transition: all 200ms ease;
 }
 
 /*////////////////////////*/
@@ -544,7 +553,7 @@ a {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	background-image: url(../images/status.gif);
+	background-image: url(/images/status.gif);
 	background-size: 64px 64px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -936,171 +945,171 @@ a {
 }
 
 .address-list {
-	background-image: url(../images/lists/address_48.png);
+	background-image: url(/images/lists/address_48.png);
 }
 
 .block-list {
-	background-image: url(../images/lists/block_48.png);
+	background-image: url(/images/lists/block_48.png);
 }
 
 .bookmark-list {
-	background-image: url(../images/lists/bookmark_48.png);
+	background-image: url(/images/lists/bookmark_48.png);
 }
 
 .briefcase-list {
-	background-image: url(../images/lists/briefcase_48.png);
+	background-image: url(/images/lists/briefcase_48.png);
 }
 
 .bubble-list {
-	background-image: url(../images/lists/bubble_48.png);
+	background-image: url(/images/lists/bubble_48.png);
 }
 
 .buy-list {
-	background-image: url(../images/lists/buy_48.png);
+	background-image: url(/images/lists/buy_48.png);
 }
 
 .calendar-list {
-	background-image: url(../images/lists/calendar_48.png);
+	background-image: url(/images/lists/calendar_48.png);
 }
 
 .clipboard-list {
-	background-image: url(../images/lists/clipboard_48.png);
+	background-image: url(/images/lists/clipboard_48.png);
 }
 
 .clock-list {
-	background-image: url(../images/lists/clock_48.png);
+	background-image: url(/images/lists/clock_48.png);
 }
 
 .delete-list {
-	background-image: url(../images/lists/delete_48.png);
+	background-image: url(/images/lists/delete_48.png);
 }
 
 .diagram-list {
-	background-image: url(../images/lists/diagram_48.png);
+	background-image: url(/images/lists/diagram_48.png);
 }
 
 .document-list {
-	background-image: url(../images/lists/document_48.png);
+	background-image: url(/images/lists/document_48.png);
 }
 
 .down-list {
-	background-image: url(../images/lists/down_48.png);
+	background-image: url(/images/lists/down_48.png);
 }
 
 .flag-list {
-	background-image: url(../images/lists/flag_48.png);
+	background-image: url(/images/lists/flag_48.png);
 }
 
 .folder-list {
-	background-image: url(../images/lists/folder_48.png);
+	background-image: url(/images/lists/folder_48.png);
 }
 
 .gear-list {
-	background-image: url(../images/lists/gear_48.png);
+	background-image: url(/images/lists/gear_48.png);
 }
 
 .globe-list {
-	background-image: url(../images/lists/globe_48.png);
+	background-image: url(/images/lists/globe_48.png);
 }
 
 .heart-list {
-	background-image: url(../images/lists/heart_48.png);
+	background-image: url(/images/lists/heart_48.png);
 }
 
 .help-list {
-	background-image: url(../images/lists/help_48.png);
+	background-image: url(/images/lists/help_48.png);
 }
 
 .home-list {
-	background-image: url(../images/lists/home_48.png);
+	background-image: url(/images/lists/home_48.png);
 }
 
 .info-list {
-	background-image: url(../images/lists/info_48.png);
+	background-image: url(/images/lists/info_48.png);
 }
 
 .key-list {
-	background-image: url(../images/lists/key_48.png);
+	background-image: url(/images/lists/key_48.png);
 }
 
 .label-list {
-	background-image: url(../images/lists/label_48.png);
+	background-image: url(/images/lists/label_48.png);
 }
 
 .left-list {
-	background-image: url(../images/lists/left_48.png);
+	background-image: url(/images/lists/left_48.png);
 }
 
 .letter-list {
-	background-image: url(../images/lists/letter_48.png);
+	background-image: url(/images/lists/letter_48.png);
 }
 
 .monitor-list {
-	background-image: url(../images/lists/monitor_48.png);
+	background-image: url(/images/lists/monitor_48.png);
 }
 
 .pencil-list {
-	background-image: url(../images/lists/pencil_48.png);
+	background-image: url(/images/lists/pencil_48.png);
 }
 
 .plus-list {
-	background-image: url(../images/lists/plus_48.png);
+	background-image: url(/images/lists/plus_48.png);
 }
 
 .present-list {
-	background-image: url(../images/lists/present_48.png);
+	background-image: url(/images/lists/present_48.png);
 }
 
 .print-list {
-	background-image: url(../images/lists/print_48.png);
+	background-image: url(/images/lists/print_48.png);
 }
 
 .right-list {
-	background-image: url(../images/lists/right_48.png);
+	background-image: url(/images/lists/right_48.png);
 }
 
 .save-list {
-	background-image: url(../images/lists/save_48.png);
+	background-image: url(/images/lists/save_48.png);
 }
 
 .search-list {
-	background-image: url(../images/lists/search_48.png);
+	background-image: url(/images/lists/search_48.png);
 }
 
 .shield-list {
-	background-image: url(../images/lists/shield_48.png);
+	background-image: url(/images/lists/shield_48.png);
 }
 
 .statistics-list {
-	background-image: url(../images/lists/statistics_48.png);
+	background-image: url(/images/lists/statistics_48.png);
 }
 
 .stop-list {
-	background-image: url(../images/lists/stop_48.png);
+	background-image: url(/images/lists/stop_48.png);
 }
 
 .tick-list {
-	background-image: url(../images/lists/tick_48.png);
+	background-image: url(/images/lists/tick_48.png);
 }
 
 .trash-list {
-	background-image: url(../images/lists/trash_48.png);
+	background-image: url(/images/lists/trash_48.png);
 }
 
 .up-list {
-	background-image: url(../images/lists/up_48.png);
+	background-image: url(/images/lists/up_48.png);
 }
 
 .user-list {
-	background-image: url(../images/lists/user_48.png);
+	background-image: url(/images/lists/user_48.png);
 }
 
 .wallet-list {
-	background-image: url(../images/lists/wallet_48.png);
+	background-image: url(/images/lists/wallet_48.png);
 }
 
 .warning-list {
-	background-image: url(../images/lists/warning_48.png);
+	background-image: url(/images/lists/warning_48.png);
 }
 
 /*	8. Table  */
@@ -1330,7 +1339,7 @@ table tr:hover td {
 /*	11. Radio and Checkboxe */
 
 .checkbox-one {
-	background-image: url(../images/ui/checkbox1.png);
+	background-image: url(/images/ui/checkbox1.png);
 	background-size: 16px 18px;
 	background-repeat: no-repeat;
 	padding-left: 30px;
@@ -1339,11 +1348,11 @@ table tr:hover td {
 }
 
 .checkbox-one-checked {
-	background-image: url(../images/ui/checkbox1c.png);
+	background-image: url(/images/ui/checkbox1c.png);
 }
 
 .checkbox-two {
-	background-image: url(../images/ui/checkbox2.png);
+	background-image: url(/images/ui/checkbox2.png);
 	background-size: 16px 18px;
 	background-repeat: no-repeat;
 	padding-left: 30px;
@@ -1352,11 +1361,11 @@ table tr:hover td {
 }
 
 .checkbox-two-checked {
-	background-image: url(../images/ui/checkbox2c.png);
+	background-image: url(/images/ui/checkbox2c.png);
 }
 
 .checkbox-three {
-	background-image: url(../images/ui/checkbox3.png);
+	background-image: url(/images/ui/checkbox3.png);
 	background-size: 16px 16px;
 	background-repeat: no-repeat;
 	padding-left: 30px;
@@ -1365,11 +1374,11 @@ table tr:hover td {
 }
 
 .checkbox-three-checked {
-	background-image: url(../images/ui/checkbox3c.png);
+	background-image: url(/images/ui/checkbox3c.png);
 }
 
 .radio-one {
-	background-image: url(../images/ui/radio1.png);
+	background-image: url(/images/ui/radio1.png);
 	background-size: 16px 18px;
 	background-repeat: no-repeat;
 	padding-left: 30px;
@@ -1378,11 +1387,11 @@ table tr:hover td {
 }
 
 .radio-one-checked {
-	background-image: url(../images/ui/radio1c.png);
+	background-image: url(/images/ui/radio1c.png);
 }
 
 .radio-two {
-	background-image: url(../images/ui/radio2.png);
+	background-image: url(/images/ui/radio2.png);
 	background-size: 16px 18px;
 	background-repeat: no-repeat;
 	padding-left: 31px;
@@ -1391,7 +1400,7 @@ table tr:hover td {
 }
 
 .radio-two-checked {
-	background-image: url(../images/ui/radio2c.png);
+	background-image: url(/images/ui/radio2c.png);
 }
 
 /*	12. Charts */
@@ -1801,14 +1810,14 @@ table tr:hover td {
 	font-size: 13px;
 	color: #343434;
 	text-transform: uppercase;
-	background-image: url(../images/ui/plus.png);
+	background-image: url(/images/ui/plus.png);
 	background-repeat: no-repeat;
 	background-size: 12px 12px;
 	background-position: 15px 19px;
 }
 
 .toggle-1-active {
-	background-image: url(../images/ui/minus.png);
+	background-image: url(/images/ui/minus.png);
 }
 
 .deploy-toggle-2 {
@@ -1816,14 +1825,14 @@ table tr:hover td {
 	padding-left: 50px;
 	font-size: 13px;
 	color: #343434;
-	background-image: url(../images/lists/down_48.png);
+	background-image: url(/images/lists/down_48.png);
 	background-repeat: no-repeat;
 	background-size: 14px 14px;
 	background-position: 15px 18px;
 }
 
 /*.toggle-2-active {
-	background-image: url(../images/lists/delete_48.png);
+	background-image: url(/images/lists/delete_48.png);
 }*/
 
 .deploy-toggle-3 {
@@ -1878,14 +1887,14 @@ table tr:hover td {
 	padding: 15px;
 	padding-left: 40px;
 	text-transform: uppercase;
-	background-image: url(../images/ui/arrow-down.png);
+	background-image: url(/images/ui/arrow-down.png);
 	background-repeat: no-repeat;
 	background-size: 8px 5px;
 	background-position: 15px 23px;
 }
 
 .submenu-nav-deploy-active {
-	background-image: url(../images/ui/arrow-up.png);
+	background-image: url(/images/ui/arrow-up.png);
 }
 
 .submenu-nav-items {
@@ -1976,7 +1985,7 @@ table tr:hover td {
 }
 
 .sliding-door-bottom a em {
-	background-image: url(../images/ui/minus.png);
+	background-image: url(/images/ui/minus.png);
 	background-size: 12px 12px;
 	background-repeat: no-repeat;
 	background-position: 13px 13px;
@@ -1989,7 +1998,7 @@ table tr:hover td {
 
 
 .sliding-door-top a em {
-	background-image: url(../images/ui/plus.png);
+	background-image: url(/images/ui/plus.png);
 	background-size: 12px 12px;
 	background-repeat: no-repeat;
 	background-position: 13px 13px;
@@ -2251,7 +2260,7 @@ table tr:hover td {
 	padding-right: 20px;
 	margin-bottom: 20px;
 	transition: all 200ms ease;
-	background-image: url(../images/ui/euro.png);
+	background-image: url(/images/ui/euro.png);
 	background-repeat: no-repeat;
 	background-size: 12px 13px;
 	background-position: 95% 50%;
@@ -2279,7 +2288,7 @@ table tr:hover td {
 	padding-right: 20px;
 	margin-bottom: 20px;
 	transition: all 200ms ease;
-	background-image: url(../images/ui/arrow-down.png);
+	background-image: url(/images/ui/arrow-down.png);
 	background-repeat: no-repeat;
 	background-size: 8px 5px;
 	background-position: 95% 50%;
@@ -2296,7 +2305,7 @@ table tr:hover td {
 }
 
 .icon-user-value {
-	background-image: url(../images/ui/login_user.png);
+	background-image: url(/images/ui/login_user.png);
 	background-size: 16px 15px;
 	background-repeat: no-repeat;
 	background-position: 20px 14px;
@@ -2304,7 +2313,7 @@ table tr:hover td {
 }
 
 .icon-password-value {
-	background-image: url(../images/ui/login_password.png);
+	background-image: url(/images/ui/login_password.png);
 	background-size: 16px 15px;
 	background-repeat: no-repeat;
 	background-position: 19px 13px;
@@ -2444,7 +2453,7 @@ table tr:hover td {
 }
 
 .profile-header {
-	background-image: url(../images/pictures/5.jpg);
+	background-image: url(/images/pictures/5.jpg);
 	background-repeat: repeat;
 }
 
@@ -2460,7 +2469,7 @@ table tr:hover td {
 }
 
 .profile-header-background {
-	background-image: url(../images/pictures/5w.jpg);
+	background-image: url(/images/pictures/5w.jpg);
 	background-repeat: repeat;
 	position: absolute;
 	left: 0px;
@@ -3335,12 +3344,12 @@ table tr:hover td {
 /* Default demo styles */
 
 .snap-drawers {
-	background-image: url(../images/misc/menu-bg.png);
+	background-image: url(/images/misc/menu-bg.png);
 	background-size: 100px 100px;
 }
 
 .snap-drawer {
-	background-image: url(../images/misc/menu-bg.png);
+	background-image: url(/images/misc/menu-bg.png);
 	background-size: 100px 100px;
 }
 
@@ -3407,7 +3416,7 @@ table tr:hover td {
 }
 
 .login-logo {
-	background-image: url(../images/misc/logo.png);
+	background-image: url(/images/misc/logo.png);
 	width: 100px;
 	height: 22px;
 	background-size: 100px 22px;
@@ -3525,7 +3534,7 @@ table tr:hover td {
 }
 
 .signup-logo {
-	background-image: url(../images/misc/logo.png);
+	background-image: url(/images/misc/logo.png);
 	width: 100px;
 	height: 22px;
 	background-size: 100px 22px;
@@ -4301,7 +4310,7 @@ table tr:hover td {
 /*/////////////*/
 
 .error-page-wrapper {
-	background-image: url(../images/pictures/3.jpg);
+	background-image: url(/images/pictures/bus.jpg);
 	background-position: center center;
 	background-size: cover;
 	position: absolute;
@@ -4311,17 +4320,18 @@ table tr:hover td {
 }
 
 .error-page-wrapper .overlay {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.4);
 }
+
 
 .error-page {
 	position: absolute;
 	z-index: 999999;
-	height: 280px;
+	height: 189px;
 	width: 300px;
 	left: 50%;
 	margin-left: -150px;
-	top: 50%;
+	top: 60%;
 	margin-top: -170px;
 }
 
@@ -4347,14 +4357,13 @@ table tr:hover td {
 }
 
 .error-page a {
-	width: 120px;
+	width: 135px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 	font-size: 13px;
 	color: #FFFFFF;
 	padding: 13px;
-	padding-left: 38px;
 	border: solid 1px rgba(255, 255, 255, 0.5);
 	border-radius: 5px;
 	font-weight: 500;
@@ -4368,8 +4377,9 @@ table tr:hover td {
 }
 
 .error-page a:hover {
-	background-color: rgba(255, 255, 255, 0.1);
-	color: #FFFFFF;
+	background-color: rgba(255, 255, 255, 0.6);
+	color: black;
+	font-weight: bold;
 }
 
 
@@ -4377,7 +4387,7 @@ table tr:hover td {
 /*////////////*/
 
 .soon-page-wrapper {
-	background-image: url(../images/pictures/3.jpg);
+	background-image: url(/images/pictures/3.jpg);
 	background-position: center center;
 	background-size: cover;
 	position: absolute;
@@ -5064,7 +5074,7 @@ table tr:hover td {
 }
 
 .recover-logo {
-	background-image: url(../images/misc/logo.png);
+	background-image: url(/images/misc/logo.png);
 	width: 100px;
 	height: 22px;
 	background-size: 100px 22px;
