@@ -18,6 +18,7 @@ const dirName = __dirname + '/template/code/';
 app.use(express.static(dirName));
 
 const urlBase = `https://isicampus-api.herokuapp.com`;
+const version = 1.0;
 
 app.set('view engine', 'ejs');
 app.set('views', 'template/code');
